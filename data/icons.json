@@ -1,0 +1,162 @@
+[
+  {
+    "id": "icon_business_incorp",
+    "name": "Business Incorporation",
+    "category": "Corporate & Establishment",
+    "description": "Represents formal enterprise registration, corporate charter, and statutory establishment.",
+    "tags": ["business", "incorporation", "registry", "company", "charter"],
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 21h18\"/><path d=\"M5 21V7l7-4 7 4v14\"/><path d=\"M9 10h1\"/><path d=\"M9 14h1\"/><path d=\"M14 10h1\"/><path d=\"M14 14h1\"/><path d=\"M11 21v-4h2v4\"/></svg>"
+  },
+  {
+    "id": "icon_handshake_deal",
+    "name": "Executive Partnership & Liaison",
+    "category": "Corporate & Establishment",
+    "description": "Signifies bilateral agreements, high-level corporate connections, and dependable negotiations.",
+    "tags": ["handshake", "partnership", "agreement", "liaison", "deal"],
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m11 17 2 2a1 1 0 0 0 1.4 0l4.3-4.3a1 1 0 0 0 0-1.4l-3-3\"/><path d=\"m13 7-2-2a1 1 0 0 0-1.4 0L5.3 9.3a1 1 0 0 0 0 1.4l3 3\"/><path d=\"M18 11l3-3a1 1 0 0 0 0-1.4l-2.6-2.6a1 1 0 0 0-1.4 0L13 8\"/><path d=\"M6 13l-3 3a1 1 0 0 0 0 1.4l2.6 2.6a1 1 0 0 0 1.4 0L11 16\"/></svg>"
+  },
+  {
+    "id": "icon_ministry_pillar",
+    "name": "Ministry & Government Pillar",
+    "category": "Government & Regulatory",
+    "description": "Denotes ministerial institutions, legislative authorities, and formal public administration in Monrovia.",
+    "tags": ["ministry", "government", "institution", "pillar", "parliament"],
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M2 20h20\"/><path d=\"M12 2 3 7h18Z\"/><path d=\"M6 10v7\"/><path d=\"M10 10v7\"/><path d=\"M14 10v7\"/><path d=\"M18 10v7\"/><path d=\"M4 7h16\"/><path d=\"M4 17h16\"/></svg>"
+  },
+  {
+    "id": "icon_regulatory_scales",
+    "name": "Regulatory & Legal Balance",
+    "category": "Government & Regulatory",
+    "description": "Symbolizes statutory equity, legal compliance, and adherence to Liberian jurisprudence.",
+    "tags": ["scales", "law", "legal", "compliance", "justice", "statutory"],
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z\"/><path d=\"m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z\"/><path d=\"M7 21h10\"/><path d=\"M12 3v18\"/><path d=\"M3 7h18\"/><circle cx=\"12\" cy=\"3\" r=\"1\"/></svg>"
+  },
+  {
+    "id": "icon_compliance_seal",
+    "name": "Official Compliance Seal",
+    "category": "Government & Regulatory",
+    "description": "Indicates accredited verification, official government endorsement, and licensing approval.",
+    "tags": ["seal", "stamp", "certificate", "verified", "license", "approval"],
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"10\" r=\"6\"/><path d=\"m9 10 2 2 4-4\"/><path d=\"m8.2 15-2.2 6 6-2 6 2-2.2-6\"/></svg>"
+  },
+  {
+    "id": "icon_diplomatic_shield",
+    "name": "Diplomatic & Institutional Shield",
+    "category": "Government & Regulatory",
+    "description": "Signifies sovereign protocol, protective liaison, and diplomatic discretion.",
+    "tags": ["shield", "diplomacy", "discretion", "protection", "security"],
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z\"/><path d=\"M12 6v6l4 2\"/></svg>"
+  },
+  {
+    "id": "icon_tax_revenue",
+    "name": "Liberia Revenue & Tax ID (TIN)",
+    "category": "Tax & Finance",
+    "description": "Pertains to Liberia Revenue Authority (LRA) tax registration, clearance certificates, and audits.",
+    "tags": ["tax", "revenue", "tin", "lra", "finance", "audit"],
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect width=\"18\" height=\"18\" x=\"3\" y=\"3\" rx=\"2\"/><path d=\"M7 7h10\"/><path d=\"M7 11h10\"/><path d=\"M7 15h6\"/><circle cx=\"16\" cy=\"15\" r=\"1.5\"/></svg>"
+  },
+  {
+    "id": "icon_central_banking",
+    "name": "Central Bank & Capital Gateway",
+    "category": "Tax & Finance",
+    "description": "Financial infrastructure, repatriation of capital, and commercial banking liaisons in Monrovia.",
+    "tags": ["bank", "capital", "currency", "investment", "finance"],
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect width=\"20\" height=\"12\" x=\"2\" y=\"6\" rx=\"2\"/><circle cx=\"12\" cy=\"12\" r=\"2\"/><path d=\"M6 12h.01M18 12h.01\"/><path d=\"M2 10h20\"/></svg>"
+  },
+  {
+    "id": "icon_mining_ores",
+    "name": "Mining & Mineral Concessions",
+    "category": "Liberia & Key Industries",
+    "description": "Crucial for Liberia's mining sector: iron ore, gold, diamond concessions, and exploration permits.",
+    "tags": ["mining", "iron ore", "gold", "minerals", "concession", "diamond"],
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M6 3h12l4 6-10 12L2 9z\"/><path d=\"M2 9h20\"/><path d=\"M10 3v6l-4 12\"/><path d=\"M14 3v6l4 12\"/></svg>"
+  },
+  {
+    "id": "icon_maritime_freepost",
+    "name": "Maritime & Freeport of Monrovia",
+    "category": "Liberia & Key Industries",
+    "description": "Port handling, shipping registry compliance, customs clearances, and Atlantic maritime logistics.",
+    "tags": ["maritime", "port", "ship", "monrovia", "customs", "logistics"],
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M2 20a4 4 0 0 0 8 0 4 4 0 0 0 8 0 4 4 0 0 0 4 0\"/><path d=\"M4 17l2-8h12l2 8\"/><path d=\"M12 9V3\"/><path d=\"M9 5h6\"/><path d=\"M12 17v-4\"/></svg>"
+  },
+  {
+    "id": "icon_natural_resources",
+    "name": "Natural Resources & Agriculture",
+    "category": "Liberia & Key Industries",
+    "description": "Forestry, rubber concessions, palm cultivation, and renewable resource stewardship.",
+    "tags": ["agriculture", "resources", "forestry", "timber", "rubber"],
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 22v-9\"/><path d=\"M12 13a5 5 0 0 0 5-5c0-4-5-6-5-6s-5 2-5 6a5 5 0 0 0 5 5z\"/><path d=\"M12 17c-3 0-5 2-5 4\"/><path d=\"M12 17c3 0 5 2 5 4\"/></svg>"
+  },
+  {
+    "id": "icon_energy_infrastructure",
+    "name": "Energy & Infrastructure",
+    "category": "Liberia & Key Industries",
+    "description": "Power grid concessions, infrastructure development, renewable solar, and utility coordination.",
+    "tags": ["energy", "infrastructure", "power", "electricity", "solar", "grid"],
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M13 2 3 14h9l-1 8 10-12h-9l1-8z\"/></svg>"
+  },
+  {
+    "id": "icon_ecowas_access",
+    "name": "ECOWAS Regional Gateway",
+    "category": "Liberia & Key Industries",
+    "description": "West African regional economic integration, cross-border commerce, and transit treaties.",
+    "tags": ["ecowas", "regional", "africa", "gateway", "trade", "global"],
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><path d=\"M12 2a15.3 15.3 0 0 0 4 10 15.3 15.3 0 0 0-4 10 15.3 15.3 0 0 0-4-10 15.3 15.3 0 0 0 4-10z\"/><path d=\"M2 12h20\"/></svg>"
+  },
+  {
+    "id": "icon_pro_investment",
+    "name": "Investment Shield & Concession",
+    "category": "Corporate & Establishment",
+    "description": "Protection of foreign capital, investment incentives, and bilateral investment treaties.",
+    "tags": ["investment", "fdi", "capital", "concession", "security"],
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 2v20\"/><path d=\"M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6\"/></svg>"
+  },
+  {
+    "id": "icon_notary_signature",
+    "name": "Notarization & Legal Referral",
+    "category": "Corporate & Establishment",
+    "description": "Document attestation, certified affidavits, and coordination with vetted legal counsel.",
+    "tags": ["notary", "signature", "attestation", "legal", "dossier"],
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m18 2 4 4-14 14H4v-4L18 2z\"/><path d=\"m14 6 4 4\"/><path d=\"M4 22h16\"/></svg>"
+  },
+  {
+    "id": "icon_operational_permit",
+    "name": "Operational Permit & Retainer",
+    "category": "Government & Regulatory",
+    "description": "Ministry licenses, sectoral permits, environmental approvals, and ongoing retainers.",
+    "tags": ["permit", "license", "approval", "retainer", "monitoring"],
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z\"/><polyline points=\"14 2 14 8 20 8\"/><line x1=\"16\" y1=\"13\" x2=\"8\" y2=\"13\"/><line x1=\"16\" y1=\"17\" x2=\"8\" y2=\"17\"/><polyline points=\"10 9 9 9 8 9\"/></svg>"
+  },
+  {
+    "id": "icon_investor_delegation",
+    "name": "Investor Delegation & Protocol",
+    "category": "Corporate & Establishment",
+    "description": "High-level delegation reception, official itineraries, and executive market tours in Liberia.",
+    "tags": ["delegation", "investor", "protocol", "liaison", "executive"],
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2\"/><circle cx=\"9\" cy=\"7\" r=\"4\"/><path d=\"M22 21v-2a4 4 0 0 0-3-3.87\"/><path d=\"M16 3.13a4 4 0 0 1 0 7.75\"/></svg>"
+  },
+  {
+    "id": "icon_monrovia_compass",
+    "name": "Strategic Navigator & Market Entry",
+    "category": "Corporate & Establishment",
+    "description": "Strategic orientation for companies entering the West African market ecosystem.",
+    "tags": ["compass", "navigator", "strategy", "orientation", "market entry"],
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><polygon points=\"16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76\"/></svg>"
+  },
+  {
+    "id": "icon_secure_dispatch",
+    "name": "Confidential Dispatch & Liaison",
+    "category": "Corporate & Establishment",
+    "description": "Discreet document transmission, government correspondence, and executive reporting.",
+    "tags": ["mail", "dispatch", "confidential", "correspondence", "discreet"],
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect width=\"20\" height=\"16\" x=\"2\" y=\"4\" rx=\"2\"/><path d=\"m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7\"/></svg>"
+  },
+  {
+    "id": "icon_direct_hotline",
+    "name": "Direct Executive Communication",
+    "category": "Corporate & Establishment",
+    "description": "Dedicated telephonic and direct operational contact for urgent ministerial matters.",
+    "tags": ["phone", "communication", "hotline", "direct", "urgent"],
+    "svg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z\"/></svg>"
+  }
+]

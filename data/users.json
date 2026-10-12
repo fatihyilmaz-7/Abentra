@@ -1,0 +1,70 @@
+{
+  "users": [
+    {
+      "id": "usr_01",
+      "username": "admin",
+      "password": "admin",
+      "password_hash": "admin",
+      "passwordHash": "admin",
+      "salt": "",
+      "name": "Abenetta Kollie (Super Admin)",
+      "role": "superadmin",
+      "permissions": [
+        "all"
+      ],
+      "email": "abentrainternational@gmail.com",
+      "createdAt": "2026-10-12T10:00:00Z",
+      "lastLogin": "2026-10-12T16:48:57.420Z",
+      "lastLoginIp": "::1",
+      "lastLoginFlag": "🇹🇷",
+      "lastLoginDevice": "Desktop / Safari"
+    },
+    {
+      "id": "usr_02",
+      "username": "ads",
+      "password": "ads",
+      "password_hash": "ads",
+      "passwordHash": "ads",
+      "salt": "",
+      "name": "Marketing & Ads Manager",
+      "role": "ads_manager",
+      "permissions": [
+        "dashboard",
+        "logs",
+        "heatmap",
+        "theme",
+        "export"
+      ],
+      "email": "ads@abentrainternational.com",
+      "createdAt": "2026-10-12T16:00:00Z",
+      "lastLogin": "2026-10-12T16:53:46.741Z",
+      "lastLoginIp": "::ffff:127.0.0.1",
+      "lastLoginFlag": "🇹🇷",
+      "lastLoginDevice": "Desktop / Firefox"
+    },
+    {
+      "id": "usr_03",
+      "username": "dev",
+      "password": "dev",
+      "password_hash": "dev",
+      "passwordHash": "dev",
+      "salt": "",
+      "name": "Senior Platform Developer",
+      "role": "developer",
+      "permissions": [
+        "theme",
+        "content",
+        "sections",
+        "icons",
+        "logs",
+        "export"
+      ],
+      "email": "dev@abentrainternational.com",
+      "createdAt": "2026-10-12T16:30:00Z",
+      "lastLogin": "2026-10-12T16:46:29.166Z",
+      "lastLoginIp": "::1",
+      "lastLoginFlag": "🇹🇷",
+      "lastLoginDevice": "Desktop / Unknown"
+    }
+  ]
+}

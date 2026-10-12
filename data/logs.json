@@ -1,0 +1,78 @@
+{
+  "summary": {
+    "totalVisits": 36,
+    "uniqueVisitors": 2,
+    "pageViews": 36,
+    "avgDurationSeconds": 0,
+    "lastUpdated": "2026-10-12T15:34:15.368Z"
+  },
+  "sectionViews": {
+    "purpose": 6,
+    "contact": 8,
+    "who": 16,
+    "services": 1
+  },
+  "sectionTimeSeconds": {
+    "purpose": 57,
+    "contact": 1153,
+    "who": 657,
+    "services": 931
+  },
+  "deviceStats": {
+    "Desktop": 11,
+    "Mobile": 0,
+    "Tablet": 0
+  },
+  "browserStats": {
+    "Safari": 11
+  },
+  "countryStats": {
+    "🇹🇷 Türkiye": 11
+  },
+  "visitors": [
+    {
+      "id": "vis_e09a5ff0",
+      "ip": "::1",
+      "country": "Turkey",
+      "countryCode": "TR",
+      "flag": "🇹🇷",
+      "city": "Istanbul",
+      "region": "",
+      "isp": "Local Network",
+      "device": "Desktop",
+      "browser": "Unknown",
+      "os": "Unknown",
+      "screen": "1920x1080",
+      "referer": "Test Entry",
+      "firstSeen": "2026-10-12T16:42:59.600Z",
+      "lastSeen": "2026-10-12T16:42:59.601Z",
+      "durationSeconds": 0,
+      "sectionsViewed": []
+    },
+    {
+      "id": "vis_p9p3maqmv5eu7b7",
+      "ip": "176.30.100.141",
+      "country": "Türkiye",
+      "city": "Meram",
+      "device": "Desktop",
+      "browser": "Safari",
+      "os": "macOS",
+      "referer": "Direct Entry",
+      "firstSeen": "2026-10-12T15:34:43.305Z",
+      "lastSeen": "2026-10-12T17:13:32.014Z",
+      "durationSeconds": 0,
+      "sectionsViewed": [],
+      "flag": "🇹🇷",
+      "countryCode": "TR"
+    }
+  ],
+  "sectionCountryViews": {
+    "who": {
+      "🇹🇷 Turkey": 1,
+      "🇹🇷 Türkiye": 1
+    },
+    "contact": {
+      "🇹🇷 Türkiye": 4
+    }
+  }
+}

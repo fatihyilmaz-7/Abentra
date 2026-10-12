@@ -1,0 +1,138 @@
+[
+  {
+    "id": "sec_stats",
+    "name": "Key Metrics & Impact",
+    "title": "Delivering institutional confidence in Liberia.",
+    "tag": "Track Record",
+    "tagSub": "Strategic Advisory",
+    "subtitle": "Connecting multinational corporations, private investors, and emerging enterprises to verified commercial channels.",
+    "type": "stats",
+    "enabled": true,
+    "order": 1,
+    "anchor": "impact",
+    "items": [
+      {
+        "label": "Years Advisory Expertise",
+        "value": "15+",
+        "description": "Deep-rooted understanding of Liberian commercial and administrative frameworks."
+      },
+      {
+        "label": "Corporate Entities Handled",
+        "value": "100+",
+        "description": "Seamless registrations, renewals, and regulatory accreditations."
+      },
+      {
+        "label": "Rapid Liaison Activation",
+        "value": "48h",
+        "description": "Direct communication pathways with relevant ministries and agencies."
+      },
+      {
+        "label": "Regulatory Integrity",
+        "value": "100%",
+        "description": "Strict compliance with Liberian statutory laws and international business ethics."
+      }
+    ],
+    "customHtml": ""
+  },
+  {
+    "id": "sec_why_liberia",
+    "name": "Strategic Gateway / Why Liberia",
+    "title": "Why invest & establish in Liberia?",
+    "tag": "Regional Horizon",
+    "tagSub": "Investment Climate",
+    "subtitle": "A resource-rich economy undergoing dynamic institutional reforms, positioned as a vital Atlantic trade gateway in West Africa.",
+    "type": "cards",
+    "enabled": true,
+    "order": 2,
+    "anchor": "gateway",
+    "items": [
+      {
+        "icon": "icon_natural_resources",
+        "title": "Abundant Natural Wealth",
+        "description": "Extensive reserves of iron ore, gold, diamonds, rubber, sustainable timber, and offshore energy exploration opportunities."
+      },
+      {
+        "icon": "icon_maritime_freepost",
+        "title": "Maritime & Freeport Hub",
+        "description": "The Freeport of Monrovia serves as a key logistical nexus, alongside one of the world's premier maritime registries."
+      },
+      {
+        "icon": "icon_pro_investment",
+        "title": "Pro-Business Regulatory Framework",
+        "description": "Competitive tax incentives, bilateral trade agreements, and supportive foreign direct investment policies."
+      },
+      {
+        "icon": "icon_ecowas_access",
+        "title": "ECOWAS Market Integration",
+        "description": "Direct access to over 400 million regional consumers through the Economic Community of West African States."
+      }
+    ],
+    "customHtml": ""
+  },
+  {
+    "id": "sec_process",
+    "name": "Engagement Process",
+    "title": "A structured pathway from intent to operation.",
+    "tag": "Execution Framework",
+    "tagSub": "How We Work",
+    "subtitle": "Navigating complex bureaucratic landscapes with precision, transparency, and unyielding efficiency.",
+    "type": "process",
+    "enabled": true,
+    "order": 3,
+    "anchor": "methodology",
+    "items": [
+      {
+        "step": "01",
+        "title": "Preliminary Scoping & Compliance Audit",
+        "description": "We evaluate your corporate objectives against current Liberian statutory prerequisites and licensing needs."
+      },
+      {
+        "step": "02",
+        "title": "Institutional & Regulatory Roadmapping",
+        "description": "Preparation of requisite administrative dossiers, ministerial filings, and coordination with accredited legal counsel."
+      },
+      {
+        "step": "03",
+        "title": "Active Agency Liaison & Tracking",
+        "description": "Daily monitoring of application pathways across pertinent authorities, ensuring prompt resolution of bottlenecks."
+      },
+      {
+        "step": "04",
+        "title": "Operational Clearance & Retainer Advisory",
+        "description": "Securing valid enterprise certificates, tax credentials, and delivering sustained compliance monitoring."
+      }
+    ],
+    "customHtml": ""
+  },
+  {
+    "id": "sec_faq",
+    "name": "Frequently Asked Questions",
+    "title": "Navigating business establishment in Liberia.",
+    "tag": "Advisory Insights",
+    "tagSub": "Common Queries",
+    "subtitle": "Answers to critical questions encountered by foreign investors and domestic entrepreneurs.",
+    "type": "faq",
+    "enabled": true,
+    "order": 4,
+    "anchor": "faq",
+    "items": [
+      {
+        "a": "Yes. Liberian investment statutes permit 100% foreign equity ownership in most commercial sectors, subject to compliance with the Liberian Business Corporation Act and sectoral licensing conditions.",
+        "q": "Can foreign investors own 100% of a company in Liberia?"
+      },
+      {
+        "a": "With coordinated documentation through ABENTRA, standard company registration and tax identification numbering (TIN) are typically expedited within business days, barring exceptional statutory verifications.",
+        "q": "How long does standard business registration typically take?"
+      },
+      {
+        "a": "ABENTRA operates as an executive liaison and administrative advisory gateway. For court representation or formal statutory legal counsel, we coordinate directly with vetted and reputable Liberian law firms.",
+        "q": "Does ABENTRA provide formal legal representation?"
+      },
+      {
+        "a": "Registered entities must maintain annual business registry renewals, Liberia Revenue Authority (LRA) tax filings, sector-specific operational permits, and municipal operating clearances.",
+        "q": "What ongoing compliance requirements must businesses maintain in Liberia?"
+      }
+    ],
+    "customHtml": ""
+  }
+]

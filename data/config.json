@@ -1,0 +1,175 @@
+{
+  "who": {
+    "tag": "Who we are",
+    "lead": "ABENTRA is the trusted connection between businesses, government institutions, regulators and commercial opportunities in Liberia.",
+    "title": "Your connection to business in Liberia.",
+    "points": [
+      {
+        "num": "01",
+        "title": "Business establishment",
+        "tabIndex": 0
+      },
+      {
+        "num": "02",
+        "title": "Licensing & compliance",
+        "tabIndex": 1
+      },
+      {
+        "num": "03",
+        "title": "Government & corporate liaison",
+        "tabIndex": 2
+      },
+      {
+        "num": "04",
+        "title": "Market entry & ongoing support",
+        "tabIndex": 3
+      }
+    ],
+    "tagSub": "Company profile 02",
+    "secondary": "Helping local and international businesses establish, connect and remain compliant in Liberia.",
+    "promiseText": "We simplify the path between business ambition and compliant operation in Liberia.",
+    "promiseLabel": "Our promise",
+    "sidebarTitle": "One coordinated point of contact"
+  },
+  "hero": {
+    "tag": "Company profile",
+    "desc": "Business establishment, licensing, compliance and liaison in Liberia.",
+    "title": "Bridging opportunities.",
+    "location": "Monrovia, Liberia",
+    "titleAccent": "Building tomorrow.",
+    "btnPrimaryLink": "#services",
+    "btnPrimaryText": "Our services",
+    "btnSecondaryLink": "#contact",
+    "btnSecondaryText": "Let’s connect"
+  },
+  "smtp": {
+    "host": "",
+    "pass": "",
+    "port": 587,
+    "user": "",
+    "secure": false,
+    "enabled": false,
+    "fromName": "ABENTRA International",
+    "fromEmail": "info@abentra.com"
+  },
+  "brand": {
+    "name": "ABENTRA",
+    "tagline": "BRIDGING OPPORTUNITIES. BUILDING TOMORROW.",
+    "location": "Monrovia, Liberia",
+    "logoType": "svg",
+    "badgeText": "Company profile",
+    "logoImage": "/assets/logo.jpeg",
+    "subTagline": "INTERNATIONAL"
+  },
+  "theme": {
+    "ink": "#f3efe6",
+    "gold": "#c9a45c",
+    "mode": "dark",
+    "mute": "#b9c3d0",
+    "navy": "#0a2038",
+    "gold2": "#e3c98f",
+    "navy2": "#0e2a47",
+    "navy3": "#061628"
+  },
+  "footer": {
+    "col1": "ABENTRA International · Monrovia, Liberia",
+    "col2": "Bridging opportunities. Building tomorrow.",
+    "copyright": "© 2026 ABENTRA International. All rights reserved."
+  },
+  "ticker": [
+    "Business establishment",
+    "Licensing & compliance",
+    "Government & corporate liaison",
+    "Market entry & ongoing support"
+  ],
+  "contact": {
+    "tag": "Leadership & contact",
+    "email": "abentrainternational@gmail.com",
+    "title": "Let’s connect.",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Camp+Johnson+Road+and+Clay+Street+Monrovia+Liberia",
+    "phones": [
+      "+231 886 246 170",
+      "+231 775 875 843"
+    ],
+    "tagSub": "Company profile 08",
+    "ctaText": "Email ABENTRA",
+    "enableForm": true,
+    "leaderName": "ABENETTA KOLLIE",
+    "leaderTitle": "Founder & Managing Director",
+    "addressLine1": "Camp Johnson Road & Clay Street",
+    "addressLine2": "Monrovia, Liberia"
+  },
+  "purpose": {
+    "tag": "Our purpose",
+    "title": "Purpose, direction and character.",
+    "tagSub": "Company profile 03",
+    "characters": [
+      "Professional",
+      "Diplomatic",
+      "Knowledgeable",
+      "Efficient",
+      "Discreet",
+      "Responsive",
+      "Trustworthy"
+    ],
+    "visionText": "Become Liberia’s most trusted gateway for responsible local and international business establishment and regulatory compliance.",
+    "missionText": "Help businesses enter, establish and operate confidently through dependable liaison, licensing, compliance and market-entry support.",
+    "visionTitle": "Vision",
+    "missionTitle": "Mission",
+    "characterTitle": "Our character"
+  },
+  "services": [
+    {
+      "id": "s0",
+      "tag": "Service area 01",
+      "note": "One coordinated point of contact for business support in Liberia.",
+      "items": [
+        "Business registration and renewal",
+        "Tax registration and clearance facilitation",
+        "Corporate administrative support"
+      ],
+      "tabId": "t0",
+      "title": "Business establishment",
+      "tagSub": "Company profile 04"
+    },
+    {
+      "id": "s1",
+      "tag": "Service area 02",
+      "note": "One coordinated point of contact for business support in Liberia.",
+      "items": [
+        "Operational permits and industry licenses",
+        "Certification, accreditation and renewals",
+        "Compliance monitoring and retainers"
+      ],
+      "tabId": "t1",
+      "title": "Licensing & compliance",
+      "tagSub": "Company profile 05"
+    },
+    {
+      "id": "s2",
+      "tag": "Service area 03",
+      "note": "ABENTRA coordinates processes but does not provide legal advice, guarantee government approval or control official processing times.",
+      "items": [
+        "Ministry and agency coordination",
+        "Application follow-up and reporting",
+        "Legal referrals to qualified lawyers"
+      ],
+      "tabId": "t2",
+      "title": "Government & corporate liaison",
+      "tagSub": "Company profile 06"
+    },
+    {
+      "id": "s3",
+      "tag": "Service area 04",
+      "note": "One coordinated point of contact for business support in Liberia.",
+      "items": [
+        "Market-entry guidance",
+        "Local introductions and partner connections",
+        "Investor and delegation support"
+      ],
+      "tabId": "t3",
+      "title": "Market entry & ongoing support",
+      "tagSub": "Company profile 07"
+    }
+  ]
+}

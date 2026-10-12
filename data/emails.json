@@ -1,0 +1,81 @@
+{
+  "inbox": [
+    {
+      "id": "msg_mv5d07mi",
+      "name": "Alhaji Kamara",
+      "email": "a.kamara@liberiainvest.org",
+      "phone": "+231778123456",
+      "subject": "Inquiry on Diplomatic Concession Roadmapping",
+      "service": "Government & corporate liaison",
+      "message": "We are requesting formal liaison with the Ministry of Commerce.",
+      "date": "2026-10-12T14:40:38.298Z",
+      "read": true,
+      "replied": true
+    },
+    {
+      "id": "msg_001",
+      "name": "David Sterling",
+      "email": "d.sterling@atlanticminerals.co.uk",
+      "phone": "+44 20 7946 0912",
+      "subject": "Mining Concession Licensing & Ministry Liaison in Nimba County",
+      "service": "Licensing & compliance",
+      "message": "Dear Abentra Team, Our investment consortium is finalizing exploratory acquisition plans for mineral concessions in Nimba County. We require structured assistance with Ministry of Mines & Energy liaison, environmental permits, and business establishment in Monrovia. Please arrange an initial consultation.",
+      "date": "2026-10-12T14:32:00Z",
+      "read": false,
+      "replied": false
+    },
+    {
+      "id": "msg_002",
+      "name": "Kofi Mensah",
+      "email": "kmensah@westafricatrading.com",
+      "phone": "+233 24 555 7821",
+      "subject": "Port Logistics & Corporate Registration Clearance",
+      "service": "Business establishment",
+      "message": "Hello Madam Kollie, We are expanding our maritime transit operations to the Freeport of Monrovia. We need assistance registering a Liberian subsidiary and securing tax identification clearances from the LRA. Looking forward to your guidance.",
+      "date": "2026-10-11T09:15:00Z",
+      "read": true,
+      "replied": true
+    }
+  ],
+  "sent": [
+    {
+      "id": "sent_mv5d0wjv",
+      "to": "a.kamara@liberiainvest.org",
+      "subject": "RE: Inquiry on Diplomatic Concession Roadmapping",
+      "body": "Dear Mr. Kamara,\n\nWe have scheduled a ministerial briefing for your delegation on Thursday.\n\nBest regards,\nAbenetta Kollie",
+      "template": "Custom Email",
+      "sentAt": "2026-10-12T14:41:10.603Z",
+      "status": "Delivered (Simulated)",
+      "errorDetails": null
+    },
+    {
+      "id": "sent_001",
+      "to": "kmensah@westafricatrading.com",
+      "subject": "RE: Port Logistics & Corporate Registration Clearance - ABENTRA Advisory",
+      "body": "Dear Mr. Mensah,\n\nThank you for reaching out to ABENTRA International. We would be pleased to assist West Africa Trading with your subsidiary registration and LRA tax clearance for the Freeport operations.\n\nOur team has prepared a preliminary roadmap. Let us schedule an executive consultation this week.\n\nWarm regards,\nAbenetta Kollie\nFounder & Managing Director\nABENTRA International",
+      "template": "Business Establishment Engagement",
+      "sentAt": "2026-10-11T11:45:00Z",
+      "status": "Delivered"
+    }
+  ],
+  "templates": [
+    {
+      "id": "tpl_general_inquiry",
+      "name": "General Inquiries Welcome",
+      "subject": "ABENTRA International | Inquiry Confirmation & Next Steps",
+      "body": "Dear {{name}},\n\nThank you for reaching out to ABENTRA International regarding your commercial initiatives in Liberia.\n\nWe have received your inquiry and our executive advisory team is currently reviewing your prerequisites. We will follow up with specific administrative insights and guidance shortly.\n\nSincerely,\nABENTRA International\nMonrovia, Liberia"
+    },
+    {
+      "id": "tpl_establishment",
+      "name": "Business Establishment Proposal",
+      "subject": "Proposal for Business Incorporation & Licensing | ABENTRA International",
+      "body": "Dear {{name}},\n\nFollowing your request concerning company incorporation and statutory registrations in Liberia, we are pleased to outline the primary operational scope.\n\nABENTRA acts as your singular point of coordination across the Liberia Business Registry (LBR), the Liberia Revenue Authority (LRA), and affiliated municipal agencies.\n\nPlease find attached our preliminary institutional roadmap.\n\nWarm regards,\nAbenetta Kollie\nFounder & Managing Director"
+    },
+    {
+      "id": "tpl_consultation",
+      "name": "Executive Consultation Invitation",
+      "subject": "Scheduling Executive Consultation | ABENTRA International",
+      "body": "Dear {{name}},\n\nWe would welcome the opportunity to convene a direct virtual or in-person briefing regarding your strategic operations in Liberia.\n\nPlease advise which times this week suit your schedule.\n\nBest regards,\nABENTRA International Team\nCamp Johnson Road & Clay Street, Monrovia"
+    }
+  ]
+}

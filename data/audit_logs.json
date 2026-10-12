@@ -1,0 +1,93 @@
+[
+  {
+    "id": "audit_mv5hrfjo",
+    "timestamp": "2026-10-12T16:53:46.740Z",
+    "username": "ads",
+    "role": "ads_manager",
+    "ip": "::ffff:127.0.0.1",
+    "flag": "🇹🇷",
+    "country": "Türkiye",
+    "city": "Istanbul",
+    "device": "Desktop / macOS",
+    "browser": "Firefox",
+    "status": "Success"
+  },
+  {
+    "id": "audit_mv5hpxa3",
+    "timestamp": "2026-10-12T16:52:36.411Z",
+    "username": "ads",
+    "role": "ads_manager",
+    "ip": "::ffff:127.0.0.1",
+    "flag": "🇹🇷",
+    "country": "Türkiye",
+    "city": "Istanbul",
+    "device": "Desktop / macOS",
+    "browser": "Firefox",
+    "status": "Success"
+  },
+  {
+    "id": "audit_mv5hl8az",
+    "timestamp": "2026-10-12T16:48:57.419Z",
+    "username": "admin",
+    "role": "Super Administrator",
+    "ip": "::1",
+    "flag": "🇹🇷",
+    "country": "Türkiye",
+    "city": "Istanbul",
+    "device": "Desktop / macOS",
+    "browser": "Safari",
+    "status": "Success"
+  },
+  {
+    "id": "audit_mv5hiazp",
+    "timestamp": "2026-10-12T16:46:40.933Z",
+    "username": "admin",
+    "role": "Super Administrator",
+    "ip": "::1",
+    "flag": "🇹🇷",
+    "country": "Türkiye",
+    "city": "Istanbul",
+    "device": "Desktop / Unknown",
+    "browser": "Unknown",
+    "status": "Success"
+  },
+  {
+    "id": "audit_mv5hi1wt",
+    "timestamp": "2026-10-12T16:46:29.165Z",
+    "username": "dev",
+    "role": "developer",
+    "ip": "::1",
+    "flag": "🇹🇷",
+    "country": "Türkiye",
+    "city": "Istanbul",
+    "device": "Desktop / Unknown",
+    "browser": "Unknown",
+    "status": "Success"
+  },
+  {
+    "id": "audit_mv5hhruj",
+    "timestamp": "2026-10-12T16:46:16.123Z",
+    "username": "ads",
+    "role": "ads_manager",
+    "ip": "::1",
+    "flag": "🇹🇷",
+    "country": "Türkiye",
+    "city": "Istanbul",
+    "device": "Desktop / Unknown",
+    "browser": "Unknown",
+    "status": "Success"
+  },
+  {
+    "id": "audit_mv5he7y3",
+    "timestamp": "2026-10-12T16:43:30.363Z",
+    "username": "ads",
+    "role": "ads_manager",
+    "ip": "::1",
+    "flag": "🇹🇷",
+    "country": "Türkiye",
+    "city": "Istanbul",
+    "device": "Desktop / Unknown",
+    "browser": "Unknown",
+    "status": "Success"
+  }
+]

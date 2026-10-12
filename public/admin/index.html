@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ABENTRA Executive Portal | Yönetim Merkezi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/admin/css/admin.css">
+</head>
+<body data-theme="theme-midnight">
+
+  <!-- ==========================================
+       LOGIN MODAL OVERLAY (When unauthenticated)
+       ========================================== -->
+  <div id="login-screen" class="login-screen">
+    <div class="login-card">
+      <svg class="login-logo" viewBox="90 8 170 120">
+        <path d="M147 16h10l50 106h-21z" fill="currentColor"/>
+        <path d="M147 16l3 9-31 97h-10z" fill="currentColor"/>
+        <path d="M92 124C100 84 170 66 222 50 172 82 132 102 100 126z" fill="currentColor"/>
+      </svg>
+      <h2>ABENTRA International</h2>
+      <p id="login-subtext">Executive Management & Telemetry Portal</p>
+      <form id="admin-login-form">
+        <div class="form-field">
+          <input type="text" id="login-username" class="input-box" placeholder="Kullanıcı Adı (admin)" required autocomplete="username">
+        </div>
+        <div class="form-field">
+          <input type="password" id="login-password" class="input-box" placeholder="Şifre (admin)" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn-ui gold" style="width: 100%; justify-content: center; padding: 12px; margin-top: 10px;">
+          Giriş Yap / Sign In
+        </button>
+        <div id="login-error" style="color: var(--adm-danger); font-size: 13px; margin-top: 14px; display: none;"></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       SIDEBAR NAVIGATION
+       ========================================== -->
+  <aside class="sidebar" id="admin-sidebar">
+    <div class="brand-area">
+      <svg class="brand-icon" viewBox="90 8 170 120">
+        <path d="M147 16h10l50 106h-21z" fill="currentColor"/>
+        <path d="M147 16l3 9-31 97h-10z" fill="currentColor"/>
+        <path d="M92 124C100 84 170 66 222 50 172 82 132 102 100 126z" fill="currentColor"/>
+      </svg>
+      <div>
+        <div class="brand-name" data-i18n="portalTitle">ABENTRA</div>
+        <div class="brand-tag" data-i18n="portalSubtitle">Yönetim Merkezi</div>
+      </div>
+    </div>
+
+    <ul class="nav-menu">
+      <li class="nav-item active" data-tab="dashboard">
+        <a href="#dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+          <span data-i18n="navDashboard">Genel Bakış</span>
+        </a>
+      </li>
+      <li class="nav-item" data-tab="logs">
+        <a href="#logs">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+          <span data-i18n="navLogs">Ziyaretçi & Alan Logları</span>
+        </a>
+      </li>
+      <li class="nav-item" data-tab="theme">
+        <a href="#theme">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.563-2.512 5.563-5.563C22 6.5 17.5 2 12 2Z"/></svg>
+          <span data-i18n="navTheme">Site Teması & Logo</span>
+        </a>
+      </li>
+      <li class="nav-item" data-tab="content">
+        <a href="#content">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+          <span data-i18n="navContent">Site İçerik Yönetimi</span>
+        </a>
+      </li>
+      <li class="nav-item" data-tab="sections">
+        <a href="#sections">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.29 7 12 12 20.71 7"/><line x1="12" y1="22" x2="12" y2="12"/></svg>
+          <span data-i18n="navSections">Ara Sectionlar</span>
+        </a>
+      </li>
+      <li class="nav-item" data-tab="emails">
+        <a href="#emails">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          <span data-i18n="navEmails">E-Posta & Mesajlar</span>
+          <span class="nav-badge" id="sidebar-unread-badge" style="display:none;">0</span>
+        </a>
+      </li>
+      <li class="nav-item" data-tab="icons">
+        <a href="#icons">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <span data-i18n="navIcons">SVG Icon Kütüphanesi</span>
+        </a>
+      </li>
+      <li class="nav-item" data-tab="users">
+        <a href="#users">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span data-i18n="navUsers">Yöneticiler & Yetkiler</span>
+        </a>
+      </li>
+      <li class="nav-item" data-tab="settings">
+        <a href="#settings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+          <span data-i18n="navSettings">Sistem & Güvenlik</span>
+        </a>
+      </li>
+    </ul>
+
+    <div class="user-footer">
+      <div class="user-info">
+        <div class="user-avatar" id="current-user-initial">A</div>
+        <div>
+          <div class="user-name" id="current-user-name">Admin</div>
+          <div class="user-role" id="current-user-role" data-i18n="adminRole">Süper Yönetici</div>
+        </div>
+      </div>
+      <button class="btn-ui danger" id="btn-sidebar-logout" title="Çıkış Yap">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      </button>
+    </div>
+  </aside>
+  <!-- Mobile Sidebar Backdrop Overlay -->
+  <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+  <!-- ==========================================
+       MAIN CONTENT CONTAINER
+       ========================================== -->
+  <main class="main-content">
+    <!-- Top Header -->
+    <header class="top-header">
+      <div class="header-left">
+        <button class="toggle-sidebar-btn" id="toggle-sidebar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <h1 class="page-title" id="page-title-display">Genel Bakış</h1>
+      </div>
+
+      <div class="header-controls">
+        <!-- Admin Theme Switcher -->
+        <select id="admin-theme-select" class="select-ui" title="Admin Teması">
+          <option value="theme-midnight">Executive Midnight</option>
+          <option value="theme-obsidian">Dark Obsidian</option>
+          <option value="theme-royal">Royal Light</option>
+          <option value="theme-emerald">Cyber Emerald</option>
+        </select>
+
+        <!-- Language Switcher -->
+        <select id="admin-lang-select" class="select-ui" title="Dil Seçimi">
+          <option value="tr">🇹🇷 Türkçe</option>
+          <option value="en">🇬🇧 English</option>
+        </select>
+
+        <!-- View Live Site Button -->
+        <a href="/" target="_blank" class="btn-ui">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          <span data-i18n="viewSite">Siteyi Görüntüle</span>
+        </a>
+      </div>
+    </header>
+
+    <div class="view-container">
+
+      <!-- =======================================================
+           TAB 1: DASHBOARD (Overview & Real-time Section Analytics)
+           ======================================================= -->
+      <section id="tab-dashboard" class="tab-panel active">
+        <div class="view-heading">
+          <div>
+            <h2 data-i18n="dashTitle">Yönetim Özeti ve Canlı Metrikler</h2>
+            <p data-i18n="dashSub">Site trafiği, ziyaret edilen alanların analizi ve operasyonel durum.</p>
+          </div>
+          <button class="btn-ui" id="btn-refresh-dashboard">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 21h5v-5"/></svg>
+            Yenile
+          </button>
+        </div>
+
+        <!-- KPI Grid -->
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-title">
+              <span data-i18n="totalVisits">Toplam Ziyaret</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><path d="m12 6 4 6h-8z"/></svg>
+            </div>
+            <div class="kpi-value" id="kpi-total-visits">0</div>
+            <div class="kpi-sub" id="kpi-pageviews">0 Sayfa Görüntüleme</div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-title">
+              <span data-i18n="uniqueVisitors">Tekil Kullanıcı</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            </div>
+            <div class="kpi-value" id="kpi-unique-visitors">0</div>
+            <div class="kpi-sub">Farklı IP & Cihaz</div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-title">
+              <span data-i18n="avgDwell">Ortalama Süre</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="kpi-value" id="kpi-avg-duration">0s</div>
+            <div class="kpi-sub">Sayfa ve Bölüm Kalış</div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-title">
+              <span data-i18n="inquiries">Gelen Talepler</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            </div>
+            <div class="kpi-value" id="kpi-total-inquiries">0</div>
+            <div class="kpi-sub"><span id="kpi-unread-inquiries" style="color:var(--adm-gold)">0</span> <span data-i18n="unreadBadge">okunmamış</span></div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-title">
+              <span data-i18n="mostViewedSec">En Çok İzlenen Alan</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <div class="kpi-value" id="kpi-top-section" style="font-size:24px;text-transform:capitalize;">-</div>
+            <div class="kpi-sub">En Yüksek Etkileşim</div>
+          </div>
+        </div>
+
+        <!-- Section Heatmap Breakdown & Device Stats -->
+        <div class="analytics-grid">
+          <!-- Section Heatmap -->
+          <div class="card-box">
+            <div class="card-box-header">
+              <div>
+                <h3 data-i18n="sectionHeatTitle">Hangi Alan Ne Kadar Görüntülendi?</h3>
+                <p data-i18n="sectionHeatSub">Kullanıcıların en çok vakit geçirdiği ve görüntülediği bölümlerin dağılımı.</p>
+              </div>
+            </div>
+            <div id="section-heatmap-list">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+
+          <!-- Device Breakdown & Quick Countries -->
+          <div class="card-box">
+            <div class="card-box-header">
+              <div>
+                <h3 data-i18n="deviceDistribution">Cihaz & Konum Dağılımı</h3>
+                <p>Masaüstü, mobil, tablet ve coğrafi dağılım.</p>
+              </div>
+            </div>
+            <div id="device-stats-container" style="margin-bottom: 24px;"></div>
+            <div class="card-box-header" style="margin-top:20px;">
+              <div>
+                <h3 style="font-size:18px;">Öne Çıkan Ülkeler</h3>
+              </div>
+            </div>
+            <div id="country-stats-container"></div>
+          </div>
+        </div>
+
+        <!-- Recent Visitors Stream -->
+        <div class="card-box">
+          <div class="card-box-header">
+            <div>
+              <h3 data-i18n="recentVisitorsTitle">Son Ziyaretçiler & Canlı Akış</h3>
+              <p>Son giren kullanıcıların detayları ve hangi bölümlere baktıkları.</p>
+            </div>
+            <a href="#logs" class="btn-ui" onclick="document.querySelector('[data-tab=logs]').click()">Tümünü Gör</a>
+          </div>
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th data-i18n="colVisitorId">Ziyaretçi</th>
+                  <th data-i18n="colIp">IP Adresi</th>
+                  <th data-i18n="colCountry">Konum</th>
+                  <th data-i18n="colDevice">Cihaz</th>
+                  <th data-i18n="colDuration">Süre</th>
+                  <th data-i18n="colSections">Görüntülenen Alanlar</th>
+                </tr>
+              </thead>
+              <tbody id="dashboard-recent-visitors-body">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- =======================================================
+           TAB 2: VISITOR & SECTION TRACKING LOGS
+           ======================================================= -->
+      <section id="tab-logs" class="tab-panel">
+        <div class="view-heading">
+          <div>
+            <h2 data-i18n="logsTitle">Ayrıntılı Ziyaretçi & Bölüm İzleme Günlükleri</h2>
+            <p data-i18n="logsSub">Kullanıcıların site içindeki hareketleri, hangi ara sectionlarda ne kadar kaldıkları.</p>
+          </div>
+          <div style="display:flex;gap:10px;">
+            <button class="btn-ui danger" id="btn-clear-logs" data-i18n="clearLogs">Logları Temizle</button>
+            <button class="btn-ui" id="btn-export-csv" data-i18n="exportCsv">CSV İndir</button>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+          <input type="text" id="logs-search-input" class="input-box" placeholder="IP, Konum veya Cihaz ara..." style="max-width: 400px;">
+        </div>
+
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th data-i18n="colVisitorId">Ziyaretçi ID</th>
+                <th data-i18n="colIp">IP</th>
+                <th data-i18n="colCountry">Konum</th>
+                <th data-i18n="colDevice">Cihaz & Tarayıcı</th>
+                <th>Referer / Kaynak</th>
+                <th data-i18n="colDuration">Toplam Süre</th>
+                <th data-i18n="colSections">İzlenen Alanlar (Dwell Breakdown)</th>
+                <th>Tarih</th>
+              </tr>
+            </thead>
+            <tbody id="full-logs-table-body">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- =======================================================
+           TAB 3: THEME & BRANDING
+           ======================================================= -->
+      <section id="tab-theme" class="tab-panel">
+        <div class="view-heading">
+          <div>
+            <h2 data-i18n="themeTitle">Site Teması, Renk Paleti ve Logo Yönetimi</h2>
+            <p data-i18n="themeSub">Web sitesinin lüks kurumsal kimliğini, renk tonlarını ve logosunu güncelleyin.</p>
+          </div>
+          <button class="btn-ui gold" id="btn-save-theme" data-i18n="btnSaveTheme">Tema Ayarlarını Kaydet</button>
+        </div>
+
+        <!-- Presets -->
+        <div class="card-box" style="margin-bottom: 24px;">
+          <h3 style="margin-bottom: 14px; font-size: 18px;" data-i18n="presets">Hazır Renk Şablonları</h3>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <button class="btn-ui" id="preset-default" data-i18n="presetDefault">Orijinal Abentra Lüksü</button>
+            <button class="btn-ui" id="preset-obsidian" data-i18n="presetObsidian">Koyu Obsidyen & Altın</button>
+            <button class="btn-ui" id="preset-royal" data-i18n="presetRoyal">Kraliyet Mavisi & Şampanya</button>
+          </div>
+        </div>
+
+        <!-- Palette Editor -->
+        <div class="card-box" style="margin-bottom: 24px;">
+          <h3 style="margin-bottom: 20px; font-size: 20px;" data-i18n="paletteSection">Renk Paleti (CSS Değişkenleri)</h3>
+          <div class="form-row">
+            <div class="form-field">
+              <label data-i18n="navyPrimary">Ana Lacivert (--navy)</label>
+              <div class="color-picker-group">
+                <input type="color" id="theme-color-navy" class="color-swatch">
+                <input type="text" id="theme-text-navy" class="input-box">
+              </div>
+            </div>
+            <div class="form-field">
+              <label data-i18n="navyCard">Kart Laciverti (--navy2)</label>
+              <div class="color-picker-group">
+                <input type="color" id="theme-color-navy2" class="color-swatch">
+                <input type="text" id="theme-text-navy2" class="input-box">
+              </div>
+            </div>
+            <div class="form-field">
+              <label data-i18n="navyDark">Derin Lacivert (--navy3)</label>
+              <div class="color-picker-group">
+                <input type="color" id="theme-color-navy3" class="color-swatch">
+                <input type="text" id="theme-text-navy3" class="input-box">
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-field">
+              <label data-i18n="goldSignature">Klasik Altın (--gold)</label>
+              <div class="color-picker-group">
+                <input type="color" id="theme-color-gold" class="color-swatch">
+                <input type="text" id="theme-text-gold" class="input-box">
+              </div>
+            </div>
+            <div class="form-field">
+              <label data-i18n="goldAccent">Açık Altın (--gold2)</label>
+              <div class="color-picker-group">
+                <input type="color" id="theme-color-gold2" class="color-swatch">
+                <input type="text" id="theme-text-gold2" class="input-box">
+              </div>
+            </div>
+            <div class="form-field">
+              <label data-i18n="inkText">Yazı Rengi (--ink)</label>
+              <div class="color-picker-group">
+                <input type="color" id="theme-color-ink" class="color-swatch">
+                <input type="text" id="theme-text-ink" class="input-box">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Logo & Branding -->
+        <div class="card-box">
+          <h3 style="margin-bottom: 20px; font-size: 20px;" data-i18n="logoSection">Logo ve Marka Kimliği</h3>
+          <div class="form-row">
+            <div class="form-field">
+              <label data-i18n="logoTypeLabel">Logo Tercihi</label>
+              <select id="brand-logotype-select" class="select-ui" style="padding:10px;">
+                <option value="svg" data-i18n="logoTypeSvg">Orijinal Vektör Dinamik Arma (SVG)</option>
+                <option value="image" data-i18n="logoTypeImage">Özel Logo Görseli (Dosya)</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label data-i18n="uploadLogoLabel">Yeni Logo Dosyası Yükle</label>
+              <div style="display:flex;gap:10px;">
+                <input type="file" id="logo-file-input" accept="image/*" class="input-box" style="padding:6px;">
+                <button type="button" class="btn-ui" id="btn-upload-logo" data-i18n="btnUpload">Yükle</button>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-field">
+              <label data-i18n="brandNameLabel">Marka Başlığı</label>
+              <input type="text" id="brand-name-input" class="input-box">
+            </div>
+            <div class="form-field">
+              <label data-i18n="brandTaglineLabel">Slogan / Tagline</label>
+              <input type="text" id="brand-tagline-input" class="input-box">
+            </div>
+            <div class="form-field">
+              <label data-i18n="brandLocationLabel">Konum Etiketi</label>
+              <input type="text" id="brand-location-input" class="input-box">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =======================================================
+           TAB 4: CONTENT MANAGEMENT (CMS)
+           ======================================================= -->
+      <section id="tab-content" class="tab-panel">
+        <div class="view-heading">
+          <div>
+            <h2 data-i18n="contentTitle">Site İçerik Editörü (CMS)</h2>
+            <p data-i18n="contentSub">Tüm metinleri, başlıkları, hizmetleri ve liderlik bilgilerini yönetin.</p>
+          </div>
+          <div style="display:flex;gap:10px;">
+            <button class="btn-ui danger" id="btn-reset-content-defaults" data-i18n="btnResetDefaults">Fabrika Ayarlarına Sıfırla</button>
+            <button class="btn-ui gold" id="btn-save-content" data-i18n="btnSaveContent">İçerikleri Kaydet</button>
+          </div>
+        </div>
+
+        <!-- CMS Subtabs -->
+        <div class="subtabs">
+          <button class="subtab-btn active" data-subtab="cms-hero" data-i18n="tabHero">Hero Alanı</button>
+          <button class="subtab-btn" data-subtab="cms-ticker" data-i18n="tabTicker">Kayan Yazı Bandı</button>
+          <button class="subtab-btn" data-subtab="cms-who" data-i18n="tabWho">Hakkımızda</button>
+          <button class="subtab-btn" data-subtab="cms-purpose" data-i18n="tabPurpose">Amaç & Misyon</button>
+          <button class="subtab-btn" data-subtab="cms-services" data-i18n="tabServices">Hizmetler</button>
+          <button class="subtab-btn" data-subtab="cms-contact" data-i18n="tabContact">İletişim & Yönetim</button>
+        </div>
+
+        <!-- Subtab Panels -->
+        <div class="card-box">
+          <!-- Hero Subtab -->
+          <div id="cms-hero" class="cms-subpanel">
+            <div class="form-row">
+              <div class="form-field">
+                <label data-i18n="heroTagLabel">Etiket (Tag)</label>
+                <input type="text" id="cms-hero-tag" class="input-box">
+              </div>
+              <div class="form-field">
+                <label data-i18n="heroLocationLabel">Konum Rozeti</label>
+                <input type="text" id="cms-hero-location" class="input-box">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label data-i18n="heroTitleLabel">Ana Başlık (1. Satır)</label>
+                <input type="text" id="cms-hero-title" class="input-box">
+              </div>
+              <div class="form-field">
+                <label data-i18n="heroTitleAccentLabel">Altın Vurgulu Başlık (2. Satır)</label>
+                <input type="text" id="cms-hero-title-accent" class="input-box">
+              </div>
+            </div>
+            <div class="form-field">
+              <label data-i18n="heroDescLabel">Hero Açıklama Paragrafı</label>
+              <textarea id="cms-hero-desc" class="textarea-box" style="min-height:80px;"></textarea>
+            </div>
+          </div>
+
+          <!-- Ticker Subtab -->
+          <div id="cms-ticker" class="cms-subpanel" style="display:none;">
+            <div class="form-field">
+              <label data-i18n="tickerItemsLabel">Kayan Bant İfadeleri (Virgülle veya her satıra bir tane)</label>
+              <textarea id="cms-ticker-items" class="textarea-box"></textarea>
+            </div>
+          </div>
+
+          <!-- Who Subtab -->
+          <div id="cms-who" class="cms-subpanel" style="display:none;">
+            <div class="form-row">
+              <div class="form-field">
+                <label data-i18n="whoTitleLabel">Bölüm Başlığı</label>
+                <input type="text" id="cms-who-title" class="input-box">
+              </div>
+              <div class="form-field">
+                <label data-i18n="whoSidebarLabel">Yan Panel Başlığı</label>
+                <input type="text" id="cms-who-sidebar-title" class="input-box">
+              </div>
+            </div>
+            <div class="form-field">
+              <label data-i18n="whoLeadLabel">Öncü Metin (Lead Text)</label>
+              <textarea id="cms-who-lead" class="textarea-box" style="min-height:80px;"></textarea>
+            </div>
+            <div class="form-field">
+              <label data-i18n="whoSecLabel">İkincil Açıklama</label>
+              <textarea id="cms-who-secondary" class="textarea-box" style="min-height:70px;"></textarea>
+            </div>
+            <div class="form-field">
+              <label data-i18n="whoPromiseLabel">Taahhüt / Sözümüz (Promise Text)</label>
+              <textarea id="cms-who-promise" class="textarea-box" style="min-height:70px;"></textarea>
+            </div>
+          </div>
+
+          <!-- Purpose Subtab -->
+          <div id="cms-purpose" class="cms-subpanel" style="display:none;">
+            <div class="form-field">
+              <label data-i18n="purposeTitleLabel">Bölüm Başlığı</label>
+              <input type="text" id="cms-purpose-title" class="input-box">
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label data-i18n="purposeMissionLabel">Misyon (Mission Metni)</label>
+                <textarea id="cms-purpose-mission" class="textarea-box"></textarea>
+              </div>
+              <div class="form-field">
+                <label data-i18n="purposeVisionLabel">Vizyon (Vision Metni)</label>
+                <textarea id="cms-purpose-vision" class="textarea-box"></textarea>
+              </div>
+            </div>
+            <div class="form-field">
+              <label data-i18n="purposeCharsLabel">Karakter Özellikleri (Virgülle ayırın: Professional, Diplomatic, vb.)</label>
+              <input type="text" id="cms-purpose-chars" class="input-box">
+            </div>
+          </div>
+
+          <!-- Services Subtab -->
+          <div id="cms-services" class="cms-subpanel" style="display:none;">
+            <div id="cms-services-container">
+              <!-- Dynamically populated services list -->
+            </div>
+          </div>
+
+          <!-- Contact Subtab -->
+          <div id="cms-contact" class="cms-subpanel" style="display:none;">
+            <div class="form-row">
+              <div class="form-field">
+                <label data-i18n="contactLeaderNameLabel">Yönetici / Lider Adı</label>
+                <input type="text" id="cms-contact-name" class="input-box">
+              </div>
+              <div class="form-field">
+                <label data-i18n="contactLeaderTitleLabel">Unvan / Pozisyon</label>
+                <input type="text" id="cms-contact-title" class="input-box">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label data-i18n="contactEmailLabel">E-Posta Adresi</label>
+                <input type="email" id="cms-contact-email" class="input-box">
+              </div>
+              <div class="form-field">
+                <label data-i18n="contactPhonesLabel">Telefon Numaraları (Virgülle ayırın)</label>
+                <input type="text" id="cms-contact-phones" class="input-box">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label data-i18n="contactAddr1Label">Ofis Adresi (Satır 1)</label>
+                <input type="text" id="cms-contact-addr1" class="input-box">
+              </div>
+              <div class="form-field">
+                <label data-i18n="contactAddr2Label">Şehir / Ülke (Satır 2)</label>
+                <input type="text" id="cms-contact-addr2" class="input-box">
+              </div>
+            </div>
+            <div class="form-field">
+              <label data-i18n="contactMapLabel">Google Maps Bağlantı Adresi</label>
+              <input type="text" id="cms-contact-map" class="input-box">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =======================================================
+           TAB 5: INTERMEDIATE SECTIONS BUILDER
+           ======================================================= -->
+      <section id="tab-sections" class="tab-panel">
+        <div class="view-heading">
+          <div>
+            <h2 data-i18n="sectionsTitle">Ara Sectionlar & Dinamik Bölüm Yöneticisi</h2>
+            <p data-i18n="sectionsSub">Sayfa içi bölümleri etkinleştirin, gizleyin, sıralamasını değiştirin veya yeni bölümler ekleyin.</p>
+          </div>
+          <button class="btn-ui gold" id="btn-open-add-section-modal" data-i18n="btnAddSection">+ Yeni Section Ekle</button>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width: 60px;" data-i18n="colSecOrder">Sıra</th>
+                <th data-i18n="colSecName">Bölüm Adı</th>
+                <th data-i18n="colSecType">Tip</th>
+                <th data-i18n="colSecAnchor">Çapa (ID)</th>
+                <th data-i18n="colSecStatus">Durum</th>
+                <th data-i18n="colSecActions">İşlemler</th>
+              </tr>
+            </thead>
+            <tbody id="dynamic-sections-table-body">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- =======================================================
+           TAB 6: EMAIL & MESSAGING CENTER
+           ======================================================= -->
+      <section id="tab-emails" class="tab-panel">
+        <div class="view-heading">
+          <div>
+            <h2 data-i18n="emailTitle">E-Posta Yönetim Merkezi</h2>
+            <p data-i18n="emailSub">Gelen iletişim taleplerini okuyun, yanıtlayın ve yeni kurumsal e-postalar gönderin.</p>
+          </div>
+        </div>
+
+        <!-- Email Subtabs -->
+        <div class="subtabs">
+          <button class="subtab-btn active" data-subtab="email-inbox" data-i18n="tabInbox">Gelen Kutusu (Site Talepleri)</button>
+          <button class="subtab-btn" data-subtab="email-compose" data-i18n="tabCompose">Yeni E-Posta Gönder</button>
+          <button class="subtab-btn" data-subtab="email-sent" data-i18n="tabSent">Gönderilen E-Postalar</button>
+          <button class="subtab-btn" data-subtab="email-smtp" data-i18n="tabSmtp">SMTP Sunucu Ayarları</button>
+        </div>
+
+        <!-- Email Inbox Panel -->
+        <div id="email-inbox" class="email-subpanel">
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th data-i18n="inboxSender">Gönderen</th>
+                  <th data-i18n="inboxService">İlgili Hizmet</th>
+                  <th data-i18n="inboxSubject">Konu</th>
+                  <th data-i18n="inboxDate">Tarih</th>
+                  <th data-i18n="colStatus">Durum</th>
+                  <th data-i18n="inboxActions">İşlemler</th>
+                </tr>
+              </thead>
+              <tbody id="inbox-table-body">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Email Compose Panel -->
+        <div id="email-compose" class="email-subpanel" style="display:none;">
+          <div class="card-box">
+            <form id="compose-email-form">
+              <div class="form-row">
+                <div class="form-field">
+                  <label data-i18n="composeTo">Alıcı E-Posta *</label>
+                  <input type="email" id="compose-to" class="input-box" required placeholder="client@company.com">
+                </div>
+                <div class="form-field">
+                  <label data-i18n="composeTemplate">Şablon Seç (İsteğe Bağlı)</label>
+                  <select id="compose-template-select" class="select-ui" style="padding:10px;">
+                    <option value="" data-i18n="customEmailOption">Özel E-Posta Yaz</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-field">
+                <label data-i18n="composeSubject">E-Posta Konusu *</label>
+                <input type="text" id="compose-subject" class="input-box" required placeholder="ABENTRA International Advisory Response">
+              </div>
+              <div class="form-field">
+                <label data-i18n="composeBody">Mesaj İçeriği *</label>
+                <textarea id="compose-body" class="textarea-box" style="min-height:200px;" required></textarea>
+              </div>
+              <button type="submit" class="btn-ui gold" id="btn-send-email-submit" data-i18n="btnSendMail">
+                E-Postayı Gönder
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Sent Emails Panel -->
+        <div id="email-sent" class="email-subpanel" style="display:none;">
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th data-i18n="colRecipient">Alıcı</th>
+                  <th data-i18n="colSubject">Konu</th>
+                  <th data-i18n="colTemplate">Şablon</th>
+                  <th data-i18n="colStatus">Durum</th>
+                  <th data-i18n="colSentDate">Gönderim Tarihi</th>
+                </tr>
+              </thead>
+              <tbody id="sent-table-body">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- SMTP Settings Panel -->
+        <div id="email-smtp" class="email-subpanel" style="display:none;">
+          <div class="card-box">
+            <h3 style="margin-bottom:16px;" data-i18n="smtpSectionTitle">SMTP Gönderim Yapılandırması</h3>
+            <p style="color:var(--adm-mute);margin-bottom:20px;" data-i18n="smtpSectionDesc">Gerçek e-posta göndermek için kurumsal e-posta sağlayıcınızın (Google Workspace, Office365, cPanel, vb.) SMTP bilgilerini girebilirsiniz.</p>
+            <form id="smtp-settings-form">
+              <div class="form-row">
+                <div class="form-field">
+                  <label data-i18n="smtpHostLabel">SMTP Sunucusu (Host)</label>
+                  <input type="text" id="smtp-host" class="input-box" placeholder="smtp.gmail.com">
+                </div>
+                <div class="form-field">
+                  <label data-i18n="smtpPortLabel">Port</label>
+                  <input type="number" id="smtp-port" class="input-box" placeholder="587">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-field">
+                  <label data-i18n="smtpUserLabel">Kullanıcı Adı / E-Posta</label>
+                  <input type="text" id="smtp-user" class="input-box" placeholder="abentrainternational@gmail.com">
+                </div>
+                <div class="form-field">
+                  <label data-i18n="smtpPassLabel">Şifre / Uygulama Şifresi</label>
+                  <input type="password" id="smtp-pass" class="input-box" placeholder="••••••••••••">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-field">
+                  <label data-i18n="smtpSenderEmailLabel">Gönderen E-Posta (From)</label>
+                  <input type="email" id="smtp-from-email" class="input-box" placeholder="abentrainternational@gmail.com">
+                </div>
+                <div class="form-field">
+                  <label data-i18n="smtpSenderNameLabel">Gönderen Başlığı (From Name)</label>
+                  <input type="text" id="smtp-from-name" class="input-box" placeholder="ABENTRA International">
+                </div>
+              </div>
+              <div class="form-field" style="flex-direction:row;align-items:center;gap:10px;">
+                <input type="checkbox" id="smtp-enabled" style="width:18px;height:18px;">
+                <label for="smtp-enabled" data-i18n="smtpEnableLabel" style="margin:0;cursor:pointer;">Gerçek SMTP Gönderimini Aktif Et</label>
+              </div>
+              <button type="submit" class="btn-ui gold" style="margin-top:14px;" data-i18n="btnSaveSmtp">SMTP Ayarlarını Kaydet</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- =======================================================
+           TAB 7: SECTOR-SPECIFIC SVG ICON LIBRARY
+           ======================================================= -->
+      <section id="tab-icons" class="tab-panel">
+        <div class="view-heading">
+          <div>
+            <h2 data-i18n="iconTitle">Sektörel SVG Icon Kütüphanesi</h2>
+            <p data-i18n="iconSub">Liberya ticareti, madencilik, bakanlık ilişkileri, hukuk ve kurumsal kurulum için özel ikonlar.</p>
+          </div>
+          <button class="btn-ui gold" id="btn-open-add-icon-modal" data-i18n="btnAddIcon">+ Yeni SVG İkon Ekle</button>
+        </div>
+
+        <div class="icon-controls">
+          <input type="text" id="icon-search-input" class="input-box" placeholder="İkon veya etiket ara (örn: mining, tax, seal)..." style="max-width:360px;">
+          <div class="icon-categories">
+            <button class="cat-chip active" data-cat="all" data-i18n="filterAll">Tümü</button>
+            <button class="cat-chip" data-cat="Corporate & Establishment" data-i18n="filterCorp">Kurumsal & Kurulum</button>
+            <button class="cat-chip" data-cat="Government & Regulatory" data-i18n="filterGov">Hükümet & Mevzuat</button>
+            <button class="cat-chip" data-cat="Liberia & Key Industries" data-i18n="filterLib">Liberya & Sanayi</button>
+            <button class="cat-chip" data-cat="Tax & Finance" data-i18n="filterFin">Vergi & Finans</button>
+          </div>
+        </div>
+
+        <div class="icon-grid" id="icon-grid-container">
+          <!-- Dynamically populated icons -->
+        </div>
+      </section>
+
+      <!-- =======================================================
+           TAB 8: SYSTEM PREFERENCES & SECURITY
+           ======================================================= -->
+      <section id="tab-settings" class="tab-panel">
+        <div class="view-heading">
+          <div>
+            <h2 data-i18n="settingsTitle">Yönetici & Sistem Ayarları</h2>
+            <p data-i18n="settingsSub">Admin paneli tema rengi, dil seçimi ve şifre güncelleme.</p>
+          </div>
+        </div>
+
+        <div class="card-box" style="margin-bottom:24px;">
+          <h3 style="margin-bottom:18px;font-size:20px;" data-i18n="adminPrefsTitle">Arayüz Tercihleri</h3>
+          <div class="form-row">
+            <div class="form-field">
+              <label data-i18n="adminThemeLabel">Admin Paneli Teması</label>
+              <select id="settings-theme-select" class="select-ui" style="padding:10px;">
+                <option value="theme-midnight">Executive Midnight (Varsayılan Lacivert & Altın)</option>
+                <option value="theme-obsidian">Dark Obsidian (Koyu Obsidyen Siyah)</option>
+                <option value="theme-royal">Royal Light (Açık Kraliyet)</option>
+                <option value="theme-emerald">Cyber Emerald (Zümrüt Yeşil & Altın)</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label data-i18n="adminLangLabel">Admin Paneli Dili</label>
+              <select id="settings-lang-select" class="select-ui" style="padding:10px;">
+                <option value="tr">Türkçe (TR)</option>
+                <option value="en">English (EN)</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label data-i18n="siteDefaultLangLabel">Web Sitesi Varsayılan Dili</label>
+              <select id="settings-site-lang-select" class="select-ui" style="padding:10px;">
+                <option value="en">English (EN)</option>
+                <option value="tr">Türkçe (TR)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="card-box">
+          <h3 style="margin-bottom:12px;font-size:20px;" data-i18n="changePassTitle">Yönetici Bilgilerini Değiştir (Kullanıcı Adı & Şifre)</h3>
+          <p style="color:var(--adm-mute);font-size:13px;margin-bottom:20px;" data-i18n="changePassDesc">Yönetici kullanıcı adı ve şifresi düz metin olarak saklanır ve dilediğiniz zaman güncellenebilir. (Varsayılan: <code>admin</code> / <code>admin</code>)</p>
+          <form id="change-password-form">
+            <div class="form-row">
+              <div class="form-field">
+                <label data-i18n="currPass">Mevcut Şifre *</label>
+                <input type="text" id="pass-current" class="input-box" required placeholder="admin">
+              </div>
+              <div class="form-field">
+                <label data-i18n="newUsername">Yeni Kullanıcı Adı</label>
+                <input type="text" id="pass-new-username" class="input-box" placeholder="admin">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label data-i18n="newPass">Yeni Şifre *</label>
+                <input type="text" id="pass-new" class="input-box" required placeholder="admin">
+              </div>
+              <div class="form-field">
+                <label data-i18n="confPass">Yeni Şifre Tekrar *</label>
+                <input type="text" id="pass-confirm" class="input-box" required placeholder="admin">
+              </div>
+            </div>
+            <button type="submit" class="btn-ui gold" data-i18n="btnUpdatePass">Bilgileri Güncelle</button>
+          </form>
+        </div>
+
+        <!-- Granular Metric Purge & Reset Section -->
+        <div class="card-box" style="margin-top:24px;">
+          <h3 style="margin-bottom:8px;font-size:20px;" data-i18n="purgeSectionTitle">Metrik & Veri Yönetimi (Metrik Metrik Temizleme)</h3>
+          <p style="color:var(--adm-mute);font-size:13px;margin-bottom:20px;" data-i18n="purgeSectionDesc">İstediğiniz telemetri grubunu bağımsız olarak silebilir veya sıfırlayabilirsiniz. Silinen veriler anında sıfırlanır ve paneller güncellenir.</p>
+
+          <div class="purge-grid">
+            <div class="purge-card">
+              <div>
+                <div class="purge-card-header">
+                  <span class="purge-icon">👥</span>
+                  <div class="purge-title" data-i18n="purgeVisitorsTitle">Ziyaretçi Loglarını Sil</div>
+                </div>
+                <div class="purge-desc" data-i18n="purgeVisitorsDesc">Ziyaretçi oturumlarını, IP listesini ve toplam ziyaret / tekil ziyaretçi sayaçlarını sıfırlar.</div>
+              </div>
+              <button class="btn-danger btn-purge-action" data-purge="visitors" data-i18n="btnPurgeVisitors">Logları Sıfırla</button>
+            </div>
+
+            <div class="purge-card">
+              <div>
+                <div class="purge-card-header">
+                  <span class="purge-icon">🔥</span>
+                  <div class="purge-title" data-i18n="purgeHeatmapTitle">Bölüm Isı Haritasını Sıfırla</div>
+                </div>
+                <div class="purge-desc" data-i18n="purgeHeatmapDesc">Bölüm görüntüleme sayaçlarını, kalış sürelerini ve ülke bazlı bölüm telemetrisini temizler.</div>
+              </div>
+              <button class="btn-danger btn-purge-action" data-purge="heatmap" data-i18n="btnPurgeHeatmap">Isı Haritasını Sıfırla</button>
+            </div>
+
+            <div class="purge-card">
+              <div>
+                <div class="purge-card-header">
+                  <span class="purge-icon">🌍</span>
+                  <div class="purge-title" data-i18n="purgeGeoTitle">Cihaz & Ülke Dağılımını Sıfırla</div>
+                </div>
+                <div class="purge-desc" data-i18n="purgeGeoDesc">Masaüstü/mobil cihaz istatistiklerini, tarayıcı ve ülke dağılım sayaçlarını temizler.</div>
+              </div>
+              <button class="btn-danger btn-purge-action" data-purge="geo" data-i18n="btnPurgeGeo">Cihaz/Ülke Sıfırla</button>
+            </div>
+
+            <div class="purge-card">
+              <div>
+                <div class="purge-card-header">
+                  <span class="purge-icon">📬</span>
+                  <div class="purge-title" data-i18n="purgeEmailsTitle">İletişim Taleplerini Sil</div>
+                </div>
+                <div class="purge-desc" data-i18n="purgeEmailsDesc">Gelen kutusundaki iletişim formlarını ve gönderilmiş e-posta geçmişini temizler.</div>
+              </div>
+              <button class="btn-danger btn-purge-action" data-purge="emails" data-i18n="btnPurgeEmails">Mesajları Temizle</button>
+            </div>
+
+            <div class="purge-card">
+              <div>
+                <div class="purge-card-header">
+                  <span class="purge-icon">🛡️</span>
+                  <div class="purge-title" data-i18n="purgeAuditTitle">Yönetici Giriş Loglarını Sil</div>
+                </div>
+                <div class="purge-desc" data-i18n="purgeAuditDesc">Admin paneli giriş denetim kayıtlarını (IP, cihaz, konum ve denemeler) temizler.</div>
+              </div>
+              <button class="btn-danger btn-purge-action" data-purge="audit" data-i18n="btnPurgeAudit">Denetim Loglarını Sil</button>
+            </div>
+
+            <div class="purge-card" style="border-color:rgba(239,68,68,0.5);">
+              <div>
+                <div class="purge-card-header">
+                  <span class="purge-icon">⚠️</span>
+                  <div class="purge-title" style="color:#f87171;" data-i18n="purgeAllTitle">Tüm Metrikleri Genel Sıfırla</div>
+                </div>
+                <div class="purge-desc" data-i18n="purgeAllDesc">Tüm analitik, ısı haritası, telemetri, cihaz ve log verilerini tek seferde fabrika ayarlarına döndürür.</div>
+              </div>
+              <button class="btn-danger btn-purge-action" style="background:rgba(239,68,68,0.3);" data-purge="all" data-i18n="btnPurgeAll">Fabrika Ayarlarına Dön</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Metric Export Box (Dedicated to Settings) -->
+        <div class="card-box" style="margin-top:24px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px;">
+            <div>
+              <h3 style="font-size:20px;color:var(--adm-gold);" data-i18n="exportSectionTitle">Raporlama & Veri Dışa Aktarma</h3>
+              <p style="color:var(--adm-mute);font-size:13px;" data-i18n="exportSectionDesc">Toplanan tüm metrikleri ve ziyaretçi kayıtlarını tarihleriyle birlikte Excel/CSV veya resmi şirket antetli PDF raporu olarak dışa aktarabilirsiniz.</p>
+            </div>
+            <span class="badge badge-gold" style="font-size:11px;padding:5px 12px;letter-spacing:0.5px;">KURUMSAL RAPORLAMA</span>
+          </div>
+
+          <div class="export-cards-grid">
+            <div class="export-action-card">
+              <div class="export-action-icon">📊</div>
+              <div class="export-action-content">
+                <div class="export-action-badge">RAW TELEMETRY DATA</div>
+                <h4>CSV / Excel Telemetri Veritabanı</h4>
+                <p>IP logları, ülke & şehir bilgileri, oturum süreleri, cihaz dağılımları ve bölüm görüntülemelerini doğrudan Excel uyumlu CSV formatında dışa aktarın.</p>
+                <button id="btn-settings-export-csv" class="btn-ui" style="margin-top:14px;">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  <span data-i18n="btnExportCsv">CSV Olarak İndir (Excel Uyumlu)</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="export-action-card featured">
+              <div class="export-action-icon gold-icon">📑</div>
+              <div class="export-action-content">
+                <div class="export-action-badge gold-badge">OFFICIAL EXECUTIVE DOSSIER</div>
+                <h4>Resmi Yönetici PDF Raporu</h4>
+                <p>ABENTRA antetli, resmi mühürlü, KPI özetleri ve coğrafi dağılım tabloları içeren şık ve kurumsal PDF telemetri raporu oluşturup yazdırın.</p>
+                <button id="btn-settings-export-pdf" class="btn-ui gold" style="margin-top:14px;">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                  <span data-i18n="btnExportPdf">Resmi PDF Raporu Oluştur & Yazdır</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =======================================================
+           TAB 9: USERS & ROLE-BASED ACCESS CONTROL (RBAC)
+           ======================================================= -->
+      <section id="tab-users" class="tab-panel">
+        <div class="view-heading">
+          <div>
+            <h2 data-i18n="usersHeading">Yöneticiler & Rol Tabanlı Yetkilendirme (RBAC)</h2>
+            <p data-i18n="usersHeadingSub">Farklı departmanlar için (Süper Yönetici, Reklam/Ads Yöneticisi, Geliştirici vb.) yönetici hesapları oluşturun ve panellerini bireysel olarak sınırlandırın.</p>
+          </div>
+          <button class="btn-ui gold" id="btn-open-add-user-modal" data-i18n="btnAddUser">+ Yeni Yönetici Ekle</button>
+        </div>
+
+        <!-- Role Summary KPIs -->
+        <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:24px;">
+          <div class="kpi-card">
+            <div class="kpi-label" data-i18n="kpiTotalAdmins">Toplam Yönetici Hesabı</div>
+            <div class="kpi-value" id="kpi-total-admins">1</div>
+            <div class="kpi-sub" data-i18n="kpiActiveAdminsSub">Aktif yetkili hesaplar</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label" data-i18n="kpiRolesCount">Tanımlı Roller</div>
+            <div class="kpi-value">4</div>
+            <div class="kpi-sub">Superadmin · Ads · Dev · Custom</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-label" data-i18n="kpiLastAudit">Son Giriş Denetimi</div>
+            <div class="kpi-value" id="kpi-last-audit" style="font-size:16px;">-</div>
+            <div class="kpi-sub" id="kpi-last-audit-sub">Giriş denetimi aktif</div>
+          </div>
+        </div>
+
+        <!-- Admin Users Table -->
+        <div class="table-wrapper" style="margin-bottom:30px;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th data-i18n="colUsername">Kullanıcı Adı</th>
+                <th data-i18n="colFullName">İsim / E-Posta</th>
+                <th data-i18n="colRole">Rol</th>
+                <th data-i18n="colPermissions">Erişim İzinleri</th>
+                <th data-i18n="colPassword">Şifre (Düz Metin)</th>
+                <th data-i18n="colLastLogin">Son Giriş & Konum</th>
+                <th data-i18n="colActions">İşlemler</th>
+              </tr>
+            </thead>
+            <tbody id="users-table-body">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Admin Login Audit Logs Table -->
+        <div class="card-box">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+            <h3 style="font-size:18px;" data-i18n="auditTableTitle">Yönetici Giriş & Güvenlik Denetim Günlüğü</h3>
+            <button class="btn-ui btn-sm" id="btn-refresh-audit" data-i18n="btnRefreshAudit">Yenile</button>
+          </div>
+          <p style="color:var(--adm-mute);font-size:13px;margin-bottom:18px;" data-i18n="auditTableDesc">Admin paneline yapılan tüm giriş denemeleri, kullanılan IP adresleri, bayrak/konum ve cihaz bilgileriyle kaydedilir.</p>
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th data-i18n="colAuditDate">Tarih / Saat</th>
+                  <th data-i18n="colAuditUser">Kullanıcı</th>
+                  <th data-i18n="colAuditRole">Rol</th>
+                  <th data-i18n="colAuditIp">IP Adresi</th>
+                  <th data-i18n="colAuditLocation">Konum</th>
+                  <th data-i18n="colAuditDevice">Cihaz / Tarayıcı</th>
+                  <th data-i18n="colAuditStatus">Durum</th>
+                </tr>
+              </thead>
+              <tbody id="audit-table-body">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ==========================================
+       MODALS
+       ========================================== -->
+
+  <!-- Modal: Visitor Section View Details -->
+  <div id="modal-visitor-detail" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="modal-visitor-title" data-i18n="sectionDetailModalTitle">Ziyaretçi Bölüm İnceleme Detayı</h3>
+        <button class="modal-close" onclick="closeModal('modal-visitor-detail')">&times;</button>
+      </div>
+      <div id="modal-visitor-content"></div>
+    </div>
+  </div>
+
+  <!-- Modal: Read Message -->
+  <div id="modal-message-detail" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="modal-msg-title" data-i18n="modalMsgTitle">İletişim Talebi Detayı</h3>
+        <button class="modal-close" onclick="closeModal('modal-message-detail')">&times;</button>
+      </div>
+      <div id="modal-msg-content"></div>
+    </div>
+  </div>
+
+  <!-- Modal: Add / Edit Dynamic Section -->
+  <div id="modal-add-section" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 id="modal-sec-title" data-i18n="modalAddSecTitle">Yeni Ara Section Ekle</h3>
+        <button class="modal-close" onclick="closeModal('modal-add-section')">&times;</button>
+      </div>
+      <form id="form-add-section">
+        <div class="form-row">
+          <div class="form-field">
+            <label data-i18n="secModalTitleLabel">Bölüm Başlığı *</label>
+            <input type="text" id="sec-title-input" class="input-box" required placeholder="Örn: Neden Liberya?">
+          </div>
+          <div class="form-field">
+            <label data-i18n="secModalNameLabel">Bölüm Adı / Tanımı *</label>
+            <input type="text" id="sec-name-input" class="input-box" required placeholder="Örn: Strategic Gateway">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label data-i18n="secModalTagLabel">Üst Etiket (Tag)</label>
+            <input type="text" id="sec-tag-input" class="input-box" placeholder="Örn: Yatırım İklimi">
+          </div>
+          <div class="form-field">
+            <label data-i18n="secModalTypeLabel">Bölüm Şablonu (Tip)</label>
+            <select id="sec-type-select" class="select-ui" style="padding:10px;">
+              <option value="cards" data-i18n="optCardsGrid">Kart Izgarası (Cards Grid)</option>
+              <option value="stats" data-i18n="optStatsGrid">Etki Metrikleri (Stats / Numbers)</option>
+              <option value="process" data-i18n="optProcessGrid">Aşamalı Süreç (Step Timeline)</option>
+              <option value="faq" data-i18n="optFaqGrid">Soru - Cevap Akordiyon (FAQ)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-field">
+          <label data-i18n="secModalSubLabel">Alt Başlık / Açıklama</label>
+          <input type="text" id="sec-sub-input" class="input-box" placeholder="Kısa tanıtım cümlesi...">
+        </div>
+        <button type="submit" class="btn-ui gold" style="width:100%;justify-content:center;margin-top:14px;" data-i18n="btnSaveSectionSubmit">Bölümü Kaydet</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Add Custom SVG Icon -->
+  <div id="modal-add-icon" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 data-i18n="iconModalTitle">Kütüphaneye Yeni SVG İkon Ekle</h3>
+        <button class="modal-close" onclick="closeModal('modal-add-icon')">&times;</button>
+      </div>
+      <form id="form-add-icon">
+        <div class="form-row">
+          <div class="form-field">
+            <label data-i18n="iconAddNameLabel">İkon Adı *</label>
+            <input type="text" id="icon-add-name" class="input-box" required placeholder="Örn: Port of Buchanan">
+          </div>
+          <div class="form-field">
+            <label data-i18n="iconAddCatLabel">Kategori</label>
+            <select id="icon-add-cat" class="select-ui" style="padding:10px;">
+              <option value="Corporate & Establishment">Corporate & Establishment</option>
+              <option value="Government & Regulatory">Government & Regulatory</option>
+              <option value="Liberia & Key Industries">Liberia & Key Industries</option>
+              <option value="Tax & Finance">Tax & Finance</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-field">
+          <label data-i18n="iconAddDescLabel">Açıklama</label>
+          <input type="text" id="icon-add-desc" class="input-box" placeholder="İkonun kullanım alanı...">
+        </div>
+        <div class="form-field">
+          <label data-i18n="iconAddTagsLabel">Etiketler (Virgülle)</label>
+          <input type="text" id="icon-add-tags" class="input-box" placeholder="port, buchanan, shipping, iron ore">
+        </div>
+        <div class="form-field">
+          <label data-i18n="iconAddSvgLabel">SVG Kodu (&lt;svg...&gt;&lt;/svg&gt;) *</label>
+          <textarea id="icon-add-svg" class="textarea-box" required placeholder="<svg viewBox='0 0 24 24'...></svg>"></textarea>
+        </div>
+        <button type="submit" class="btn-ui gold" style="width:100%;justify-content:center;margin-top:10px;" data-i18n="btnAddIconSubmit">İkonu Ekle</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Add / Edit Admin User -->
+  <div id="modal-user" class="modal-overlay">
+    <div class="modal-box" style="max-width:620px;">
+      <div class="modal-header">
+        <h3 id="modal-user-title" data-i18n="modalAddUserTitle">Yeni Yönetici Hesabı Ekle</h3>
+        <button class="modal-close" onclick="closeModal('modal-user')">&times;</button>
+      </div>
+      <form id="form-manage-user">
+        <input type="hidden" id="manage-user-id" value="">
+        <div class="form-row">
+          <div class="form-field">
+            <label data-i18n="lblModalUsername">Kullanıcı Adı *</label>
+            <input type="text" id="manage-user-username" class="input-box" required placeholder="örn: ads_lead">
+          </div>
+          <div class="form-field">
+            <label data-i18n="lblModalPassword">Şifre (Düz Metin) *</label>
+            <input type="text" id="manage-user-password" class="input-box" required placeholder="örn: gizli123">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label data-i18n="lblModalFullName">Ad Soyad / Unvan *</label>
+            <input type="text" id="manage-user-name" class="input-box" required placeholder="örn: Selin Yılmaz (Ads Manager)">
+          </div>
+          <div class="form-field">
+            <label data-i18n="lblModalEmail">E-Posta</label>
+            <input type="email" id="manage-user-email" class="input-box" placeholder="örn: selin@sirketiniz.com">
+          </div>
+        </div>
+        <div class="form-field">
+          <label data-i18n="lblModalRole">Yönetici Rolü</label>
+          <select id="manage-user-role-select" class="select-ui" style="padding:10px;">
+            <option value="superadmin" data-i18n="roleOptSuper">Süper Yönetici (Tüm Yetkiler & Paneller Açık)</option>
+            <option value="ads_manager" data-i18n="roleOptAds">Reklam Yöneticisi (Ads Manager - Sadece Ülkeler, Cihazlar & Isı Haritası)</option>
+            <option value="developer" data-i18n="roleOptDev">Geliştirici (Developer - Tema, İçerik, Dinamik Bölümler & İkonlar)</option>
+            <option value="admin" data-i18n="roleOptAdmin">Standart Yönetici (İstatistikler, Mesajlar, Bölümler)</option>
+            <option value="custom" data-i18n="roleOptCustom">Özel Yetkilendirme (Bireysel Seçim)</option>
+          </select>
+        </div>
+
+        <div class="form-field" style="margin-top:14px;">
+          <label style="margin-bottom:8px;" data-i18n="lblCustomPerms">Bireysel Panel & Eylem İzinleri</label>
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;background:rgba(255,255,255,0.02);padding:14px;border:1px solid var(--adm-border);border-radius:6px;" id="user-perms-checkboxes">
+            <label style="font-size:13px;display:flex;align-items:center;gap:6px;cursor:pointer;"><input type="checkbox" value="dashboard" class="perm-cb"> <span data-i18n="permDashboard">Genel Bakış & Metrikler</span></label>
+            <label style="font-size:13px;display:flex;align-items:center;gap:6px;cursor:pointer;"><input type="checkbox" value="logs" class="perm-cb"> <span data-i18n="permLogs">Ziyaretçi Günlükleri</span></label>
+            <label style="font-size:13px;display:flex;align-items:center;gap:6px;cursor:pointer;"><input type="checkbox" value="heatmap" class="perm-cb"> <span data-i18n="permHeatmap">Bölüm Isı Haritası</span></label>
+            <label style="font-size:13px;display:flex;align-items:center;gap:6px;cursor:pointer;"><input type="checkbox" value="theme" class="perm-cb"> <span data-i18n="permTheme">Tema & Tasarım</span></label>
+            <label style="font-size:13px;display:flex;align-items:center;gap:6px;cursor:pointer;"><input type="checkbox" value="content" class="perm-cb"> <span data-i18n="permContent">Site İçerik CMS</span></label>
+            <label style="font-size:13px;display:flex;align-items:center;gap:6px;cursor:pointer;"><input type="checkbox" value="sections" class="perm-cb"> <span data-i18n="permSections">Dinamik Ara Bölümler</span></label>
+            <label style="font-size:13px;display:flex;align-items:center;gap:6px;cursor:pointer;"><input type="checkbox" value="emails" class="perm-cb"> <span data-i18n="permEmails">E-Posta & Mesajlar</span></label>
+            <label style="font-size:13px;display:flex;align-items:center;gap:6px;cursor:pointer;"><input type="checkbox" value="icons" class="perm-cb"> <span data-i18n="permIcons">SVG İkon Kütüphanesi</span></label>
+            <label style="font-size:13px;display:flex;align-items:center;gap:6px;cursor:pointer;"><input type="checkbox" value="users" class="perm-cb"> <span data-i18n="permUsers">Yönetici & Rol Yönetimi</span></label>
+            <label style="font-size:13px;display:flex;align-items:center;gap:6px;cursor:pointer;"><input type="checkbox" value="settings" class="perm-cb"> <span data-i18n="permSettings">Sistem Ayarları</span></label>
+            <label style="font-size:13px;display:flex;align-items:center;gap:6px;cursor:pointer;"><input type="checkbox" value="export" class="perm-cb"> <span data-i18n="permExport">CSV & PDF Dışa Aktarma</span></label>
+            <label style="font-size:13px;display:flex;align-items:center;gap:6px;cursor:pointer;"><input type="checkbox" value="purge" class="perm-cb"> <span data-i18n="permPurge">Metrik Sıfırlama & Silme</span></label>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-ui gold" style="width:100%;justify-content:center;margin-top:16px;" data-i18n="btnSaveUserSubmit">Hesabı Kaydet</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Purge Confirmation -->
+  <div id="modal-purge-confirm" class="modal-overlay">
+    <div class="modal-box" style="max-width:480px;">
+      <div class="modal-header">
+        <h3 style="color:#f87171;" data-i18n="purgeConfirmTitle">Metrik Sıfırlama Onayı</h3>
+        <button class="modal-close" onclick="closeModal('modal-purge-confirm')">&times;</button>
+      </div>
+      <div style="padding:16px 0;">
+        <p id="purge-confirm-message" style="font-size:14px;color:var(--adm-text);line-height:1.6;">Bu işlem seçilen telemetri verilerini kalıcı olarak silecektir. Emin misiniz?</p>
+      </div>
+      <div style="display:flex;gap:12px;justify-content:flex-end;">
+        <button class="btn-ui" onclick="closeModal('modal-purge-confirm')" data-i18n="btnCancel">İptal</button>
+        <button class="btn-danger" id="btn-confirm-purge-execute" data-i18n="btnConfirmPurge">Evet, Kalıcı Olarak Sil</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Printable Official Executive Telemetry Dossier Template -->
+  <div id="printable-report-wrapper">
+    <!-- Letterhead -->
+    <div class="print-header">
+      <div class="print-header-left">
+        <img src="/logo.jpeg" alt="ABENTRA Logo" class="print-logo">
+        <div class="print-brand-text">
+          <div class="print-brand-title">ABENTRA INTERNATIONAL</div>
+          <div class="print-brand-tagline">BRIDGING OPPORTUNITIES. BUILDING TOMORROW.</div>
+          <div class="print-brand-sub">Licensed Corporate Advisory & Government Liaison · Monrovia, Republic of Liberia</div>
+        </div>
+      </div>
+      <div class="print-header-right">
+        <div class="print-doc-badge">OFFICIAL EXECUTIVE TELEMETRY DOSSIER</div>
+        <div class="print-doc-ref" id="print-report-ref">REF: ABT-INTEL-2026-001</div>
+        <div class="print-meta-line" id="print-report-date">-</div>
+        <div class="print-meta-line" id="print-report-admin">-</div>
+        <div class="print-security-pill">CONFIDENTIAL · INTERNAL AUDIT ONLY</div>
+      </div>
+    </div>
+
+    <!-- Gold Accent Rule -->
+    <div class="print-gold-divider"></div>
+
+    <!-- Executive KPI Grid -->
+    <div class="print-block-header">
+      <span class="print-block-num">01</span>
+      <span>EXECUTIVE METRIC SUMMARY (ÖZET TELEMETRİ GÖSTERGELERİ)</span>
+    </div>
+    <div class="print-kpi-grid">
+      <div class="print-kpi-card">
+        <div class="print-kpi-label">Toplam Ziyaret (Sessions)</div>
+        <div class="print-kpi-val" id="print-kpi-visits">0</div>
+        <div class="print-kpi-note">Global toplam oturum hacmi</div>
+      </div>
+      <div class="print-kpi-card">
+        <div class="print-kpi-label">Tekil Ziyaretçi (Unique)</div>
+        <div class="print-kpi-val" id="print-kpi-unique">0</div>
+        <div class="print-kpi-note">Tekil cihaz & parmak izi</div>
+      </div>
+      <div class="print-kpi-card">
+        <div class="print-kpi-label">Sayfa Görüntüleme (Pageviews)</div>
+        <div class="print-kpi-val" id="print-kpi-pageviews">0</div>
+        <div class="print-kpi-note">Kümülatif sayfa etkileşimi</div>
+      </div>
+      <div class="print-kpi-card">
+        <div class="print-kpi-label">Ort. Kalış Süresi (Dwell Time)</div>
+        <div class="print-kpi-val" id="print-kpi-duration">0 sn</div>
+        <div class="print-kpi-note">Oturum başına etkileşim süresi</div>
+      </div>
+    </div>
+
+    <!-- Country & Device Telemetry Table (Two-column layout) -->
+    <div class="print-two-col">
+      <div class="print-col">
+        <div class="print-block-header">
+          <span class="print-block-num">02</span>
+          <span>COĞRAFİ KONUM & ÜLKE DAĞILIMI</span>
+        </div>
+        <table class="print-table">
+          <thead>
+            <tr><th>Ülke</th><th style="text-align:right;">Ziyaret</th><th style="text-align:right;">Pay</th></tr>
+          </thead>
+          <tbody id="print-country-table-body"></tbody>
+        </table>
+      </div>
+      <div class="print-col">
+        <div class="print-block-header">
+          <span class="print-block-num">03</span>
+          <span>DONANIM & PLATFORM DAĞILIMI</span>
+        </div>
+        <table class="print-table">
+          <thead>
+            <tr><th>Cihaz Tipi</th><th style="text-align:right;">Ziyaret</th><th style="text-align:right;">Pay</th></tr>
+          </thead>
+          <tbody id="print-device-table-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Section Heatmap Telemetry Table -->
+    <div class="print-block-header">
+      <span class="print-block-num">04</span>
+      <span>BÖLÜM (SECTION) ISI HARİTASI & ETKİLEŞİM ANALİZİ</span>
+    </div>
+    <table class="print-table">
+      <thead>
+        <tr><th>Bölüm Adı</th><th>Görüntüleme</th><th>Toplam Kalış Süresi</th><th>Ortalama Süre</th></tr>
+      </thead>
+      <tbody id="print-heatmap-table-body"></tbody>
+    </table>
+
+    <!-- Recent Visitor Sessions Table -->
+    <div class="print-block-header">
+      <span class="print-block-num">05</span>
+      <span>DENETLENMİŞ ZİYARETÇİ VE ERİŞİM GÜNLÜĞÜ (AUDITED SESSIONS)</span>
+    </div>
+    <table class="print-table">
+      <thead>
+        <tr><th>Ziyaretçi ID / IP</th><th>Konum</th><th>Cihaz & Tarayıcı</th><th>Kalış Süresi</th><th>Zaman</th></tr>
+      </thead>
+      <tbody id="print-visitors-table-body"></tbody>
+    </table>
+
+    <!-- Executive Sign-Off & Official Verification Block -->
+    <div class="print-signoff-block">
+      <div class="print-signoff-legal">
+        <div class="print-signoff-title">RESMİ KURUMSAL BEYAN VE GÜVENLİK PROTOKOLÜ</div>
+        <p>İşbu telemetri raporu ABENTRA International sunucu çekirdeği tarafından otomatik olarak derlenmiş olup, toplanan tüm erişim logları ve IP telemetrisi Liberya Cumhuriyeti veri güvenliği standartlarına ve kurum içi denetim protokollerine tabidir. Yetkisiz paylaşımı veya çoğaltılması yasaktır.</p>
+        <div class="print-hash" id="print-report-hash">SİSTEM KODU: SHA256-ABT-SECURE-AUDIT</div>
+      </div>
+      <div class="print-signoff-sig">
+        <div class="print-sig-line"></div>
+        <div class="print-sig-title">YETKİLİ YÖNETİCİ ONAYI</div>
+        <div class="print-sig-sub">ABENTRA International · Monrovia, Liberia</div>
+      </div>
+    </div>
+
+    <div class="print-footer">
+      <div>ABENTRA International · Executive Intelligence Dossier · Strictly Confidential</div>
+      <div>Monrovia, Republic of Liberia · Official Telemetry Record</div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <script src="/admin/js/i18n.js"></script>
+  <script src="/admin/js/admin.js"></script>
+</body>
+</html>
