@@ -28,44 +28,54 @@ const USERS_FILE = path.join(DATA_DIR, 'users.json');
 const AUDIT_FILE = path.join(DATA_DIR, 'audit_logs.json');
 const UPLOADS_DIR = path.join(__dirname, 'public', 'uploads');
 
-if (!fs.existsSync(UPLOADS_DIR)) {
-  fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+// Only attempt local filesystem directory creation in local environments (not Vercel read-only FS)
+if (process.env.VERCEL !== '1' && !process.env.VERCEL) {
+  try {
+    if (!fs.existsSync(UPLOADS_DIR)) {
+      fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+    }
+  } catch (err) {
+    console.warn('[Storage] Could not create local uploads directory:', err.message);
+  }
 }
 
-// Multer storage for uploads
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, UPLOADS_DIR);
-  },
-  filename: (req, file, cb) => {
-    const ext = path.extname(file.originalname);
-    const base = path.basename(file.originalname, ext).replace(/[^a-zA-Z0-9_-]/g, '_');
-    cb(null, `${base}_${Date.now()}${ext}`);
-  }
-});
+// Multer in-memory storage for serverless compatibility (avoids EROFS crashes)
 const upload = multer({
-  storage,
+  storage: multer.memoryStorage(),
   limits: { fileSize: 10 * 1024 * 1024 } // 10MB
 });
 
-// Helper functions for reading/writing local JSON (used as fallback/cache)
+// In-memory cache for fast reads and serverless environments (handles read-only FS)
+const memCache = new Map();
+
 function readJSON(filePath, fallback = {}) {
+  if (memCache.has(filePath)) {
+    return JSON.parse(JSON.stringify(memCache.get(filePath)));
+  }
   try {
     if (fs.existsSync(filePath)) {
-      return JSON.parse(fs.readFileSync(filePath, 'utf8'));
+      const parsed = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+      memCache.set(filePath, parsed);
+      return parsed;
     }
   } catch (err) {
-    console.error(`Error reading ${filePath}:`, err);
+    console.warn(`[readJSON] Could not read ${filePath}:`, err.message);
   }
   return fallback;
 }
 
 function writeJSON(filePath, data) {
+  // Always update in-memory cache
+  memCache.set(filePath, JSON.parse(JSON.stringify(data)));
+  // In Vercel serverless environment, filesystem is read-only
+  if (process.env.VERCEL === '1' || process.env.VERCEL) {
+    return true;
+  }
   try {
     fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf8');
     return true;
   } catch (err) {
-    console.error(`Error writing ${filePath}:`, err);
+    console.warn(`[writeJSON] Could not persist to ${filePath} (read-only):`, err.message);
     return false;
   }
 }
@@ -266,8 +276,18 @@ function recordAuditLog(entry) {
 // PUBLIC ROUTES & APIS (Supabase-first)
 // ==========================================
 
-// Serve static assets
+// Serve static assets from public directory
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Root landing page
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// Admin portal route
+app.get(['/admin', '/admin/'], (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'admin', 'index.html'));
+});
 
 // Fallback to original html if requested
 app.get('/original', (req, res) => {
@@ -1038,16 +1058,33 @@ app.post('/api/admin/upload-logo', requireAuth, upload.single('logo'), async (re
     return res.status(400).json({ error: 'No image file uploaded.' });
   }
 
-  let logoUrl = `/uploads/${req.file.filename}`;
+  const fileBuffer = req.file.buffer;
+  let logoUrl = '';
 
-  // If Supabase is configured, upload to Supabase Storage Bucket
+  // 1. Try uploading to Supabase Storage Bucket first
   if (supabase.isConfigured()) {
     try {
-      const fileBuffer = fs.readFileSync(req.file.path);
       const cloudUrl = await supabase.uploadToBucket(fileBuffer, req.file.originalname, req.file.mimetype);
       if (cloudUrl) logoUrl = cloudUrl;
     } catch (e) {
-      console.warn('Supabase storage upload skipped, using local upload:', e.message);
+      console.warn('Supabase storage upload skipped:', e.message);
+    }
+  }
+
+  // 2. If not uploaded to cloud, fallback to local disk (if not Vercel) or base64 Data URI
+  if (!logoUrl) {
+    if (process.env.VERCEL === '1' || process.env.VERCEL) {
+      logoUrl = `data:${req.file.mimetype};base64,${fileBuffer.toString('base64')}`;
+    } else {
+      try {
+        const ext = path.extname(req.file.originalname);
+        const filename = `${Date.now()}_${path.basename(req.file.originalname, ext).replace(/[^a-zA-Z0-9_-]/g, '_')}${ext}`;
+        if (!fs.existsSync(UPLOADS_DIR)) fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+        fs.writeFileSync(path.join(UPLOADS_DIR, filename), fileBuffer);
+        logoUrl = `/uploads/${filename}`;
+      } catch (err) {
+        logoUrl = `data:${req.file.mimetype};base64,${fileBuffer.toString('base64')}`;
+      }
     }
   }
 
@@ -1411,13 +1448,18 @@ app.get(/^\/admin(\/.*)?$/, (req, res, next) => {
   res.sendFile(path.join(__dirname, 'public', 'admin', 'index.html'));
 });
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`====================================================`);
-  console.log(`ABENTRA International Server running on http://localhost:${PORT}`);
-  console.log(`Public Site: http://localhost:${PORT}/`);
-  console.log(`Admin Portal: http://localhost:${PORT}/admin`);
-  console.log(`Original Site: http://localhost:${PORT}/original`);
-  console.log(`Supabase Status: ${supabase.isConfigured() ? 'CONFIGURED' : 'NOT CONFIGURED (Using JSON fallback)'}`);
-  console.log(`====================================================`);
-});
+// Start server only when not running in Vercel serverless environment
+if (process.env.VERCEL !== '1' && !process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`====================================================`);
+    console.log(`ABENTRA International Server running on http://localhost:${PORT}`);
+    console.log(`Public Site: http://localhost:${PORT}/`);
+    console.log(`Admin Portal: http://localhost:${PORT}/admin`);
+    console.log(`Original Site: http://localhost:${PORT}/original`);
+    console.log(`Supabase Status: ${supabase.isConfigured() ? 'CONFIGURED' : 'NOT CONFIGURED (Using JSON fallback)'}`);
+    console.log(`====================================================`);
+  });
+}
+
+// Export Express app for Vercel Serverless Function
+module.exports = app;

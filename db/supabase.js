@@ -14,9 +14,15 @@ class SupabaseManager {
   }
 
   initClient() {
-    require('dotenv').config({ path: ENV_FILE, override: true });
-    const url = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-    const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_KEY || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || '';
+    try {
+      require('dotenv').config();
+      if (fs.existsSync(ENV_FILE)) {
+        require('dotenv').config({ path: ENV_FILE, override: true });
+      }
+    } catch (e) {}
+
+    const url = (process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || '').trim();
+    const key = (process.env.SUPABASE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || '').trim();
 
     if (url && key && url.startsWith('http')) {
       try {
@@ -24,7 +30,7 @@ class SupabaseManager {
           auth: { persistSession: false }
         });
         this.configured = true;
-        console.log(`[Supabase] Client initialized with URL: ${url}`);
+        console.log(`[Supabase] Client initialized successfully with URL: ${url}`);
       } catch (err) {
         console.warn('[Supabase] Initialization error:', err.message);
         this.client = null;
@@ -33,6 +39,9 @@ class SupabaseManager {
     } else {
       this.client = null;
       this.configured = false;
+      if (!url || !key) {
+        console.info('[Supabase] Bilgi: SUPABASE_URL ve SUPABASE_KEY ortam değişkenleri tanımlı değil. Uygulama çökmeden fallback modunda çalışıyor.');
+      }
     }
   }
 
@@ -45,7 +54,7 @@ class SupabaseManager {
       return {
         success: false,
         configured: false,
-        message: 'Supabase URL veya API Anahtarı henüz girilmedi.'
+        message: 'Supabase URL veya API Anahtarı ortam değişkenlerinde (Environment Variables) bulunamadı. Lütfen Vercel veya .env üzerinden SUPABASE_URL ve SUPABASE_KEY tanımlayın.'
       };
     }
 
@@ -82,8 +91,15 @@ class SupabaseManager {
     }
   }
 
-  // Update .env credentials from Admin UI
+  // Update credentials
   updateCredentials(url, key) {
+    if (process.env.VERCEL) {
+      console.warn('[Supabase] Vercel üzerinde çalışılıyor: Ortam değişkenleri Vercel Dashboard üzerinden ayarlanmalıdır.');
+      process.env.SUPABASE_URL = url.trim();
+      process.env.SUPABASE_KEY = key.trim();
+      this.initClient();
+      return true;
+    }
     try {
       let content = fs.existsSync(ENV_FILE) ? fs.readFileSync(ENV_FILE, 'utf8') : '';
 
@@ -109,8 +125,11 @@ class SupabaseManager {
       this.initClient();
       return true;
     } catch (e) {
-      console.error('[Supabase] Failed to write .env:', e);
-      return false;
+      console.warn('[Supabase] Failed to write .env (read-only filesystem):', e.message);
+      process.env.SUPABASE_URL = url.trim();
+      process.env.SUPABASE_KEY = key.trim();
+      this.initClient();
+      return true;
     }
   }
 
