@@ -1,5 +1,33 @@
 [
   {
+    "id": "sec_mvbm5ljo",
+    "name": "Section",
+    "title": "Excellence in Section",
+    "tag": "Executive Advisory",
+    "subtitle": "Connecting multinational entities to verified commercial pathways in Liberia.",
+    "type": "feature_grid",
+    "enabled": true,
+    "order": 1,
+    "anchor": "feature_grid-5ljo",
+    "items": [
+      {
+        "title": "Institutional Advantage",
+        "description": "Verified regulatory compliance and ongoing advisory.",
+        "value": "100%"
+      },
+      {
+        "title": "Operational Nexus",
+        "description": "Direct ministerial and administrative engagement.",
+        "value": "24/7"
+      },
+      {
+        "title": "Strategic Execution",
+        "description": "Seamless market entry and corporate establishment.",
+        "value": "15+"
+      }
+    ]
+  },
+  {
     "id": "sec_stats",
     "name": "Key Metrics & Impact",
     "title": "Delivering institutional confidence in Liberia.",
@@ -8,7 +36,7 @@
     "subtitle": "Connecting multinational corporations, private investors, and emerging enterprises to verified commercial channels.",
     "type": "stats",
     "enabled": true,
-    "order": 1,
+    "order": 2,
     "anchor": "impact",
     "items": [
       {
@@ -43,7 +71,7 @@
     "subtitle": "A resource-rich economy undergoing dynamic institutional reforms, positioned as a vital Atlantic trade gateway in West Africa.",
     "type": "cards",
     "enabled": true,
-    "order": 2,
+    "order": 3,
     "anchor": "gateway",
     "items": [
       {
@@ -78,7 +106,7 @@
     "subtitle": "Navigating complex bureaucratic landscapes with precision, transparency, and unyielding efficiency.",
     "type": "process",
     "enabled": true,
-    "order": 3,
+    "order": 4,
     "anchor": "methodology",
     "items": [
       {
@@ -113,7 +141,7 @@
     "subtitle": "Answers to critical questions encountered by foreign investors and domestic entrepreneurs.",
     "type": "faq",
     "enabled": true,
-    "order": 4,
+    "order": 5,
     "anchor": "faq",
     "items": [
       {
@@ -131,8 +159,101 @@
       {
         "a": "Registered entities must maintain annual business registry renewals, Liberia Revenue Authority (LRA) tax filings, sector-specific operational permits, and municipal operating clearances.",
         "q": "What ongoing compliance requirements must businesses maintain in Liberia?"
+      },
+      {
+        "answer": "Yes, Abentra maintains dedicated liaisons and registered protocols with the National Port Authority and Ministry of Transport to facilitate formal investor concessions.",
+        "category": "Maritime & Logistics",
+        "question": "Can Abentra expedite ministerial meetings with the National Port Authority in Liberia?"
       }
     ],
     "customHtml": ""
+  },
+  {
+    "id": "sec_mvb9pjdc",
+    "name": "Tabbed Divisions Showcase",
+    "title": "Excellence in Tabbed Divisions Showcase",
+    "tag": "Executive Advisory",
+    "tagSub": null,
+    "subtitle": "Connecting multinational entities to verified commercial pathways in Liberia.",
+    "type": "tabs",
+    "enabled": true,
+    "order": 6,
+    "anchor": "tabs-pjdc",
+    "items": [
+      {
+        "title": "Institutional Advantage",
+        "value": "100%",
+        "description": "Verified regulatory compliance and ongoing advisory."
+      },
+      {
+        "title": "Operational Nexus",
+        "value": "24/7",
+        "description": "Direct ministerial and administrative engagement."
+      },
+      {
+        "title": "Strategic Execution",
+        "value": "15+",
+        "description": "Seamless market entry and corporate establishment."
+      }
+    ],
+    "customHtml": ""
+  },
+  {
+    "id": "sec_mvbjlphr",
+    "name": "Custom HTML & Embed",
+    "title": "Excellence in Custom HTML & Embed",
+    "tag": "Executive Advisory",
+    "tagSub": null,
+    "subtitle": "Connecting multinational entities to verified commercial pathways in Liberia.",
+    "type": "custom_html",
+    "enabled": true,
+    "order": 7,
+    "anchor": "custom_html-lphr",
+    "items": [
+      {
+        "title": "Institutional Advantage",
+        "value": "100%",
+        "description": "Verified regulatory compliance and ongoing advisory."
+      },
+      {
+        "title": "Operational Nexus",
+        "value": "24/7",
+        "description": "Direct ministerial and administrative engagement."
+      },
+      {
+        "title": "Strategic Execution",
+        "value": "15+",
+        "description": "Seamless market entry and corporate establishment."
+      }
+    ],
+    "customHtml": ""
+  },
+  {
+    "id": "sec_mvbnepph",
+    "name": "Eylem & Dönüşüm Bandı",
+    "title": "Eylem & Dönüşüm Bandı Alanında Kurumsal Güven",
+    "tag": "Stratejik Çözümler",
+    "subtitle": "Uluslararası yatırımcıları Liberya'da güvenilir ve şeffaf kanallarla buluşturuyoruz.",
+    "type": "cta",
+    "enabled": true,
+    "order": 8,
+    "anchor": "cta-epph",
+    "items": [
+      {
+        "title": "Kurumsal Avantaj",
+        "description": "Mevzuat uyumu ve sürekli danışmanlık.",
+        "value": "100%"
+      },
+      {
+        "title": "Operasyonel Merkez",
+        "description": "Doğrudan bakanlık ve idari süreç takibi.",
+        "value": "24/7"
+      },
+      {
+        "title": "Stratejik Uygulama",
+        "description": "Pazara giriş ve şirket kurulumu.",
+        "value": "15+"
+      }
+    ]
   }
 ]

@@ -216,36 +216,17 @@ nav ul a:hover, nav ul a.on {
 
 .logo-art {
   width: 100%;
-  max-width: 460px;
+  max-width: 480px;
+  height: auto;
   justify-self: center;
-  transition: transform .15s ease-out;
+  display: block;
+  transition: transform .25s ease-out, filter .25s ease-out;
+  filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.45));
 }
 
-.logo-art .draw {
-  fill: none;
-  stroke: url(#g);
-  stroke-width: 1.4;
-  stroke-dasharray: 900;
-  stroke-dashoffset: 900;
-  animation: draw 2.6s .2s ease forwards;
-}
-
-.logo-art .fill {
-  opacity: 0;
-  animation: fadein 1.2s 2.2s ease forwards;
-}
-
-.logo-art .txt {
-  opacity: 0;
-  animation: fadein 1s 2.8s ease forwards;
-}
-
-@keyframes draw {
-  to { stroke-dashoffset: 0; }
-}
-
-@keyframes fadein {
-  to { opacity: 1; }
+.logo-art:hover {
+  transform: translateY(-2px) scale(1.015);
+  filter: drop-shadow(0 18px 36px rgba(201, 164, 92, 0.28));
 }
 
 .globe {
@@ -1233,10 +1214,7 @@ footer a.admin-link:hover {
     animation: none !important;
     transition: none !important;
   }
-  .logo-art .draw {
-    stroke-dashoffset: 0;
-  }
-  .logo-art .fill, .logo-art .txt, .rv {
+  .rv {
     opacity: 1;
     transform: none;
   }
@@ -1244,3 +1222,71 @@ footer a.admin-link:hover {
     scroll-behavior: auto;
   }
 }
+
+/* Public 9-Language Dropdown */
+.nav-lang-item {
+  position: relative;
+  list-style: none;
+}
+.lang-dropdown {
+  position: relative;
+  display: inline-block;
+}
+.lang-btn {
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  background: rgba(201, 164, 92, 0.08);
+  border: 1px solid rgba(201, 164, 92, 0.35);
+  border-radius: 999px;
+  color: #f7eed7;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .2s ease;
+}
+.lang-btn:hover {
+  background: rgba(201, 164, 92, 0.2);
+  border-color: #f0d48f;
+  color: #fff;
+}
+.lang-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 170px;
+  background: #091528;
+  border: 1px solid rgba(201, 164, 92, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.7), 0 0 1px rgba(201, 164, 92, 0.4);
+  padding: 6px;
+  z-index: 999;
+  backdrop-filter: blur(20px);
+}
+.lang-menu.open {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.lang-menu-opt {
+  all: unset;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  font-size: 13px;
+  color: #cfd8e3;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease;
+}
+.lang-menu-opt:hover, .lang-menu-opt.active {
+  background: rgba(201, 164, 92, 0.18);
+  color: #f0d48f;
+  font-weight: 600;
+}
+

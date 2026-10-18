@@ -16,7 +16,7 @@ npm start
 
 ### 2. Erişim Adresleri
 - **Canlı Web Sitesi:** [http://localhost:3000/](http://localhost:3000/)
-- **Yönetici Paneli (Admin Portal):** [http://localhost:3000/admin](http://localhost:3000/admin)
+- **Yönetici Paneli (Admin Portal):** [http://localhost:3000/moon/manager](http://localhost:3000/moon/manager)
 - **Orijinal Statik Versiyon:** [http://localhost:3000/original](http://localhost:3000/original)
 
 ---
@@ -43,7 +43,7 @@ Tüm veriler (site teması, içerikler, ara sectionlar, sektörel SVG kütüphan
 ### 2. Bilgilerinizi Bağlayın (2 Farklı Kolay Yol)
 
 #### Yöntem A: Yönetici Panelinden (En Kolay)
-1. [http://localhost:3000/admin](http://localhost:3000/admin) paneline giriş yapın.
+1. [http://localhost:3000/moon/manager](http://localhost:3000/moon/manager) paneline giriş yapın.
 2. **Sistem & Güvenlik** sekmesine gidin.
 3. **Supabase Bulut Depolama & Veritabanı** kartındaki:
    - **Proje URL:** `https://your-project-id.supabase.co`

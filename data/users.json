@@ -14,10 +14,20 @@
       ],
       "email": "abentrainternational@gmail.com",
       "createdAt": "2026-10-12T10:00:00Z",
-      "lastLogin": "2026-10-12T16:48:57.420Z",
+      "lastLogin": "2026-10-16T17:23:29.968Z",
       "lastLoginIp": "::1",
       "lastLoginFlag": "🇹🇷",
-      "lastLoginDevice": "Desktop / Safari"
+      "lastLoginDevice": "Desktop / Unknown",
+      "theme_settings": {
+        "me": 0,
+        "neon": 0,
+        "theme": "obsidian",
+        "layout": "mini",
+        "shape": "sharp",
+        "density": "tight",
+        "lang": "en",
+        "o": {}
+      }
     },
     {
       "id": "usr_02",
@@ -30,6 +40,7 @@
       "role": "ads_manager",
       "permissions": [
         "dashboard",
+        "aud",
         "logs",
         "heatmap",
         "theme",
@@ -37,10 +48,19 @@
       ],
       "email": "ads@abentrainternational.com",
       "createdAt": "2026-10-12T16:00:00Z",
-      "lastLogin": "2026-10-12T16:53:46.741Z",
-      "lastLoginIp": "::ffff:127.0.0.1",
+      "lastLogin": "2026-10-14T14:41:08.317Z",
+      "lastLoginIp": "::1",
       "lastLoginFlag": "🇹🇷",
-      "lastLoginDevice": "Desktop / Firefox"
+      "lastLoginDevice": "Desktop / Unknown",
+      "theme_settings": {
+        "theme": "obsidian",
+        "layout": "mini",
+        "shape": "sharp",
+        "density": "tight",
+        "neon": 1,
+        "lang": "tr",
+        "o": {}
+      }
     },
     {
       "id": "usr_03",
@@ -54,17 +74,92 @@
       "permissions": [
         "theme",
         "content",
+        "cms",
         "sections",
+        "sec",
         "icons",
         "logs",
-        "export"
+        "export",
+        "switch_user"
       ],
       "email": "dev@abentrainternational.com",
       "createdAt": "2026-10-12T16:30:00Z",
       "lastLogin": "2026-10-12T16:46:29.166Z",
       "lastLoginIp": "::1",
       "lastLoginFlag": "🇹🇷",
-      "lastLoginDevice": "Desktop / Unknown"
+      "lastLoginDevice": "Desktop / Unknown",
+      "theme_settings": {
+        "theme": "emerald",
+        "layout": "dock",
+        "shape": "round",
+        "density": "airy",
+        "neon": 1,
+        "lang": "en",
+        "o": {}
+      }
+    },
+    {
+      "id": "usr_04",
+      "username": "editor",
+      "password": "editor",
+      "password_hash": "editor",
+      "passwordHash": "editor",
+      "salt": "",
+      "name": "Mia Johnson (İçerik Editörü)",
+      "role": "editor",
+      "permissions": [
+        "faq",
+        "mail",
+        "sec",
+        "cms",
+        "sections",
+        "content"
+      ],
+      "email": "mia.johnson@abentrainternational.com",
+      "createdAt": "2026-10-13T09:00:00Z",
+      "lastLogin": "2026-10-14T11:20:00.000Z",
+      "lastLoginIp": "::1",
+      "lastLoginFlag": "🇱🇷",
+      "lastLoginDevice": "Desktop / Chrome",
+      "theme_settings": {
+        "theme": "light",
+        "layout": "left",
+        "shape": "soft",
+        "density": "normal",
+        "neon": 0,
+        "lang": "tr",
+        "o": {}
+      }
+    },
+    {
+      "id": "usr_05",
+      "username": "security",
+      "password": "security",
+      "password_hash": "security",
+      "passwordHash": "security",
+      "salt": "",
+      "name": "Kofi Mensah (Güvenlik Sorumlusu)",
+      "role": "security",
+      "permissions": [
+        "logs",
+        "guv",
+        "settings"
+      ],
+      "email": "kofi.mensah@abentrainternational.com",
+      "createdAt": "2026-10-13T09:30:00Z",
+      "lastLogin": "2026-10-14T10:15:00.000Z",
+      "lastLoginIp": "::1",
+      "lastLoginFlag": "🇬🇭",
+      "lastLoginDevice": "Desktop / Safari",
+      "theme_settings": {
+        "theme": "midnight",
+        "layout": "top",
+        "shape": "sharp",
+        "density": "normal",
+        "neon": 1,
+        "lang": "en",
+        "o": {}
+      }
     }
   ]
 }

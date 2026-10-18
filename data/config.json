@@ -76,6 +76,10 @@
     "col2": "Bridging opportunities. Building tomorrow.",
     "copyright": "© 2026 ABENTRA International. All rights reserved."
   },
+  "system": {
+    "lastAutoPurge": "2026-10-17T15:24:03.303Z",
+    "autoPurgeSchedule": "daily"
+  },
   "ticker": [
     "Business establishment",
     "Licensing & compliance",
@@ -170,6 +174,15 @@
       "tabId": "t3",
       "title": "Market entry & ongoing support",
       "tagSub": "Company profile 07"
+    }
+  ],
+  "faq": [
+    {
+      "id": "faq_mvblatck",
+      "q": "Can Abentra expedite ministerial meetings with the National Port Authority in Liberia?",
+      "a": "Yes, Abentra maintains dedicated liaisons and registered protocols with the National Port Authority and Ministry of Transport to facilitate formal investor concessions.",
+      "category": "Maritime & Logistics",
+      "on": 1
     }
   ]
 }

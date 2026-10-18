@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="tr" data-l="rail" data-s="soft" data-d="normal">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>ABENTRA Executive Portal | Yönetim Merkezi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/moon/manager/css/admin.css">
+</head>
+<body>
+  <!-- Ambient Aurora Glow -->
+  <div class="aur"><i></i><i></i><i></i></div>
+
+  <!-- ==============================================================================
+       LOGIN MODAL OVERLAY (When unauthenticated)
+       Includes "Beni 2 Hafta Hatırla" option & prevents automatic logout on reload
+       ============================================================================== -->
+  <div id="login-screen" class="login-overlay">
+    <div class="glass login-card">
+      <div class="login-logo">A</div>
+      <div style="display:flex;justify-content:center;margin:10px 0 16px;">
+        <div class="lang-dropdown-wrapper" id="login-lang-dropdown">
+          <button type="button" class="lang-dropdown-trigger pill" id="login-lang-trigger" aria-haspopup="true" aria-expanded="false">
+            <i class="fa-solid fa-globe"></i> <span id="login-lang-current-label">TR</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;margin-left:4px;"></i>
+          </button>
+          <div class="lang-dropdown-menu glass" id="login-lang-menu">
+            <button type="button" class="lang-menu-item" data-lang="tr">🇹🇷 Türkçe (TR)</button>
+            <button type="button" class="lang-menu-item" data-lang="en">🇬🇧 English (EN)</button>
+            <button type="button" class="lang-menu-item" data-lang="ar">🇸🇦 العربية (AR)</button>
+            <button type="button" class="lang-menu-item" data-lang="de">🇩🇪 Deutsch (DE)</button>
+            <button type="button" class="lang-menu-item" data-lang="fr">🇫🇷 Français (FR)</button>
+            <button type="button" class="lang-menu-item" data-lang="it">🇮🇹 Italiano (IT)</button>
+            <button type="button" class="lang-menu-item" data-lang="zh">🇨🇳 中文 (ZH)</button>
+            <button type="button" class="lang-menu-item" data-lang="ko">🇰🇷 한국어 (KO)</button>
+            <button type="button" class="lang-menu-item" data-lang="ja">🇯🇵 日本語 (JA)</button>
+          </div>
+        </div>
+      </div>
+      <h2>ABENTRA International</h2>
+      <p class="sub" data-i="signInSubtitle">Yönetim Merkezi · Executive Portal</p>
+
+      <form id="login-form" class="login-form" autocomplete="on">
+        <div class="f">
+          <label for="login-username" data-i="lblUsername">Kullanıcı Adı</label>
+          <input class="i" type="text" id="login-username" placeholder="Örn: admin" data-i-ph="phLoginUsername" required autocomplete="username">
+        </div>
+        <div class="f">
+          <label for="login-password" data-i="lblPassword">Şifre</label>
+          <input class="i" type="password" id="login-password" placeholder="••••••••" required autocomplete="current-password">
+        </div>
+
+        <!-- 2 Weeks Remember Me Checkbox -->
+        <div class="login-remember-row">
+          <label class="cb" style="padding: 2px 0;">
+            <input type="checkbox" id="login-remember" checked>
+            <i></i>
+            <span style="font-size: 13px; font-weight: 500;" data-i="rememberMe14d">Beni 2 hafta hatırla (14 gün)</span>
+          </label>
+        </div>
+
+        <div id="login-error" class="login-error"></div>
+
+        <button type="submit" id="btn-login-submit" class="pill gold" style="width: 100%; padding: 12px; margin-top: 6px;">
+          <span data-i="btnSignIn">Giriş Yap</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==============================================================================
+       MAIN APPLICATION LAYOUT
+       ============================================================================== -->
+  <div class="app">
+    <!-- Sidebar Navigation -->
+    <nav class="glass" id="nav"></nav>
+
+    <!-- Main Viewport Area -->
+    <div class="main">
+      <header class="top glass">
+        <h1 id="ttl" data-i="overviewTitle">Genel bakış</h1>
+        <div class="search">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="7"/><path d="m20 20-3-3"/>
+          </svg>
+          <input placeholder="Ara..." id="q" data-i-ph="topSearchPlaceholder">
+          <kbd>⌘K</kbd>
+        </div>
+        <div class="lang-dropdown-wrapper" id="top-lang-dropdown">
+          <button type="button" class="lang-dropdown-trigger pill" id="top-lang-trigger" aria-haspopup="true" aria-expanded="false" title="Language / Dil">
+            <i class="fa-solid fa-globe"></i> <span id="top-lang-current-label">TR</span> <i class="fa-solid fa-chevron-down" style="font-size:10px;margin-left:4px;"></i>
+          </button>
+          <div class="lang-dropdown-menu glass" id="top-lang-menu">
+            <button type="button" class="lang-menu-item" data-lang="tr">🇹🇷 Türkçe (TR)</button>
+            <button type="button" class="lang-menu-item" data-lang="en">🇬🇧 English (EN)</button>
+            <button type="button" class="lang-menu-item" data-lang="ar">🇸🇦 العربية (AR)</button>
+            <button type="button" class="lang-menu-item" data-lang="de">🇩🇪 Deutsch (DE)</button>
+            <button type="button" class="lang-menu-item" data-lang="fr">🇫🇷 Français (FR)</button>
+            <button type="button" class="lang-menu-item" data-lang="it">🇮🇹 Italiano (IT)</button>
+            <button type="button" class="lang-menu-item" data-lang="zh">🇨🇳 中文 (ZH)</button>
+            <button type="button" class="lang-menu-item" data-lang="ko">🇰🇷 한국어 (KO)</button>
+            <button type="button" class="lang-menu-item" data-lang="ja">🇯🇵 日本語 (JA)</button>
+          </div>
+        </div>
+        <button class="pill gold" id="btn-preview-site" data-i="topPreviewSite">Siteyi önizle</button>
+        <div class="av" id="top-av" title="Yönetici Profili" data-i-title="topAdminProfile">AK</div>
+      </header>
+
+      <!-- VIEW 1: HOME (Genel Bakış) -->
+      <section class="view on" id="v-home">
+        <!-- KPI Cards Grid (Rendered with vector SVG icons, never periodic elements) -->
+        <div class="grid g4" id="kp"></div>
+
+        <!-- Visitor Traffic Chart & Reply Rate -->
+        <div class="grid g3">
+          <div class="glass card">
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:8px;">
+              <div>
+                <h3 data-i="traf">Ziyaretçi trafiği</h3>
+                <p class="sub" id="traffic-sub-label" data-i="trafSub">Son 7 günlük ziyaretçi ve etkileşim eğrisi</p>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                <div class="metrics-period-tabs" id="traffic-segment-tabs" style="font-size:11px">
+                  <button data-segment="human" class="on" title="Sadece gerçek kullanıcıları gösterir"><i class="fa-solid fa-user"></i> <span data-i="segHuman">Gerçek</span></button>
+                  <button data-segment="all" title="Bot ve DNS dahil tüm trafik"><i class="fa-solid fa-globe"></i> <span data-i="segAll">Tümü</span></button>
+                  <button data-segment="bot" title="Sadece botlar, DNS yönlendirmeleri ve tarayıcılar"><i class="fa-solid fa-robot"></i> <span data-i="segBot">Bot/DNS</span></button>
+                </div>
+                <div class="metrics-period-tabs" id="traffic-period-tabs">
+                  <button data-period="weekly" class="on" data-i="periodWeekly">Haftalık</button>
+                  <button data-period="3days" data-i="period3Days">3 Günlük</button>
+                  <button data-period="daily" data-i="periodDaily">Günlük</button>
+                </div>
+                <div class="metrics-date-badge" id="traffic-date-badge">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  <span id="traffic-date-label">8 Eki – 14 Eki 2026</span>
+                </div>
+                <span id="traffic-trend-badge" class="dl up" style="font-weight:600;font-size:12px;background:rgba(16,185,129,0.12);border:1px solid rgba(16,185,129,0.3);padding:4px 10px;border-radius:var(--rp);">▲ +14,8%</span>
+              </div>
+            </div>
+            <div id="ch"></div>
+          </div>
+          <div class="glass card">
+            <h3 data-i="resp">Yanıt oranı</h3>
+            <p class="sub" data-i="respSub">Gelen taleplerin yanıtlanma performansı</p>
+            <div class="gz" id="gz-container">
+              <svg viewBox="0 0 120 120" width="150">
+                <circle cx="60" cy="60" r="50" fill="none" stroke-width="9" style="stroke:var(--ln)"/>
+                <circle id="gz-circle" cx="60" cy="60" r="50" fill="none" stroke-width="9" stroke-linecap="round" stroke-dasharray="289 314" transform="rotate(-90 60 60)" style="stroke:var(--up);filter:drop-shadow(0 0 calc(7px*var(--gl)) var(--up))"/>
+                <text id="gz-text" x="60" y="69" text-anchor="middle">92%</text>
+              </svg>
+              <span class="sub" id="gz-sub" data-i="calculating">Hesaplanıyor...</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section Dwell Time Market & Recent Messages -->
+        <div class="grid g2">
+          <div class="glass card">
+            <h3 data-i="mk">Bölüm piyasası</h3>
+            <p class="sub" style="margin-bottom:8px" data-i="mkSub">Ortalama kalış süresi ve ilgi oranı</p>
+            <div id="mk1"></div>
+          </div>
+          <div class="glass card">
+            <h3 data-i="rec">Son mesajlar</h3>
+            <p class="sub" style="margin-bottom:8px" data-i="recSub">Gelen kutusuna düşen son talepler</p>
+            <div id="rec"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 2: LOGS (Ziyaretçi Logları) -->
+      <section class="view" id="v-logs">
+        <div class="glass card grid" style="display:block">
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;align-items:center;">
+            <select id="log-filter-type" style="width:175px;font-weight:600">
+              <option value="all" data-i="filterAllRequests">Tüm İstekler (Hepsi)</option>
+              <option value="human" selected data-i="filterVerifiedHumans">Sadece Gerçek Kullanıcılar</option>
+              <option value="bot" data-i="filterBotsCrawlers">Bot & DNS / Tarayıcı</option>
+              <option value="suspicious" data-i="filterSuspicious">Şüpheli İstekler</option>
+            </select>
+            <select id="log-filter-period" style="width:140px">
+              <option value="all" data-i="filterAllTime">Tüm zamanlar</option>
+              <option value="7" data-i="filter7Days">Son 7 gün</option>
+              <option value="30" selected data-i="filter30Days">Son 30 gün</option>
+            </select>
+            <select id="log-filter-country" style="width:150px">
+              <option value="all" data-i="filterAllCountries">Tüm ülkeler</option>
+              <option value="Liberia" data-i="countryLiberia">Liberya</option>
+              <option value="Turkey" data-i="countryTurkey">Türkiye</option>
+              <option value="Nigeria" data-i="countryNigeria">Nijerya</option>
+              <option value="Ghana" data-i="countryGhana">Gana</option>
+              <option value="United States" data-i="countryUSA">ABD</option>
+            </select>
+            <select id="log-filter-device" style="width:140px">
+              <option value="all" data-i="filterAllDevices">Tüm cihazlar</option>
+              <option value="Desktop">Desktop</option>
+              <option value="Mobile">Mobile</option>
+              <option value="Tablet">Tablet</option>
+            </select>
+            <span style="flex:1"></span>
+            <button class="pill" id="btn-export-csv">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span data-i="exportCsv">CSV İndir</span>
+            </button>
+            <button class="pill" id="btn-clear-logs" style="color:var(--dn);border-color:color-mix(in srgb, var(--dn) 40%, transparent)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+              <span data-i="clearLogs">Logları Temizle</span>
+            </button>
+          </div>
+          <div id="log-stats-bar" style="display:flex;gap:12px;margin-bottom:12px;font-size:12px;font-weight:600;align-items:center;flex-wrap:wrap"></div>
+          <table>
+            <thead>
+              <tr>
+                <th data-i="thIp">IP Adresi</th>
+                <th data-i="thVisitorType">Ziyaretçi Türü</th>
+                <th data-i="thLocation">Konum</th>
+                <th data-i="thDevice">Cihaz</th>
+                <th data-i="thBrowser">Tarayıcı</th>
+                <th data-i="thDwellTime">Süre</th>
+                <th data-i="thTopSection">En Çok Baktığı Alan</th>
+              </tr>
+            </thead>
+            <tbody id="lg"></tbody>
+          </table>
+        </div>
+        <div class="glass card">
+          <h3 data-i="mk">Bölüm ilgisi</h3>
+          <p class="sub" style="margin-bottom:8px" data-i="logsInterestSub">Hangi alan ne kadar görüntülendi ve incelendi</p>
+          <div id="mk2"></div>
+        </div>
+      </section>
+
+      <!-- VIEW 3: THEME (Site Teması ve Marka) -->
+      <section class="view" id="v-theme">
+        <div class="grid g2">
+          <div class="glass card">
+            <h3 data-i="themeMainTitle">Site teması ve marka</h3>
+            <p class="sub" style="margin-bottom:14px" data-i="themeMainSub">Yayındaki web sitesinin görünüm ve kurumsal renkleri</p>
+            <div id="cols"></div>
+            <div class="cg">
+              <div class="f">
+                <label data-i="lblPreset">Hazır şablon</label>
+                <select id="tpl">
+                  <option value="original" data-i="themeOptOriginal">Orijinal Abentra Lüksü</option>
+                  <option value="obsidian" data-i="themeOptObsidian">Koyu Obsidyen & Altın</option>
+                  <option value="royal" data-i="themeOptRoyal">Kraliyet Mavisi & Şampanya</option>
+                </select>
+              </div>
+              <div class="f">
+                <label data-i="lblFont">Başlık yazı tipi</label>
+                <select id="fnt">
+                  <option>Cormorant Garamond</option>
+                  <option>Cinzel</option>
+                  <option>Space Grotesk</option>
+                  <option>Georgia</option>
+                </select>
+              </div>
+              <div class="f">
+                <label data-i="lblBtnShape">Buton şekli</label>
+                <select id="bsh">
+                  <option value="99px" data-i="shapePill">Oval</option>
+                  <option value="10px" data-i="shapeSoft">Yumuşak</option>
+                  <option value="2px" data-i="shapeSharp">Keskin</option>
+                </select>
+              </div>
+              <div class="f">
+                <label data-i="lblCompanyName">Şirket adı</label>
+                <input class="i" id="site-brand-name" value="ABENTRA International">
+              </div>
+            </div>
+            <button class="pill gold" id="btn-save-site-theme" style="margin-top:10px;" data-i="btnSaveTheme">Site Temasını Kaydet</button>
+          </div>
+
+          <div class="glass card">
+            <h3 data-i="liveSimTitle">Canlı önizleme</h3>
+            <p class="sub" style="margin-bottom:14px" data-i="liveSimSub">Web sitesi Hero bölümü canlı simülasyonu</p>
+            <div class="prev" id="prev">
+              <h2 id="prev-title">ABENTRA International</h2>
+              <p id="prev-desc" data-i="prevHeroDesc">Liberya'da şirket kuruluşu, ruhsatlandırma ve bakanlık ilişkileri.</p>
+              <span id="prev-btn" data-i="prevHeroBtn">Danışmanlık Al</span>
+            </div>
+
+            <!-- Logo Upload Dropzone -->
+            <div id="logo-dz" style="margin-top:16px;padding:22px;border:1.5px dashed var(--bd);border-radius:var(--rs);text-align:center;color:var(--mut);cursor:pointer;transition:.25s;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="margin-bottom:6px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <div data-i="logoDropText">Logo yüklemek için tıklayın veya dosyayı sürükleyin</div>
+              <small style="opacity:.7" data-i="logoDropSub">PNG, JPG, SVG veya JPEG · maks 5MB</small>
+            </div>
+            <input type="file" id="logo-file-input" accept="image/*" style="display:none">
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 4: CMS (İçerik Yönetimi) -->
+      <section class="view" id="v-cms">
+        <div class="tabs" id="ctabs"></div>
+        <div class="grid g2">
+          <div class="glass card" id="cform"></div>
+          <div class="glass card">
+            <h3 data-i="liveSimTitle">Canlı önizleme</h3>
+            <p class="sub" style="margin-bottom:14px" data-i="cmsLiveSub">Yazdıkça güncellenen canlı metin önizlemesi</p>
+            <div class="prev">
+              <h2 id="p1" data-i="cmsP1">Liberya'nın kapısını açıyoruz</h2>
+              <p id="p2" data-i="cmsP2">Mevzuat, izin ve süreç yönetiminde uçtan uca destek.</p>
+              <span id="p3" data-i="cmsP3">Bizimle görüşün</span>
+            </div>
+            <div style="display:flex;gap:10px;margin-top:18px;">
+              <button class="pill" id="btn-reset-cms" data-i="btnResetDefaults">Fabrika ayarlarına sıfırla</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 5: SEC (Web Builder & Ara Bölümler Stüdyosu) -->
+      <section class="view" id="v-sec">
+        <div class="builder-studio-root">
+          <!-- Top Builder Toolbar -->
+          <div class="builder-top-toolbar glass">
+            <div>
+              <h3 style="font-size:18px;margin-bottom:2px;display:flex;align-items:center;gap:8px;">
+                <i class="fa-solid fa-shapes" style="color:var(--ac);"></i>
+                <span data-i="builderMainTitle">Web Builder & Ara Bölümler</span>
+              </h3>
+              <p class="sub" style="font-size:12px;margin:0;" data-i="builderMainSub">Sürükle-bırak veya detaylı yapılandırılmış liste editörüyle sitenizin bölümlerini ve zengin widget'larını yönetin.</p>
+            </div>
+
+            <!-- Mode Switcher: Canvas Drag-Drop vs Detailed Structured List -->
+            <div class="builder-mode-switcher">
+              <button type="button" class="builder-mode-btn on" id="btn-mode-canvas" data-mode="canvas">
+                <i class="fa-solid fa-layer-group"></i> <span data-i="btnBuilderCanvasMode">Görsel Builder (Sürükle-Bırak)</span>
+              </button>
+              <button type="button" class="builder-mode-btn" id="btn-mode-list" data-mode="list">
+                <i class="fa-solid fa-list-check"></i> <span data-i="btnBuilderListMode">Yapılandırılmış Detaylı Liste</span>
+              </button>
+            </div>
+
+            <!-- Responsive Device Simulation Bar -->
+            <div class="device-preview-bar" id="builder-device-bar">
+              <button type="button" class="device-btn on" data-device="mobile" title="Apple iPhone"><i class="fa-solid fa-mobile-screen"></i> <span>iPhone</span></button>
+              <button type="button" class="device-btn" data-device="tablet" title="iPad / Tablet"><i class="fa-solid fa-tablet-screen-button"></i> <span>iPad</span></button>
+              <button type="button" class="device-btn" data-device="desktop" title="MacBook / Desktop"><i class="fa-solid fa-display"></i> <span>Desktop</span></button>
+            </div>
+
+            <div style="display:flex;gap:8px;align-items:center;">
+              <button type="button" class="pill gold" id="btn-builder-add-custom">
+                <i class="fa-solid fa-plus"></i> <span data-i="btnAddWidgetTrigger">Yeni Widget / Bölüm Ekle</span>
+              </button>
+              <button type="button" class="pill" id="btn-builder-save-all">
+                <i class="fa-solid fa-floppy-disk"></i> <span data-i="btnSaveAllBuilder">Tüm Bölümleri Kaydet</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- MODE 1: Visual Drag & Drop Canvas Layout -->
+          <div id="builder-canvas-mode-root" class="builder-canvas-layout">
+            <!-- Left Widget Library Palette (20 Rich Widgets) -->
+            <div class="builder-palette glass card">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+                <h4 style="font-size:14px;margin:0;display:flex;align-items:center;gap:6px;">
+                  <i class="fa-solid fa-box-open" style="color:var(--ac);"></i>
+                  <span data-i="widgetLibraryTitle">Widget & Bölüm Kütüphanesi</span>
+                </h4>
+                <span class="tag" style="font-size:10.5px;">20 Widget</span>
+              </div>
+              <p class="sub" style="font-size:11.5px;margin-bottom:8px;" data-i="widgetLibrarySub">Sitenize eklemek istediğiniz widget'ı tuvale sürükleyin veya Ekle'ye tıklayın</p>
+
+              <!-- Search Widget Input -->
+              <div class="widget-search-wrap">
+                <i class="fa-solid fa-magnifying-glass" style="color:var(--mut);font-size:12px;"></i>
+                <input type="text" id="widget-search-input" placeholder="Widget ara..." data-i-ph="phSearchWidgets">
+              </div>
+
+              <!-- Categories Filter Tabs -->
+              <div class="widget-cat-tabs" id="widget-cat-tabs">
+                <button type="button" class="widget-cat-pill on" data-cat="all" data-i="tabWidgetsAll">Tümü (20)</button>
+                <button type="button" class="widget-cat-pill" data-cat="core" data-i="tabWidgetsCore">Temel & Kahraman</button>
+                <button type="button" class="widget-cat-pill" data-cat="content" data-i="tabWidgetsContent">İçerik & Hikaye</button>
+                <button type="button" class="widget-cat-pill" data-cat="trust" data-i="tabWidgetsTrust">Sosyal Kanıt & Güven</button>
+                <button type="button" class="widget-cat-pill" data-cat="conversion" data-i="tabWidgetsConversion">Dönüşüm & Eylem</button>
+              </div>
+
+              <!-- 20 Draggable Widgets Stream -->
+              <div class="widget-stream-grid" id="widget-library-stream"></div>
+            </div>
+
+            <!-- Right Visual Canvas Drop Area -->
+            <div class="builder-canvas-wrapper" id="builder-canvas-wrapper">
+              <div id="builder-canvas-dropzone" style="display:flex;flex-direction:column;gap:12px;min-height:480px;"></div>
+            </div>
+          </div>
+
+          <!-- MODE 2: Detailed Structured List View -->
+          <div id="builder-list-mode-root" class="builder-list-wrapper" style="display:none;">
+            <div id="builder-structured-list-stream"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 6: MAIL (E-Posta Merkezi - Tam Ekran & Genişletilmiş İletişim Merkezi) -->
+      <section class="view" id="v-mail">
+        <div class="mail-portal-root glass">
+          <!-- Column 1: Mail Folders & Categories -->
+          <div class="mail-sidebar">
+            <div class="mail-compose-row">
+              <button class="pill gold mail-compose-btn" id="btn-mail-new-compose" style="width:100%;justify-content:center;padding:10px 14px;font-weight:600;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>
+                <span data-i="btnNewMail">Yeni E-Posta</span>
+              </button>
+            </div>
+
+            <div class="mail-folder-nav">
+              <div class="fl on" data-folder="inbox">
+                <span class="fl-label">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-6l-2 3h-4l-2-3H2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-7z"/><path d="M5.45 5.11 2 12v0h20v0l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
+                  <span data-i="folderInbox">Gelen Kutusu</span>
+                </span>
+                <span class="badge" id="badge-inbox-count">0</span>
+              </div>
+              <div class="fl" data-folder="starred">
+                <span class="fl-label">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="star-icon"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <span data-i="folderStarred">Yıldızlılar</span>
+                </span>
+                <span class="badge" id="badge-starred-count">0</span>
+              </div>
+              <div class="fl" data-folder="sent">
+                <span class="fl-label">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                  <span data-i="folderSent">Gönderilenler</span>
+                </span>
+                <span class="badge" id="badge-sent-count">0</span>
+              </div>
+              <div class="fl" data-folder="draft">
+                <span class="fl-label">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                  <span data-i="folderDrafts">Taslaklar</span>
+                </span>
+                <span class="badge" id="badge-draft-count">0</span>
+              </div>
+
+            </div>
+
+            <!-- Mail Tools Footer / Fullscreen Shortcut -->
+            <div class="mail-sidebar-foot">
+              <button class="pill" id="btn-mail-sidebar-fs" style="width:100%;justify-content:center;font-size:12px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M3 16v3a2 2 0 0 0 2 2h3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+                <span data-i="btnFullscreen">Tam Ekran Modu</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Column 2: Message List Stream -->
+          <div class="mail-list-col">
+            <div class="mail-list-header">
+              <div class="mail-search-box">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" id="mail-search-input" placeholder="E-postalarda ara..." data-i-ph="phSearchMails">
+                <button id="btn-clear-mail-search" style="all:unset;cursor:pointer;display:none;color:var(--mut);" aria-label="Clear"><i class="fa-solid fa-xmark"></i></button>
+              </div>
+              <div class="mail-filter-tabs">
+                <button class="mail-filter-btn on" data-filter="all" data-i="filterAllMails">Tümü</button>
+                <button class="mail-filter-btn" data-filter="unread" data-i="filterUnreadMails">Okunmamış</button>
+                <button class="mail-filter-btn" data-filter="starred" data-i="filterStarredMails">Yıldızlı</button>
+              </div>
+            </div>
+            <div id="ml" class="mail-list-stream"></div>
+          </div>
+
+          <!-- Column 3: Full Reading & Action Workspace -->
+          <div class="mail-detail-col" id="md"></div>
+        </div>
+      </section>
+
+      <!-- VIEW 8: AUD (Kitle Analizi) -->
+      <section class="view" id="v-aud">
+        <!-- Audience Analytics Filter Bar: 3 Modes -->
+        <div class="aud-filter-bar glass" style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;margin-bottom:18px;border-radius:var(--rs);flex-wrap:wrap;">
+          <div class="aud-filter-tabs" style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button type="button" class="pill aud-filter-tab on" data-aud-filter="top10" id="tab-aud-top10">
+              <i class="fa-solid fa-ranking-star"></i> <span data-i="audFilterTop10">En Çok Görüntülenen 10 Ülke</span>
+            </button>
+            <button type="button" class="pill aud-filter-tab" data-aud-filter="watchlist" id="tab-aud-watchlist">
+              <i class="fa-solid fa-list-check"></i> <span data-i="audFilterWatchlist">Benim 10 Ülkelik Listem</span>
+            </button>
+            <button type="button" class="pill aud-filter-tab" data-aud-filter="single" id="tab-aud-single">
+              <i class="fa-solid fa-crosshairs"></i> <span data-i="audFilterSingle">Belirlenen Tek Ülke Analizi</span>
+            </button>
+          </div>
+          <div id="aud-filter-extra-controls" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;"></div>
+        </div>
+
+        <!-- Audience Top Metrics (Real vector icons) -->
+        <div class="grid g4" id="ak"></div>
+
+        <div class="grid g2">
+          <div class="glass card">
+            <h3 data-i="audCountriesTitle">Giriş yapılan ülkeler</h3>
+            <p class="sub" style="margin-bottom:8px" data-i="audCountriesSub">Son 30 gün · ziyaretçi dağılımı ve ortalama süre</p>
+            <div id="ct"></div>
+          </div>
+          <div class="glass card">
+            <h3 data-i="audHoursTitle">Aktif saatler</h3>
+            <p class="sub" data-i="audHoursSub">Kullanıcıların sitede en çok bulunduğu saatler · GMT (Monrovia)</p>
+            <div id="hr"></div>
+            <h3 style="font-size:16px;margin-top:14px;" data-i="audPeakTitle">Yoğun saat aralıkları</h3>
+            <div id="pk"></div>
+          </div>
+        </div>
+
+        <div class="grid g2">
+          <div class="glass card">
+            <h3 data-i="audTopTitle">Öne çıkan alanlar</h3>
+            <p class="sub" style="margin-bottom:12px" data-i="audTopSub">Kalış süresine göre en çok ilgi gören bölümler</p>
+            <div id="ft"></div>
+          </div>
+          <div class="glass card">
+            <h3 data-i="audLiveTitle">Şu an aktif oturumlar</h3>
+            <p class="sub" style="margin-bottom:8px"><span class="pd"></span><b class="auv" style="color:var(--up)">0</b> <span data-i="usersActiveRightNow">kullanıcı şu an sitede</span></p>
+            <div id="ss"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 9: FAQ (Sık Sorulan Sorular) -->
+      <section class="view" id="v-faq">
+        <div class="grid g2">
+          <div class="glass card">
+            <h3 data-i="faqScanTitle">E-postalardan soru topla</h3>
+            <p class="sub" style="margin-bottom:14px" data-i="faqScanSub">Gelen kutusundaki müşteri taleplerini tarar, konuları gruplar ve sıklığa göre listeler</p>
+            <button class="pill gold" id="btn-faq-scan" onclick="qry()">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <span data-i="btnFaqScan">Sorguyu Çek</span>
+            </button>
+            <div id="qr" style="margin-top:14px"></div>
+          </div>
+          <div class="glass card">
+            <h3 data-i="faqLiveTitle">Yayındaki sık sorulan sorular</h3>
+            <p class="sub" style="margin-bottom:12px" data-i="faqLiveSub">Sitedeki SSS bölümü · cevabı düzenle, anahtarla canlı sitede göster veya gizle</p>
+            <div id="fq"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 10: GUV (Güvenlik ve Yedek) -->
+      <section class="view" id="v-guv">
+        <div class="grid g2">
+          <div class="glass card">
+            <h3 data-i="sSc">Güvenlik ve yedek</h3>
+            <p class="sub" style="margin-bottom:14px" data-i="secSubDesc">Şifre güvenliği, hash'leme ve sistem kontrolleri</p>
+            <form id="form-change-password">
+              <div class="f">
+                <label data-i="lblCurrentPass">Mevcut şifre</label>
+                <input class="i" type="password" id="pass-current" required placeholder="••••••••" data-i-ph="phPasswordDots">
+              </div>
+              <div class="f">
+                <label data-i="lblNewPass">Yeni şifre</label>
+                <input class="i" type="password" id="pass-new" required placeholder="En az 6 karakter" data-i-ph="phMin6Chars">
+              </div>
+              <div class="f">
+                <label data-i="lblConfirmPass">Yeni şifre tekrar</label>
+                <input class="i" type="password" id="pass-confirm" required placeholder="••••••••" data-i-ph="phPasswordDots">
+              </div>
+              <button type="submit" class="pill gold" style="margin-top:8px;" data-i="btnChangePassSubmit">Şifreyi Değiştir</button>
+            </form>
+
+            <hr style="border:0;border-top:1px solid var(--ln);margin:20px 0">
+
+            <div class="mk" style="border:0;padding:6px 0">
+              <b style="flex:1;width:auto"><span data-i="lblBackupTitle">Tüm sistemi yedekle</span><small data-i="lblBackupSub">Config, ara bölümler, e-postalar ve logları indir</small></b>
+              <button class="pill" id="btn-download-backup">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <span data-i="btnDownloadBackupNow">Yedeği İndir</span>
+              </button>
+            </div>
+
+            <div class="mk" style="border:0;padding:6px 0">
+              <b style="flex:1;width:auto"><span data-i="lblMetricsBackupTitle">Sadece metrik verilerini indir</span><small data-i="lblMetricsBackupSub">Ziyaretçi trafiği, saatlik histogram ve kitle telemetrisi JSON formatında</small></b>
+              <button class="pill" id="btn-download-metrics">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <span data-i="btnDownloadMetricsNow">Metrikleri İndir</span>
+              </button>
+            </div>
+
+            <div class="mk" style="border:0;padding:6px 0">
+              <b style="flex:1;width:auto"><span data-i="lblRestoreTitle">Yedekten geri yükle</span><small data-i="lblRestoreSub">JSON yedek dosyasını içe aktar</small></b>
+              <button class="pill" id="btn-restore-backup-trigger">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                <span data-i="btnRestoreBackupNow">Yedek Yükle</span>
+              </button>
+              <input type="file" id="input-backup-file" accept=".json" style="display:none">
+            </div>
+          </div>
+
+          <div class="glass card">
+            <h3 data-i="activeSessionsTitle">Aktif oturumlar & güvenlik durumu</h3>
+            <p class="sub" style="margin-bottom:14px" data-i="activeSessionsSub">Oturum açılan cihazlar ve güvenlik sertifikasyonu</p>
+            <div id="security-session-info">
+              <div class="sec" style="cursor:default">
+                <span class="pd"></span>
+                <b><span data-i="thisDeviceTitle">Bu Cihaz (Geçerli Oturum)</span><small class="sub" data-i="thisDeviceSub">14 gün boyunca aktif kalır</small></b>
+                <span class="tag" style="border-color:var(--up);color:var(--up)" data-i="statusActive">Aktif</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 12: YET (Yetkiler ve Yöneticiler) -->
+      <section class="view" id="v-yet">
+        <div class="grid g3">
+          <div class="glass card">
+            <h3 data-i="adminsCardTitle">Yöneticiler</h3>
+            <p class="sub" style="margin-bottom:12px" data-i="adminsCardSub">Yöneticiyi seçip yetkilerini açılan pencerede düzenle. Ayarlarda tek yetkisi olan yönetici o bölümü doğrudan menüde görür; birden fazla yetkisi olanda Ayarlar açılır menüsü oluşur.</p>
+            <div id="al"></div>
+          </div>
+          <div class="glass card">
+            <h3 data-i="bundlesCardTitle">Yetki paketleri</h3>
+            <p class="sub" style="margin-bottom:12px" data-i="bundlesCardSub">Sık kullanılan yetkileri paketle, yöneticiye tek tıkla ver. Paketleri kendin oluşturup düzenleyebilirsin.</p>
+            <div id="pl"></div>
+            <button class="pill gold" id="pnew" style="margin-top:8px" data-i="btnNewBundleSubmit">Yeni paket</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW: TEMEL (Temel Ayarlar ve Otomatik Veri/Metrik Yönetimi) -->
+      <section class="view" id="v-temel">
+        <!-- Metric Counters Row -->
+        <div class="grid g4" style="margin-bottom: 18px;">
+          <div class="glass card stat-card">
+            <div class="stat-head">
+              <span class="sub" data-i="temelLogsStatTitle">Ziyaretçi Logları</span>
+              <span class="tag" style="border-color:var(--n1);color:var(--n1)" data-i="tagTelemetry">Telemetri</span>
+            </div>
+            <b class="stat-val" id="temel-count-visitors">0</b>
+            <small class="sub" data-i="temelLogsStatSub">Kayıtlı oturum ve istek</small>
+          </div>
+          <div class="glass card stat-card">
+            <div class="stat-head">
+              <span class="sub" data-i="temelHeatmapStatTitle">Isı Haritası & Süre</span>
+              <span class="tag" style="border-color:var(--up);color:var(--up)" data-i="tagSections">Bölümler</span>
+            </div>
+            <b class="stat-val" id="temel-count-sections">0</b>
+            <small class="sub" data-i="temelHeatmapStatSub">İzlenen alan metrikleri</small>
+          </div>
+          <div class="glass card stat-card">
+            <div class="stat-head">
+              <span class="sub" data-i="temelGeoStatTitle">Cihaz & Coğrafya</span>
+              <span class="tag" style="border-color:var(--n3);color:var(--n3)" data-i="tagAnalytics">Analitik</span>
+            </div>
+            <b class="stat-val" id="temel-count-geo">0</b>
+            <small class="sub" data-i="temelGeoStatSub">Ülke ve tarayıcı dağılımı</small>
+          </div>
+          <div class="glass card stat-card">
+            <div class="stat-head">
+              <span class="sub" data-i="temelAutoPurgeStatTitle">Otomatik Temizleme</span>
+              <span class="tag" id="temel-badge-autopurge" style="border-color:var(--ac);color:var(--ac)" data-i="tagManual">Manuel</span>
+            </div>
+            <b class="stat-val" id="temel-status-autopurge" style="font-size:18px;margin-top:6px;" data-i="statusOff">Kapalı</b>
+            <small class="sub" id="temel-last-purge-label" data-i="temelAutoPurgeStatLast">Son: Henüz yok</small>
+          </div>
+        </div>
+
+        <div class="grid g2">
+          <!-- CARD 1: Veri ve Metrik Sıfırlama -->
+          <div class="glass card" style="border-color: color-mix(in srgb, var(--dn) 25%, var(--bd));">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+              <h3 style="color:var(--dn);display:flex;align-items:center;gap:8px;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2M10 11v6M14 11v6"/></svg>
+                <span data-i="temelWipeCardTitle">Tüm Verileri ve Metrikleri Sıfırla</span>
+              </h3>
+              <span class="tag" style="border-color:var(--dn);color:var(--dn)" data-i="tagIrreversible">Geri Alınamaz</span>
+            </div>
+            <p class="sub" style="margin-bottom:14px">
+              <span data-i="temelWipeCardSub">Sistemde toplanan tüm ziyaretçi loglarını, sayfa ve bölüm ısı haritalarını, cihaz ve coğrafi metrikleri otomatik olarak tek tıkla siler.</span>
+            </p>
+
+            <div class="purge-options" style="background:var(--fill);padding:14px;border-radius:var(--rs);border:1px solid var(--ln);margin-bottom:14px;">
+              <div style="font-size:11.5px;font-weight:600;margin-bottom:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--ac);">
+                <span data-i="temelScopeHeading">Sıfırlanacak Kapsam</span>
+              </div>
+              <label class="cb" style="margin-bottom:8px;">
+                <input type="checkbox" id="chk-purge-visitors" checked disabled>
+                <i></i>
+                <span data-i="chkScope1">Ziyaretçi Logları & Ham İstek Telemetrisi (Supabase + Yerel)</span>
+              </label>
+              <label class="cb" style="margin-bottom:8px;">
+                <input type="checkbox" id="chk-purge-heatmap" checked disabled>
+                <i></i>
+                <span data-i="chkScope2">Bölüm Isı Haritası & Sayfada Kalış Süreleri</span>
+              </label>
+              <label class="cb" style="margin-bottom:8px;">
+                <input type="checkbox" id="chk-purge-geo" checked disabled>
+                <i></i>
+                <span data-i="chkScope3">Cihaz, Tarayıcı ve Coğrafi Ülke İstatistikleri</span>
+              </label>
+              <label class="cb" style="margin-bottom:8px;">
+                <input type="checkbox" id="chk-purge-sessions" checked>
+                <i></i>
+                <span data-i="chkScope4">Canlı Ziyaretçi Oturumları ve Heartbeat Sayaçları</span>
+              </label>
+              <label class="cb" style="margin-bottom:8px;">
+                <input type="checkbox" id="chk-purge-messages">
+                <i></i>
+                <span data-i="chkScope5">Gelen İletişim Formu Mesajları ve E-Posta Gönderim Geçmişi</span>
+              </label>
+              <label class="cb">
+                <input type="checkbox" id="chk-purge-audit">
+                <i></i>
+                <span data-i="chkScope6">Yönetici Güvenlik Denetim Logları (Audit Telemetry)</span>
+              </label>
+            </div>
+
+            <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+              <button class="pill danger" id="btn-purge-all-data" style="padding:10px 18px;font-weight:600;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 6h18M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+                <span data-i="btnPurgeAllSubmit">Tüm Veri ve Metrikleri Şimdi Sil</span>
+              </button>
+              <button class="pill" id="btn-refresh-temel-stats" title="Sayaçları Yenile" data-i-title="btnRefreshStatsTitle">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2v6h-6M3 12a9 9 0 0 1 15-6.7L21 8M3 22v-6h6M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>
+                <span data-i="btnRefreshStatsSubmit">Sayaçları Güncelle</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- CARD 2: Otomatik Zamanlanmış Temizleme -->
+          <div class="glass card">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+              <h3 style="display:flex;align-items:center;gap:8px;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span data-i="autoPurgeCardTitle">Otomatik Zamanlanmış Temizleme</span>
+              </h3>
+              <span class="tag" style="border-color:var(--up);color:var(--up)" data-i="tagDaemon">Arka Plan Servisi</span>
+            </div>
+            <p class="sub" style="margin-bottom:14px">
+              <span data-i="autoPurgeCardSub">Metriklerin ve telemetri loglarının belirlediğiniz periyotta sunucu tarafından arka planda otomatik olarak silinmesini sağlar.</span>
+            </p>
+
+            <form id="form-auto-purge-schedule">
+              <div class="f">
+                <label data-i="lblAutoPurgePeriod">Otomatik Temizleme Periyodu</label>
+                <select id="sel-auto-purge-schedule" class="i" style="cursor:pointer;">
+                  <option value="off" data-i="optPurgeOff">Kapalı (Yalnızca Manuel Komutla Sil)</option>
+                  <option value="daily" data-i="optPurgeDaily">Her Gün (24 saatte bir otomatik sıfırla)</option>
+                  <option value="weekly" data-i="optPurgeWeekly">Her Hafta (7 günde bir otomatik sıfırla)</option>
+                  <option value="monthly" data-i="optPurgeMonthly">Her Ay (30 günde bir otomatik sıfırla)</option>
+                  <option value="older_7d" data-i="optPurge7d">7 Günden Eski Kayıtları Otomatik Sil</option>
+                  <option value="older_14d" data-i="optPurge14d">14 Günden Eski Kayıtları Otomatik Sil</option>
+                  <option value="older_30d" data-i="optPurge30d">30 Günden Eski Kayıtları Otomatik Sil</option>
+                </select>
+              </div>
+
+              <div class="f">
+                <label data-i="lblRetentionDays">Veri Saklama Politikası (Retention Gün)</label>
+                <input class="i" type="number" id="input-retention-days" min="1" max="365" value="30" placeholder="Örn: 30 gün" data-i-ph="phRetentionDays">
+                <small class="sub" style="display:block;margin-top:4px;" data-i="retentionDaysSub">Gereksiz disk ve veritabanı şişmesini önlemek için maksimum saklanacak gün sayısı.</small>
+              </div>
+
+              <div class="mk" style="border:0;padding:8px 0;margin-top:6px;">
+                <b style="flex:1;width:auto"><span data-i="lblAutoPurgeAudit">Otomatik Temizleme Bildirimi</span><small data-i="autoPurgeAuditSub">İşlem tamamlandığında denetim loglarına kaydet</small></b>
+                <div class="sw on" id="sw-purge-audit-notify" onclick="this.classList.toggle('on')"></div>
+              </div>
+
+              <div style="display:flex;gap:10px;margin-top:14px;">
+                <button type="submit" class="pill gold" data-i="btnSaveScheduleSubmit">Zamanlama Ayarlarını Kaydet</button>
+                <button type="button" class="pill" id="btn-run-auto-purge-now" data-i="btnTestPurgeSubmit">Zamanlamayı Şimdi Test Et</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- CARD 3: Komut Konsolu & Otomasyon Komutları -->
+          <div class="glass card" style="grid-column: 1 / -1;">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+              <h3 style="display:flex;align-items:center;gap:8px;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+                <span data-i="cmdConsoleHeading">Veri & Metrik Temizleme Komut Konsolu</span>
+              </h3>
+              <span class="tag" style="border-color:var(--ac);color:var(--ac)" data-i="tagLiveCLI">Canlı Komut Arayüzü</span>
+            </div>
+            <p class="sub" style="margin-bottom:12px">
+              <span data-i="cmdConsoleDesc">Aşağıdaki komut satırına temizleme komutunu girerek veya hazır komut butonlarına tıklayarak tüm tutulan verileri ve metrikleri otomatik olarak silebilirsiniz.</span>
+            </p>
+
+            <!-- Quick Command Badges -->
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;" id="quick-cmd-list">
+              <button type="button" class="pill quick-cmd-btn" data-cmd="purge --all" style="font-family:'Space Grotesk',monospace;font-size:12px;border-color:var(--dn);color:var(--dn);">
+                <i class="fa-solid fa-bolt"></i> purge --all
+              </button>
+              <button type="button" class="pill quick-cmd-btn" data-cmd="purge --visitors" style="font-family:'Space Grotesk',monospace;font-size:12px;">
+                purge --visitors
+              </button>
+              <button type="button" class="pill quick-cmd-btn" data-cmd="purge --heatmap" style="font-family:'Space Grotesk',monospace;font-size:12px;">
+                purge --heatmap
+              </button>
+              <button type="button" class="pill quick-cmd-btn" data-cmd="purge --geo" style="font-family:'Space Grotesk',monospace;font-size:12px;">
+                purge --geo
+              </button>
+              <button type="button" class="pill quick-cmd-btn" data-cmd="purge --older 7d" style="font-family:'Space Grotesk',monospace;font-size:12px;">
+                purge --older 7d
+              </button>
+              <button type="button" class="pill quick-cmd-btn" data-cmd="auto-purge daily" style="font-family:'Space Grotesk',monospace;font-size:12px;">
+                auto-purge daily
+              </button>
+              <button type="button" class="pill quick-cmd-btn" data-cmd="status" style="font-family:'Space Grotesk',monospace;font-size:12px;">
+                status
+              </button>
+              <button type="button" class="pill quick-cmd-btn" data-cmd="help" style="font-family:'Space Grotesk',monospace;font-size:12px;">
+                help
+              </button>
+            </div>
+
+            <!-- Command Input Bar -->
+            <div class="cmd-input-bar" style="display:flex;gap:10px;margin-bottom:12px;">
+              <div style="flex:1;position:relative;display:flex;align-items:center;background:rgba(0,0,0,.35);border:1px solid var(--bd);border-radius:var(--rp);padding:0 14px;">
+                <span style="font-family:'Space Grotesk',monospace;color:var(--ac);font-weight:700;margin-right:8px;">$</span>
+                <input type="text" id="input-admin-command" placeholder="Komut girin, örn: purge --all veya purge --older 7d" data-i-ph="phCmdInput" style="all:unset;width:100%;color:var(--ink);font-family:'Space Grotesk',monospace;font-size:13px;padding:10px 0;">
+                <kbd style="color:var(--mute);cursor:pointer;" id="btn-clear-cmd-input" title="Temizle">ESC</kbd>
+              </div>
+              <button class="pill gold" id="btn-exec-admin-command" style="padding:0 20px;font-weight:600;">
+                <span data-i="btnExecCmdSubmit">Komutu Çalıştır</span>
+              </button>
+            </div>
+
+            <!-- Terminal Output Box -->
+            <div id="terminal-output" class="terminal-box" style="border-radius:var(--rs);padding:14px;font-family:'Space Grotesk',monospace;font-size:12px;line-height:1.6;color:#eef2fb;max-height:220px;overflow-y:auto;">
+              <div style="color:var(--mute)" data-i="terminalInitLine">[SİSTEM] ABENTRA Veri & Metrik Komut Konsolu hazır. Bir komut girin veya hazır butonlara tıklayın.</div>
+            </div>
+
+            <!-- Terminal / Shell Information Row -->
+            <div style="display:flex;gap:12px;margin-top:14px;flex-wrap:wrap;background:rgba(255,255,255,.02);padding:10px 14px;border-radius:var(--rs);border:1px solid var(--ln);font-size:12.5px;">
+              <div style="flex:1;min-width:260px;">
+                <b style="color:var(--ac);display:block;margin-bottom:2px;" data-i="terminalShellHeading">Terminal / Konsol Üzerinden Otomatik Çalıştırmak İçin:</b>
+                <span style="color:var(--mute)" data-i="terminalShellSub">Sunucu terminalinde doğrudan şu komutları kullanabilirsiniz:</span>
+              </div>
+              <div style="display:flex;gap:8px;align-items:center;">
+                <code style="background:rgba(0,0,0,.5);padding:4px 10px;border-radius:4px;border:1px solid var(--bd);color:var(--up);font-family:'Space Grotesk',monospace;">./manage.sh clear-data</code>
+                <code style="background:rgba(0,0,0,.5);padding:4px 10px;border-radius:4px;border:1px solid var(--bd);color:var(--n1);font-family:'Space Grotesk',monospace;">npm run clear-metrics</code>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARD 4: Temel Sistem ve İzleme Parametreleri -->
+          <div class="glass card" style="grid-column: 1 / -1;">
+            <h3 data-i="coreParamsHeading">Temel Sistem ve İzleme Parametreleri</h3>
+            <p class="sub" style="margin-bottom:14px" data-i="coreParamsDesc">Genel portal başlığı, iletişim adresi ve ziyaretçi telemetri filtreleri</p>
+            <div class="cg">
+              <div class="f">
+                <label data-i="lblPortalSysTitle">Sistem & Portal Başlığı</label>
+                <input class="i" id="temel-site-name" value="ABENTRA International">
+              </div>
+              <div class="f">
+                <label data-i="lblContactEmailParam">Birincil İletişim / Bildirim E-Postası</label>
+                <input class="i" type="email" id="temel-contact-email" value="abentrainternational@gmail.com">
+              </div>
+              <div class="f">
+                <label data-i="lblBotFilterParam">Bot & Tarayıcı Filtreleme</label>
+                <select id="temel-bot-filter" class="i">
+                  <option value="true" data-i="optBotOnlyHumans">Yalnızca Gerçek İnsanları Say (Önerilen)</option>
+                  <option value="false" data-i="optBotLogAll">Tüm İstekleri ve Botları Kaydet</option>
+                </select>
+              </div>
+              <div class="f">
+                <label data-i="lblHeartbeatParam">Canlı Heartbeat Aralığı (sn)</label>
+                <input class="i" type="number" id="temel-heartbeat-sec" min="5" max="120" value="15">
+              </div>
+              <div class="f">
+                <label data-i="lblEmailAutoTranslate">E-Posta Otomatik Çeviri</label>
+                <select id="temel-email-auto-translate" class="i">
+                  <option value="true" data-i="optAutoTranslateOn">Aktif (Gelen postaları panel diline otomatik çevir)</option>
+                  <option value="false" data-i="optAutoTranslateOff">Devre Dışı (Yalnızca orijinal dili göster)</option>
+                </select>
+                <small class="sub" style="display:block;margin-top:4px;" data-i="emailAutoTranslateSub">Farklı dillerde gelen e-postaları panelin mevcut diline otomatik çevirir ve belirgin bir dil etiketi gösterir.</small>
+              </div>
+            </div>
+            <button class="pill gold" id="btn-save-temel-params" style="margin-top:12px;" data-i="btnSaveParamsSubmit">Temel Parametreleri Kaydet</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 13: GOR (Görünüm - Kişisel Tema Ayarları) -->
+      <section class="view" id="v-gor">
+        <div class="grid g2">
+          <div class="glass card">
+            <h3 data-i="sTh">Panel teması</h3>
+            <p class="sub" style="margin-bottom:14px" data-i="gorThemeSub">Her tema renkleri, menü yerleşimini ve köşe stilini birlikte değiştirir. Bu ayar profilinize özel kaydedilir.</p>
+            <div id="tts"></div>
+          </div>
+          <div class="glass card">
+            <h3 data-i="sLy">Yerleşim ve dil</h3>
+            <p class="sub" style="margin-bottom:14px" data-i="gorLayoutSub">Temanın varsayılanını istediğin gibi kişiselleştir</p>
+            <div class="f">
+              <label data-i="lblNavPosition">Menü konumu</label>
+              <div class="tabs" data-k="layout">
+                <button data-v="left" data-i="posLeft">Sol</button>
+                <button data-v="rail" data-i="posRail">Sol + panel</button>
+                <button data-v="mini" data-i="posMini">İkon bar</button>
+                <button data-v="top" data-i="posTop">Üst</button>
+                <button data-v="dock" data-i="posDock">Alt dock</button>
+              </div>
+            </div>
+            <div class="f">
+              <label data-i="lblCornerStyle">Köşe stili</label>
+              <div class="tabs" data-k="shape">
+                <button data-v="sharp" data-i="shapeSharp">Keskin</button>
+                <button data-v="soft" data-i="shapeSoft">Yumuşak</button>
+                <button data-v="round" data-i="shapePill">Oval</button>
+              </div>
+            </div>
+            <div class="f">
+              <label data-i="lblDensitySetting">Yoğunluk</label>
+              <div class="tabs" data-k="density">
+                <button data-v="tight" data-i="denseTight">Sıkı</button>
+                <button data-v="normal" data-i="denseNormal">Normal</button>
+                <button data-v="airy" data-i="denseAiry">Ferah</button>
+              </div>
+            </div>
+            <h3 style="margin-top:6px" data-i="sLg">Dil</h3>
+            <p class="sub" style="margin-bottom:12px" data-i="lblPortalLangSub">Arayüz dili</p>
+            <div class="tabs" data-k="lang">
+              <button data-v="tr">Türkçe</button>
+              <button data-v="en">English</button>
+            </div>
+          </div>
+          <div class="glass card">
+            <h3 data-i="sCl">Renkler ve cam</h3>
+            <p class="sub" style="margin-bottom:14px" data-i="gorColorsSub">Neon renkler, arka plan ve cam efekti özelleştirme</p>
+            <div class="mk" style="border:0;padding:0 0 16px">
+              <b style="flex:1;width:auto"><span data-i="lblNeonHeading">Neon görünüm</span><small data-i="lblNeonDesc">Kapalıyken ışıma ve parlak renkler kullanılmaz</small></b>
+              <div class="sw" id="nx"></div>
+            </div>
+            <div class="cg" id="cp"></div>
+            <div id="rg"></div>
+            <button class="pill" id="btn-reset-theme-colors" style="margin-top:10px;" data-i="btnResetThemeColors">Tema renklerine dön</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Live Telemetry Right Rail -->
+    <aside class="rail glass" id="rail"></aside>
+  </div>
+
+  <!-- Toast Element -->
+  <div id="toast" class="glass"></div>
+
+  <!-- Permissions Modal Dialog -->
+  <div id="mo" role="dialog" aria-modal="true">
+    <div class="glass mb" id="mb"></div>
+  </div>
+
+  <!-- Dropdown Container -->
+  <div class="glass dd" id="app-dropdown"></div>
+
+  <!-- Logic Script -->
+  <script src="/moon/manager/js/i18n.js?v=4.5.0"></script>
+  <script src="/moon/manager/js/admin.js?v=4.5.0"></script>
+
+  <!-- ==============================================================================
+       ADD TO FAQ MODAL (Triggered from Mail detail inquiry view)
+       ============================================================================== -->
+  <div id="modal-add-to-faq" class="builder-modal-overlay">
+    <div class="glass card" style="max-width:560px;width:92%;padding:28px 24px;border:1px solid color-mix(in srgb, var(--ac) 40%, var(--bd));box-shadow:0 24px 60px rgba(0,0,0,.6);position:relative;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+        <h3 style="display:flex;align-items:center;gap:10px;margin:0;font-size:18px;color:var(--ink);">
+          <i class="fa-solid fa-circle-question" style="color:var(--ac);"></i>
+          <span data-i="modalAddToFaqTitle">Sık Sorulan Sorulara Ekle</span>
+        </h3>
+        <button type="button" class="pill" id="btn-close-faq-modal" style="padding:4px 10px;font-size:13px;" aria-label="Close">✕</button>
+      </div>
+      <p class="sub" style="font-size:12.5px;line-height:1.5;margin-bottom:16px;" data-i="modalAddToFaqSub">
+        Bu müşteri talebini ve hazırlanan yanıtı doğrudan web sitesindeki Sık Sorulan Sorular bölümüne yayınlayabilirsiniz.
+      </p>
+      <form id="form-add-to-faq">
+        <div class="f" style="margin-bottom:12px;">
+          <label data-i="lblFaqQuestion">Soru Metni</label>
+          <input class="i" id="faq-modal-q" placeholder="Örn: Liberya'da şirket kurmak ne kadar sürer?" data-i-ph="phFaqQuestion" required>
+        </div>
+        <div class="f" style="margin-bottom:14px;">
+          <label data-i="lblFaqAnswer">Cevap Metni</label>
+          <textarea id="faq-modal-a" style="min-height:110px;" placeholder="Örn: Gerekli kurumsal evraklar hazırlandığında 2-3 hafta içinde tamamlanır." data-i-ph="phFaqAnswer" required></textarea>
+        </div>
+        <div class="f" style="margin-bottom:18px;">
+          <label data-i="lblFaqCategory">Kategori / Bölüm</label>
+          <input class="i" id="faq-modal-cat" value="Genel Danışmanlık" placeholder="Danışmanlık, Ruhsat, Şirket Kuruluşu" data-i-ph="phFaqCategory">
+        </div>
+        <div style="display:flex;gap:10px;justify-content:flex-end;">
+          <button type="button" class="pill" id="btn-cancel-faq-modal" data-i="btnCancel">İptal</button>
+          <button type="submit" class="pill gold" id="btn-submit-faq-modal">
+            <i class="fa-solid fa-check"></i> <span data-i="btnSaveToFaq">SSS'e Ekle ve Yayınla</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==============================================================================
+       SECTION / WIDGET DEEP EDITOR MODAL
+       ============================================================================== -->
+  <div id="modal-section-editor" class="builder-modal-overlay">
+    <div class="builder-modal-card">
+      <div class="builder-modal-head">
+        <h3 id="sec-modal-title" style="margin:0;font-size:16px;display:flex;align-items:center;gap:8px;">
+          <i class="fa-solid fa-pen-to-square" style="color:var(--ac);"></i>
+          <span data-i="modalEditSectionTitle">Bölüm Detaylarını Düzenle</span>
+        </h3>
+        <button type="button" class="pill" id="btn-close-sec-modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="builder-modal-body" id="sec-modal-body"></div>
+      <div class="builder-modal-foot">
+        <button type="button" class="pill" id="btn-cancel-sec-modal" data-i="actionCancel">İptal</button>
+        <button type="button" class="pill gold" id="btn-save-sec-modal" data-i="btnSaveModalSection">Değişiklikleri Uygula</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==============================================================================
+       COMPOSE EMAIL MODAL
+       ============================================================================== -->
+  <div id="modal-compose-email" class="builder-modal-overlay">
+    <div class="builder-modal-card" style="max-width:680px;">
+      <div class="builder-modal-head">
+        <h3 style="margin:0;font-size:16px;display:flex;align-items:center;gap:8px;">
+          <i class="fa-solid fa-paper-plane" style="color:var(--ac);"></i>
+          <span data-i="composeNewMailTitle">Yeni E-Posta Gönder</span>
+        </h3>
+        <button type="button" class="pill" id="btn-close-compose-modal" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="builder-modal-body">
+        <div class="f">
+          <label data-i="lblRecipientEmail">Alıcı E-Posta Adresi</label>
+          <input class="i" type="email" id="compose-recipient" placeholder="client@company.com" required>
+        </div>
+        <div class="f">
+          <label data-i="lblMailSubject">E-Posta Konusu</label>
+          <input class="i" type="text" id="compose-subject" placeholder="Örn: ABENTRA Danışmanlık ve Yatırım Bilgilendirmesi" data-i-ph="phComposeSubject" required>
+        </div>
+        <div class="f">
+          <label data-i="lblMailBodyText">Mesaj Metni</label>
+          <textarea id="compose-body" style="min-height:160px;" placeholder="Sayın Yetkili, ..." data-i-ph="phComposeBody"></textarea>
+        </div>
+      </div>
+      <div class="builder-modal-foot">
+        <button type="button" class="pill" id="btn-cancel-compose" data-i="actionCancel">İptal</button>
+        <button type="button" class="pill gold" id="btn-submit-compose-mail">
+          <i class="fa-solid fa-paper-plane"></i> <span data-i="btnSendNow">E-Postayı Gönder</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -79,7 +79,7 @@ cmd_start() {
     echo -e "    PID     : ${C_BOLD}$existing_pid${C_RESET}"
     echo -e "    Port    : ${C_BOLD}$PORT${C_RESET}"
     echo -e "    URL     : ${C_CYAN}http://localhost:$PORT${C_RESET}"
-    echo -e "    Admin   : ${C_CYAN}http://localhost:$PORT/admin${C_RESET}"
+    echo -e "    Admin   : ${C_CYAN}http://localhost:$PORT/moon/manager${C_RESET}"
     echo -e "\nLogları izlemek için: ${C_BOLD}./manage.sh logs -f${C_RESET}"
     return 0
   fi
@@ -127,7 +127,7 @@ cmd_start() {
     echo -e "    PID     : ${C_BOLD}${C_GREEN}$new_pid${C_RESET}"
     echo -e "    Port    : ${C_BOLD}$PORT${C_RESET}"
     echo -e "    Web     : ${C_CYAN}http://localhost:$PORT/${C_RESET}"
-    echo -e "    Admin   : ${C_CYAN}http://localhost:$PORT/admin${C_RESET}"
+    echo -e "    Admin   : ${C_CYAN}http://localhost:$PORT/moon/manager${C_RESET}"
     echo -e "\nLogları görüntülemek için: ${C_BOLD}./manage.sh logs -f${C_RESET}"
   else
     echo -e "${C_RED}[HATA] Süreç başlatılamadı veya hemen kapandı! Son loglar:${C_RESET}"
@@ -206,7 +206,7 @@ cmd_status() {
     echo -e "  PID          : ${C_BOLD}$pid${C_RESET}"
     echo -e "  Port         : ${C_BOLD}$PORT${C_RESET}"
     echo -e "  Web Adresi   : ${C_CYAN}http://localhost:$PORT/${C_RESET}"
-    echo -e "  Admin Paneli : ${C_CYAN}http://localhost:$PORT/admin${C_RESET}"
+    echo -e "  Admin Paneli : ${C_CYAN}http://localhost:$PORT/moon/manager${C_RESET}"
 
     # macOS / Linux uyumlu ps kaynak kullanımı
     if ps -p "$pid" -o %cpu,%mem,etime 2>/dev/null | tail -n 1 | grep -q '[0-9]'; then
@@ -258,6 +258,13 @@ cmd_logs() {
 }
 
 # ------------------------------------------------------------------------------
+# CLEAR DATA & METRICS COMMAND
+# ------------------------------------------------------------------------------
+cmd_clear_data() {
+  node "$PROJECT_DIR/scripts/clear-metrics.js" "$@"
+}
+
+# ------------------------------------------------------------------------------
 # HELP / USAGE
 # ------------------------------------------------------------------------------
 cmd_help() {
@@ -270,10 +277,12 @@ cmd_help() {
   echo -e "  ${C_BOLD}${C_YELLOW}status${C_RESET}      : Sürecin çalışma durumunu, PID ve kaynaklarını gösterir"
   echo -e "  ${C_BOLD}${C_GOLD}logs${C_RESET}        : Son 50 log satırını yazdırır"
   echo -e "  ${C_BOLD}${C_GOLD}logs -f${C_RESET}     : Logları canlı (realtime) olarak takip eder"
+  echo -e "  ${C_BOLD}${C_RED}clear-data${C_RESET}  : Tüm tutulan veri ve metrikleri otomatik temizler"
   echo -e "  ${C_BOLD}help${C_RESET}        : Bu yardım menüsünü görüntüler"
   echo -e "\nÖrnekler:"
   echo -e "  ${C_GRAY}./manage.sh start${C_RESET}"
   echo -e "  ${C_GRAY}./manage.sh status${C_RESET}"
+  echo -e "  ${C_GRAY}./manage.sh clear-data${C_RESET}"
   echo -e "  ${C_GRAY}./manage.sh logs -f${C_RESET}"
   echo -e "${C_GOLD}====================================================================${C_RESET}"
 }
@@ -298,6 +307,10 @@ case "$ACTION" in
     ;;
   logs|log)
     cmd_logs "$2" "$3"
+    ;;
+  clear-data|clear-metrics|purge)
+    shift
+    cmd_clear_data "$@"
     ;;
   help|--help|-h)
     cmd_help

@@ -1,51 +1,151 @@
 {
   "inbox": [
     {
-      "id": "msg_mv5d07mi",
-      "name": "Alhaji Kamara",
-      "email": "a.kamara@liberiainvest.org",
-      "phone": "+231778123456",
-      "subject": "Inquiry on Diplomatic Concession Roadmapping",
-      "service": "Government & corporate liaison",
-      "message": "We are requesting formal liaison with the Ministry of Commerce.",
-      "date": "2026-10-12T14:40:38.298Z",
+      "id": "msg_mvbl9ekm",
+      "name": "Alexander Wright",
+      "email": "a.wright@globallogistics.co.uk",
+      "phone": "+44 20 7946 0991",
+      "subject": "Port of Monrovia Concession Inquiry",
+      "service": "General Advisory",
+      "message": "We are preparing a multi-million container berth upgrade at Freeport of Monrovia. Can Abentra expedite ministry meetings with National Port Authority?",
+      "ip": "88.241.12.34",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+      "browser": "Chrome",
+      "os": "macOS",
+      "device": "Desktop",
+      "country": "International",
+      "city": "Monrovia",
+      "flag": "🌐",
+      "cookies": "none",
+      "date": "2026-10-16T23:18:21.190Z",
       "read": true,
-      "replied": true
+      "replied": true,
+      "starred": false,
+      "source": "Abentra SecurePosta Portal"
+    },
+    {
+      "id": "msg_004",
+      "name": "Mehmet Yıldız",
+      "email": "mehmet.yildiz@yildizholding.com.tr",
+      "phone": "+90 532 444 1923",
+      "country": "TR",
+      "lang": "tr",
+      "subject": "Yatırım Teşvikleri & Şirket Kuruluşu",
+      "service": "Yatırım ve Şirket Kuruluşu",
+      "message": "Liberya'da madencilik ve serbest liman bölgesinde yatırım yapmayı planlıyoruz. Liberya'da yatırım teşvikleri nelerdir? Şirket kurmak için hangi belgeler gerekiyor?",
+      "questions": [
+        "Liberya'da yatırım teşvikleri nelerdir?",
+        "Şirket kurmak için hangi belgeler gerekiyor?"
+      ],
+      "date": "2026-10-15T11:20:00Z",
+      "read": true,
+      "replied": false,
+      "starred": false
     },
     {
       "id": "msg_001",
       "name": "David Sterling",
       "email": "d.sterling@atlanticminerals.co.uk",
       "phone": "+44 20 7946 0912",
+      "country": "GB",
+      "lang": "en",
       "subject": "Mining Concession Licensing & Ministry Liaison in Nimba County",
       "service": "Licensing & compliance",
       "message": "Dear Abentra Team, Our investment consortium is finalizing exploratory acquisition plans for mineral concessions in Nimba County. We require structured assistance with Ministry of Mines & Energy liaison, environmental permits, and business establishment in Monrovia. Please arrange an initial consultation.",
-      "date": "2026-10-12T14:32:00Z",
-      "read": false,
-      "replied": false
+      "questions": [
+        "Environmental permits and licensing timeline",
+        "Ministry liaison consultation scheduling"
+      ],
+      "date": "2026-10-14T14:32:00Z",
+      "read": true,
+      "replied": false,
+      "starred": false
+    },
+    {
+      "id": "msg_003",
+      "name": "Grace Dolo",
+      "email": "grace.dolo@dolomining.lr",
+      "phone": "+231 77 654 3210",
+      "country": "LR",
+      "lang": "en",
+      "subject": "Maden Ruhsatı ve Bakanlık Onay Süreçleri",
+      "service": "Maden Ruhsatlandırma",
+      "message": "Hello, we are planning a gold mining project in Nimba County. How long does it take to obtain a mining license? Can you also arrange the ministry meetings?",
+      "questions": [
+        "Maden ruhsatı almak ne kadar sürer?",
+        "Bakanlık görüşmelerini de siz ayarlayabilir misiniz?"
+      ],
+      "date": "2026-10-14T10:15:00Z",
+      "read": true,
+      "replied": false,
+      "starred": true
+    },
+    {
+      "id": "msg_005",
+      "name": "Jean-Marc Diallo",
+      "email": "jmdiallo@atlantictrade.fr",
+      "phone": "+33 6 12 34 56 78",
+      "country": "FR",
+      "lang": "fr",
+      "subject": "Monrovia Temsilcilik ve Şirket Kuruluşu",
+      "service": "Şirket Kuruluşu & Temsilcilik",
+      "message": "Bonjour, nous souhaitons nous installer à Monrovia. Quels documents faut-il pour créer une société ? Quel est le coût total ?",
+      "questions": [
+        "Şirket kurmak için hangi belgeler gerekiyor?",
+        "Toplam maliyet nedir?"
+      ],
+      "date": "2026-10-13T16:45:00Z",
+      "read": true,
+      "replied": false,
+      "starred": false
+    },
+    {
+      "id": "msg_006",
+      "name": "Amina Sesay",
+      "email": "amina.sesay@freeportholdings.sl",
+      "phone": "+232 76 987 654",
+      "country": "SL",
+      "lang": "en",
+      "subject": "Serbest Liman Vergi Muafiyetleri & Lojistik",
+      "service": "Liman Lojistiği & Teşvikler",
+      "message": "Can we benefit from the Freeport of Monrovia tax exemptions? How long does it take to obtain a mining license?",
+      "questions": [
+        "Serbest liman vergi muafiyetlerinden yararlanabilir miyiz?",
+        "Maden ruhsatı almak ne kadar sürer?"
+      ],
+      "date": "2026-10-13T14:10:00Z",
+      "read": true,
+      "replied": false,
+      "starred": false
     },
     {
       "id": "msg_002",
       "name": "Kofi Mensah",
       "email": "kmensah@westafricatrading.com",
       "phone": "+233 24 555 7821",
+      "country": "GH",
+      "lang": "en",
       "subject": "Port Logistics & Corporate Registration Clearance",
       "service": "Business establishment",
       "message": "Hello Madam Kollie, We are expanding our maritime transit operations to the Freeport of Monrovia. We need assistance registering a Liberian subsidiary and securing tax identification clearances from the LRA. Looking forward to your guidance.",
+      "questions": [
+        "Liberya'da şirket kaydı için hangi belgeler gerekli?"
+      ],
       "date": "2026-10-11T09:15:00Z",
       "read": true,
-      "replied": true
+      "replied": true,
+      "starred": false
     }
   ],
   "sent": [
     {
-      "id": "sent_mv5d0wjv",
-      "to": "a.kamara@liberiainvest.org",
-      "subject": "RE: Inquiry on Diplomatic Concession Roadmapping",
-      "body": "Dear Mr. Kamara,\n\nWe have scheduled a ministerial briefing for your delegation on Thursday.\n\nBest regards,\nAbenetta Kollie",
-      "template": "Custom Email",
-      "sentAt": "2026-10-12T14:41:10.603Z",
-      "status": "Delivered (Simulated)",
+      "id": "sent_mvd0u6o1",
+      "to": "a.wright@globallogistics.co.uk",
+      "subject": "New Email / Inquiry",
+      "body": "zz",
+      "template": "General Inquiries Welcome",
+      "sentAt": "2026-10-17T23:22:11.137Z",
+      "status": "Delivered via Portal",
       "errorDetails": null
     },
     {
@@ -53,29 +153,33 @@
       "to": "kmensah@westafricatrading.com",
       "subject": "RE: Port Logistics & Corporate Registration Clearance - ABENTRA Advisory",
       "body": "Dear Mr. Mensah,\n\nThank you for reaching out to ABENTRA International. We would be pleased to assist West Africa Trading with your subsidiary registration and LRA tax clearance for the Freeport operations.\n\nOur team has prepared a preliminary roadmap. Let us schedule an executive consultation this week.\n\nWarm regards,\nAbenetta Kollie\nFounder & Managing Director\nABENTRA International",
-      "template": "Business Establishment Engagement",
+      "template": "Şirket kuruluşu ve ruhsatlandırma teklifi",
       "sentAt": "2026-10-11T11:45:00Z",
-      "status": "Delivered"
+      "status": "Delivered",
+      "starred": false
     }
   ],
   "templates": [
     {
-      "id": "tpl_general_inquiry",
-      "name": "General Inquiries Welcome",
-      "subject": "ABENTRA International | Inquiry Confirmation & Next Steps",
-      "body": "Dear {{name}},\n\nThank you for reaching out to ABENTRA International regarding your commercial initiatives in Liberia.\n\nWe have received your inquiry and our executive advisory team is currently reviewing your prerequisites. We will follow up with specific administrative insights and guidance shortly.\n\nSincerely,\nABENTRA International\nMonrovia, Liberia"
+      "id": "tpl_1",
+      "name": "Genel bilgilendirme ve karşılama",
+      "subj": "Talebiniz hakkında",
+      "msg": "Talebiniz için teşekkür ederiz. Ekibimiz en geç 48 saat içinde size dönüş yapacaktır.",
+      "html": "<!DOCTYPE html><html><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"></head><body style=\"margin:0;padding:0;background:#071224;font-family:'Space Grotesk',Arial,sans-serif;\"><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#071224;padding:36px 12px\"><tr><td align=\"center\"><table width=\"620\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:620px;background:#ffffff;border-radius:10px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,0.6);border:1px solid #1a2c47\"><tr><td style=\"background:#0b1a33;padding:28px 36px;border-bottom:3px solid #c9a24b\"><table width=\"100%\"><tr><td><div style=\"font:600 24px Georgia,serif;letter-spacing:4px;color:#e6c374\">ABENTRA</div><div style=\"font:11.5px Arial,sans-serif;color:#9fb0cf;letter-spacing:1px;margin-top:3px\">International Advisory & Corporate Services</div></td><td align=\"right\"><span style=\"display:inline-block;padding:5px 12px;border:1px solid rgba(230,195,116,0.3);border-radius:20px;color:#e6c374;font-size:11px\">Monrovia · Liberia</span></td></tr></table></td></tr><tr><td style=\"padding:36px 36px 30px;background:#ffffff\"><h1 style=\"margin:0 0 16px;font:600 22px Georgia,serif;color:#0b1a33;line-height:1.3\">%Subject%</h1><p style=\"margin:0 0 16px;font:15px/1.7 Arial,sans-serif;color:#2c3e50\">Sayın <b>%Name%</b>,</p><div style=\"font:15px/1.8 Arial,sans-serif;color:#333333;margin-bottom:24px;padding:16px 20px;background:#f8f9fa;border-left:3px solid #c9a24b;border-radius:4px\">%Message%</div><p style=\"margin:24px 0 0;font:14px/1.7 Arial,sans-serif;color:#333333\">Sorularınız veya ek bilgi talepleriniz olması halinde bu e-postayı doğrudan yanıtlayabilirsiniz.<br><br>Saygılarımızla,<br><b style=\"color:#0b1a33;font-size:15px\">%Sender%</b><br><span style=\"color:#666666;font-size:13px\">%SenderTitle% · ABENTRA International</span></p></td></tr><tr><td style=\"background:#f4f1e8;padding:20px 36px;font:11.5px/1.7 Arial,sans-serif;color:#6b6b6b;border-top:1px solid #e2ddd3\"><table width=\"100%\"><tr><td>ABENTRA International · Camp Johnson Road & Clay Street, Monrovia, Liberia<br>Telefon: %Phone% · E-posta: advisory@abentra.com<br>© %Year% ABENTRA International. Tüm hakları saklıdır.</td><td align=\"right\" style=\"font-size:18px;color:#c9a24b\">★</td></tr></table></td></tr></table></td></tr></table></body></html>"
     },
     {
-      "id": "tpl_establishment",
-      "name": "Business Establishment Proposal",
-      "subject": "Proposal for Business Incorporation & Licensing | ABENTRA International",
-      "body": "Dear {{name}},\n\nFollowing your request concerning company incorporation and statutory registrations in Liberia, we are pleased to outline the primary operational scope.\n\nABENTRA acts as your singular point of coordination across the Liberia Business Registry (LBR), the Liberia Revenue Authority (LRA), and affiliated municipal agencies.\n\nPlease find attached our preliminary institutional roadmap.\n\nWarm regards,\nAbenetta Kollie\nFounder & Managing Director"
+      "id": "tpl_2",
+      "name": "Şirket kuruluşu ve ruhsatlandırma teklifi",
+      "subj": "Şirket kuruluşu ve ruhsatlandırma teklifi",
+      "msg": "Monrovia’da şirket kuruluşu ve ruhsatlandırma sürecinin adımlarını, tahmini süreyi ve maliyet kalemlerini sunuyoruz.",
+      "html": "<!DOCTYPE html><html><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"></head><body style=\"margin:0;padding:0;background:#071224;font-family:'Space Grotesk',Arial,sans-serif;\"><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#071224;padding:36px 12px\"><tr><td align=\"center\"><table width=\"620\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:620px;background:#ffffff;border-radius:10px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,0.6);border:1px solid #1a2c47\"><tr><td style=\"background:#0b1a33;padding:28px 36px;border-bottom:3px solid #c9a24b\"><div style=\"font:600 24px Georgia,serif;letter-spacing:4px;color:#e6c374\">ABENTRA</div><div style=\"font:11.5px Arial,sans-serif;color:#9fb0cf;letter-spacing:1px;margin-top:3px\">International Advisory & Corporate Services</div></td></tr><tr><td style=\"padding:36px 36px 30px;background:#ffffff\"><h1 style=\"margin:0 0 16px;font:600 22px Georgia,serif;color:#0b1a33\">%Subject%</h1><p style=\"margin:0 0 16px;font:15px/1.7 Arial,sans-serif;color:#2c3e50\">Sayın <b>%Name%</b>,</p><div style=\"font:15px/1.8 Arial,sans-serif;color:#333333;margin-bottom:20px\">%Message%</div><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"margin:20px 0;background:#f8f9fa;border:1px solid #e5e8ec;border-radius:6px\"><tr><td style=\"padding:14px 18px;font:14px/1.6 Arial,sans-serif;color:#2c3e50;border-bottom:1px solid #e5e8ec\"><b>Talep Edilen Hizmet:</b> %Service%</td></tr><tr><td style=\"padding:14px 18px;font:14px/1.6 Arial,sans-serif;color:#2c3e50\"><b>Temsil Edilen Şirket:</b> %Company%</td></tr></table><p style=\"margin:24px 0 0;font:14px/1.7 Arial,sans-serif;color:#333333\">Saygılarımızla,<br><b style=\"color:#0b1a33;font-size:15px\">%Sender%</b><br><span style=\"color:#666666;font-size:13px\">%SenderTitle%</span></p></td></tr><tr><td style=\"background:#f4f1e8;padding:20px 36px;font:11.5px/1.7 Arial,sans-serif;color:#6b6b6b;border-top:1px solid #e2ddd3\">ABENTRA International · Monrovia, Liberia · %Phone%<br>© %Year% ABENTRA International</td></tr></table></td></tr></table></body></html>"
     },
     {
-      "id": "tpl_consultation",
-      "name": "Executive Consultation Invitation",
-      "subject": "Scheduling Executive Consultation | ABENTRA International",
-      "body": "Dear {{name}},\n\nWe would welcome the opportunity to convene a direct virtual or in-person briefing regarding your strategic operations in Liberia.\n\nPlease advise which times this week suit your schedule.\n\nBest regards,\nABENTRA International Team\nCamp Johnson Road & Clay Street, Monrovia"
+      "id": "tpl_3",
+      "name": "Üst düzey yönetici istişare daveti",
+      "subj": "Yönetici istişare daveti",
+      "msg": "Projenizi üst düzey yöneticilerimizle değerlendirmek üzere sizi bir istişare görüşmesine davet ediyoruz.",
+      "html": "<!DOCTYPE html><html><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"></head><body style=\"margin:0;padding:0;background:#071224;font-family:'Space Grotesk',Arial,sans-serif;\"><table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"background:#071224;padding:36px 12px\"><tr><td align=\"center\"><table width=\"620\" cellpadding=\"0\" cellspacing=\"0\" style=\"max-width:620px;background:#ffffff;border-radius:10px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,0.6);border:1px solid #1a2c47\"><tr><td style=\"background:#0b1a33;padding:28px 36px;border-bottom:3px solid #c9a24b\"><div style=\"font:600 24px Georgia,serif;letter-spacing:4px;color:#e6c374\">ABENTRA</div><div style=\"font:11.5px Arial,sans-serif;color:#9fb0cf;letter-spacing:1px;margin-top:3px\">International Advisory & Corporate Services</div></td></tr><tr><td style=\"padding:36px 36px 30px;background:#ffffff\"><h1 style=\"margin:0 0 16px;font:600 22px Georgia,serif;color:#0b1a33\">%Subject%</h1><p style=\"margin:0 0 16px;font:15px/1.7 Arial,sans-serif;color:#2c3e50\">Sayın <b>%Name%</b>,</p><div style=\"font:15px/1.8 Arial,sans-serif;color:#333333;margin-bottom:24px\">%Message%</div><div style=\"text-align:center;margin:28px 0\"><a href=\"https://abentra.example/randevu\" style=\"display:inline-block;padding:14px 32px;background:#c9a24b;color:#0b1a33;text-decoration:none;font:600 14px Arial,sans-serif;border-radius:4px;letter-spacing:0.5px\">Görüşme Planla & Takvimi İncele</a></div><p style=\"margin:24px 0 0;font:14px/1.7 Arial,sans-serif;color:#333333\">Saygılarımızla,<br><b style=\"color:#0b1a33;font-size:15px\">%Sender%</b><br><span style=\"color:#666666;font-size:13px\">%SenderTitle%</span></p></td></tr><tr><td style=\"background:#f4f1e8;padding:20px 36px;font:11.5px/1.7 Arial,sans-serif;color:#6b6b6b;border-top:1px solid #e2ddd3\">ABENTRA International · Monrovia, Liberia · %Phone%<br>© %Year% ABENTRA International</td></tr></table></td></tr></table></body></html>"
     }
   ]
 }

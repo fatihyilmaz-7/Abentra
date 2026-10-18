@@ -52,8 +52,16 @@ CREATE TABLE IF NOT EXISTS abentra_visitors (
   first_seen TIMESTAMPTZ DEFAULT NOW(),
   last_seen TIMESTAMPTZ DEFAULT NOW(),
   duration_seconds INT DEFAULT 0,
-  sections_viewed JSONB DEFAULT '[]'::jsonb
+  sections_viewed JSONB DEFAULT '[]'::jsonb,
+  visitor_type TEXT DEFAULT 'human',
+  bot_score INT DEFAULT 0,
+  verified BOOLEAN DEFAULT false
 );
+
+-- Migration helpers if abentra_visitors already exists
+ALTER TABLE abentra_visitors ADD COLUMN IF NOT EXISTS visitor_type TEXT DEFAULT 'human';
+ALTER TABLE abentra_visitors ADD COLUMN IF NOT EXISTS bot_score INT DEFAULT 0;
+ALTER TABLE abentra_visitors ADD COLUMN IF NOT EXISTS verified BOOLEAN DEFAULT false;
 
 -- 5. Section Telemetry & Dwell Time Aggregates Table
 CREATE TABLE IF NOT EXISTS abentra_section_stats (

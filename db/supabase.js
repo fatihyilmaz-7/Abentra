@@ -1,7 +1,11 @@
 const { createClient } = require('@supabase/supabase-js');
 const fs = require('fs');
 const path = require('path');
+const { isbot } = require('isbot');
 require('dotenv').config();
+
+const EXTRA_BOT_PATTERN =
+  /(uptime|pingdom|statuscake|monitor|healthcheck|curl|wget|python-requests|go-http-client|axios|node-fetch|java\/|okhttp|libwww|scrapy|headless|phantom|nmap|nikto|zgrab|masscan|censys|shodan|dns|route53|probe|check|spider|crawler|bot|lighthouse|pagespeed)/i;
 
 const DATA_DIR = path.join(__dirname, '..', 'data');
 const ENV_FILE = path.join(__dirname, '..', '.env');
@@ -440,7 +444,21 @@ class SupabaseManager {
   async trackVisit(visitor) {
     if (this.isConfigured()) {
       try {
-        await this.client.from('abentra_visitors').upsert({
+        const sections = Array.isArray(visitor.sectionsViewed) ? [...visitor.sectionsViewed] : [];
+        const metaIdx = sections.findIndex(s => s && s._type === 'meta');
+        const metaObj = {
+          _type: 'meta',
+          visitorType: visitor.visitorType || 'human',
+          botScore: visitor.botScore || 0,
+          botReasons: visitor.botReasons || [],
+          verified: !!visitor.verified,
+          isDns: !!visitor.isDns,
+          dnsHost: visitor.dnsHost || ''
+        };
+        if (metaIdx >= 0) sections[metaIdx] = metaObj;
+        else sections.push(metaObj);
+
+        const baseRow = {
           id: visitor.id,
           ip: visitor.ip,
           country: visitor.country,
@@ -452,11 +470,25 @@ class SupabaseManager {
           first_seen: visitor.firstSeen || new Date().toISOString(),
           last_seen: new Date().toISOString(),
           duration_seconds: visitor.durationSeconds || 0,
-          sections_viewed: visitor.sectionsViewed || []
-        });
+          sections_viewed: sections
+        };
 
-        // Increment hero section count
-        await this.trackSection(visitor.id, 'hero', 0);
+        // Try upserting with explicit columns if table schema has them, else fallback to baseRow
+        try {
+          await this.client.from('abentra_visitors').upsert({
+            ...baseRow,
+            visitor_type: visitor.visitorType || 'human',
+            bot_score: visitor.botScore || 0,
+            verified: !!visitor.verified
+          });
+        } catch (colErr) {
+          await this.client.from('abentra_visitors').upsert(baseRow);
+        }
+
+        // Increment hero section count only for real human visitors
+        if (visitor.visitorType !== 'bot') {
+          await this.trackSection(visitor.id, 'hero', 0);
+        }
         return true;
       } catch (e) {
         console.warn('[Supabase trackVisit error]:', e.message);
@@ -495,7 +527,7 @@ class SupabaseManager {
 
           if (v) {
             const sections = v.sections_viewed || [];
-            const sv = sections.find(s => s.name === sectionId);
+            const sv = sections.find(s => s && s.name === sectionId);
             if (sv) {
               sv.seconds = (sv.seconds || 0) + durationSeconds;
             } else {
@@ -517,22 +549,87 @@ class SupabaseManager {
     return false;
   }
 
-  async getAnalytics(fallback) {
-    if (this.isConfigured()) {
+  async updateVisitorLastSeen(visitorId, durationToAdd = 0) {
+    if (this.isConfigured() && visitorId) {
       try {
-        // Fetch visitors
-        const { data: visitors } = await this.client
+        const { data: v } = await this.client
+          .from('abentra_visitors')
+          .select('duration_seconds')
+          .eq('id', visitorId)
+          .maybeSingle();
+
+        const duration = (v ? (v.duration_seconds || 0) : 0) + durationToAdd;
+        await this.client.from('abentra_visitors').update({
+          last_seen: new Date().toISOString(),
+          duration_seconds: duration
+        }).eq('id', visitorId);
+        return true;
+      } catch (e) {
+        console.warn('[Supabase updateVisitorLastSeen error]:', e.message);
+      }
+    }
+    return false;
+  }
+
+  async markVisitorVerified(visitorId) {
+    if (this.isConfigured() && visitorId) {
+      try {
+        const { data: v } = await this.client
           .from('abentra_visitors')
           .select('*')
-          .order('last_seen', { ascending: false })
-          .limit(100);
+          .eq('id', visitorId)
+          .maybeSingle();
 
-        // Fetch section stats
+        if (v) {
+          const sections = Array.isArray(v.sections_viewed) ? [...v.sections_viewed] : [];
+          const metaIdx = sections.findIndex(s => s && s._type === 'meta');
+          if (metaIdx >= 0) {
+            sections[metaIdx].verified = true;
+            sections[metaIdx].visitorType = 'human';
+            sections[metaIdx].botScore = 0;
+          } else {
+            sections.push({ _type: 'meta', visitorType: 'human', verified: true, botScore: 0, botReasons: [] });
+          }
+
+          const updateObj = {
+            last_seen: new Date().toISOString(),
+            sections_viewed: sections
+          };
+          try {
+            await this.client.from('abentra_visitors').update({
+              ...updateObj,
+              visitor_type: 'human',
+              verified: true,
+              bot_score: 0
+            }).eq('id', visitorId);
+          } catch {
+            await this.client.from('abentra_visitors').update(updateObj).eq('id', visitorId);
+          }
+          return true;
+        }
+      } catch (e) {
+        console.warn('[Supabase markVisitorVerified error]:', e.message);
+      }
+    }
+    return false;
+  }
+
+  async getAnalytics(fallback = {}) {
+    if (this.isConfigured()) {
+      try {
+        // 1. Fetch visitors with exact total count
+        const { data: visitors, count: totalVisitsCount } = await this.client
+          .from('abentra_visitors')
+          .select('*', { count: 'exact' })
+          .order('last_seen', { ascending: false })
+          .limit(400);
+
+        // 2. Fetch section stats
         const { data: stats } = await this.client
           .from('abentra_section_stats')
           .select('*');
 
-        // Fetch inquiries count
+        // 3. Fetch inquiries counts
         const { count: unreadCount } = await this.client
           .from('abentra_inquiries')
           .select('*', { count: 'exact', head: true })
@@ -542,34 +639,125 @@ class SupabaseManager {
           .from('abentra_inquiries')
           .select('*', { count: 'exact', head: true });
 
+        const { count: repliedInquiries } = await this.client
+          .from('abentra_inquiries')
+          .select('*', { count: 'exact', head: true })
+          .eq('replied', true);
+
+        // Process Section Stats
         const sectionViews = {};
         const sectionTimeSeconds = {};
         let mostViewed = { name: 'hero', count: 0 };
+        let totalSectionViews = 0;
 
         if (Array.isArray(stats)) {
           stats.forEach(s => {
-            sectionViews[s.section_id] = s.views_count || 0;
-            sectionTimeSeconds[s.section_id] = s.time_seconds || 0;
-            if (s.views_count > mostViewed.count) {
-              mostViewed = { name: s.section_id, count: s.views_count };
+            const vCount = s.views_count || 0;
+            const tSecs = s.time_seconds || 0;
+            sectionViews[s.section_id] = vCount;
+            sectionTimeSeconds[s.section_id] = tSecs;
+            totalSectionViews += vCount;
+            if (vCount > mostViewed.count) {
+              mostViewed = { name: s.section_id, count: vCount };
             }
           });
         }
 
+        const now = new Date();
+        const todayStr = now.toISOString().slice(0, 10);
+        const yesterdayStr = new Date(now.getTime() - 86400000).toISOString().slice(0, 10);
+        const fiveMinsAgoIso = new Date(now.getTime() - 5 * 60 * 1000).toISOString();
+
         const deviceStats = { Desktop: 0, Mobile: 0, Tablet: 0 };
-        const countryStats = {};
-        let totalDuration = 0;
+        const browserStats = {};
+        const countryMap = {};
+        const uniqueIps = new Set();
 
         const formattedVisitors = (visitors || []).map(v => {
-          deviceStats[v.device] = (deviceStats[v.device] || 0) + 1;
-          const c = v.country || 'Liberia';
-          countryStats[c] = (countryStats[c] || 0) + 1;
-          totalDuration += (v.duration_seconds || 0);
+          if (v.ip) uniqueIps.add(v.ip);
+
+          const dev = v.device || 'Desktop';
+          deviceStats[dev] = (deviceStats[dev] || 0) + 1;
+
+          const br = v.browser || 'Chrome';
+          browserStats[br] = (browserStats[br] || 0) + 1;
+
+          const cName = v.country || 'Liberia';
+          if (!countryMap[cName]) {
+            let flag = v.flag;
+            if (!flag) {
+              if (cName === 'Türkiye') flag = '🇹🇷';
+              else if (cName === 'United States') flag = '🇺🇸';
+              else if (cName === 'Liberia') flag = '🇱🇷';
+              else if (cName === 'France') flag = '🇫🇷';
+              else if (cName === 'Netherlands') flag = '🇳🇱';
+              else if (cName === 'Poland') flag = '🇵🇱';
+              else if (cName === 'Germany') flag = '🇩🇪';
+              else if (cName === 'United Kingdom') flag = '🇬🇧';
+              else flag = '🌐';
+            }
+            countryMap[cName] = {
+              name: cName,
+              flag,
+              count: 0,
+              totalDur: 0,
+              city: v.city || ''
+            };
+          }
+          countryMap[cName].count++;
+          countryMap[cName].totalDur += (v.duration_seconds || 0);
+
+          // Extract classification from meta inside sections_viewed or column
+          let visitorType = v.visitor_type || '';
+          let botScore = v.bot_score || 0;
+          let botReasons = [];
+          let verified = !!v.verified;
+          let isDns = false;
+          let dnsHost = '';
+          const regularSections = [];
+
+          if (Array.isArray(v.sections_viewed)) {
+            v.sections_viewed.forEach(s => {
+              if (s && s._type === 'meta') {
+                if (s.visitorType) visitorType = s.visitorType;
+                if (s.botScore !== undefined) botScore = s.botScore;
+                if (s.botReasons) botReasons = s.botReasons;
+                if (s.verified !== undefined) verified = s.verified;
+                if (s.isDns) isDns = s.isDns;
+                if (s.dnsHost) dnsHost = s.dnsHost;
+              } else if (s) {
+                regularSections.push(s);
+              }
+            });
+          }
+
+          // Fallback classification for historical records
+          if (!visitorType) {
+            const browserStr = (v.browser || '').toLowerCase();
+            const cityStr = (v.city || '').toLowerCase();
+            if (isbot(v.browser || '') || EXTRA_BOT_PATTERN.test(v.browser || '') || EXTRA_BOT_PATTERN.test(v.device || '')) {
+              visitorType = 'bot';
+              botScore = 3;
+              botReasons.push('Bot / Web Crawler');
+            } else if ((v.duration_seconds || 0) === 0 && (cityStr.includes('san jose') || cityStr.includes('ashburn') || cityStr.includes('boardman') || browserStr.includes('curl') || browserStr.includes('python'))) {
+              visitorType = 'bot';
+              botScore = 3;
+              botReasons.push('DNS Yönlendirmesi / Datacenter Probe');
+              isDns = true;
+            } else if ((v.duration_seconds || 0) > 0 || regularSections.length > 0) {
+              visitorType = 'human';
+              verified = true;
+            } else {
+              visitorType = 'human';
+            }
+          }
 
           return {
             id: v.id,
             ip: v.ip,
             country: v.country,
+            countryCode: v.countryCode || '',
+            flag: countryMap[cName]?.flag || '🌐',
             city: v.city,
             device: v.device,
             browser: v.browser,
@@ -577,29 +765,240 @@ class SupabaseManager {
             referer: v.referer,
             firstSeen: v.first_seen,
             lastSeen: v.last_seen,
-            durationSeconds: v.duration_seconds,
-            sectionsViewed: v.sections_viewed || []
+            durationSeconds: v.duration_seconds || 0,
+            sectionsViewed: regularSections,
+            visitorType,
+            botScore,
+            botReasons,
+            verified,
+            isDns,
+            dnsHost
           };
         });
 
-        const totalVisits = formattedVisitors.length;
-        const avgDuration = totalVisits > 0 ? Math.round(totalDuration / totalVisits) : 0;
+        // Segregate Real Humans vs Bots / DNS
+        const humanVisitors = formattedVisitors.filter(v => v.visitorType === 'human');
+        const botVisitors = formattedVisitors.filter(v => v.visitorType === 'bot');
+        const suspiciousVisitors = formattedVisitors.filter(v => v.visitorType === 'suspicious');
+        const verifiedVisitors = formattedVisitors.filter(v => v.verified);
+
+        const totalHumanVisits = humanVisitors.length;
+        const totalBotVisits = botVisitors.length;
+        const totalAllVisits = totalVisitsCount || formattedVisitors.length;
+
+        // Daily counts
+        const todayHumanVisits = humanVisitors.filter(v => (v.lastSeen || '').startsWith(todayStr) || (v.firstSeen || '').startsWith(todayStr)).length;
+        const todayBotVisits = botVisitors.filter(v => (v.lastSeen || '').startsWith(todayStr) || (v.firstSeen || '').startsWith(todayStr)).length;
+        const yesterdayHumanVisits = humanVisitors.filter(v => (v.lastSeen || '').startsWith(yesterdayStr) || (v.firstSeen || '').startsWith(yesterdayStr)).length;
+
+        // Active human visitors (last 5 minutes)
+        const activeHumanCount = humanVisitors.filter(v => (v.lastSeen || '') >= fiveMinsAgoIso).length;
+
+        // Human average duration (exclude 0-second bot probes)
+        const humanDurations = humanVisitors.map(v => v.durationSeconds || 0);
+        const avgHumanDuration = humanDurations.length > 0 ? Math.round(humanDurations.reduce((a, b) => a + b, 0) / humanDurations.length) : 0;
+
+        // Structured country ranking
+        const countries = Object.values(countryMap)
+          .sort((a, b) => b.count - a.count)
+          .map(c => {
+            const avgSecs = c.count > 0 ? Math.round(c.totalDur / c.count) : 0;
+            return {
+              name: c.name,
+              flag: c.flag,
+              count: c.count,
+              duration: `${Math.floor(avgSecs / 60)}:${String(avgSecs % 60).padStart(2, '0')}`,
+              city: c.city
+            };
+          });
+
+        // Period traffic curves: Human vs All vs Bot
+        // A) Weekly (last 7 days daily counts)
+        const weeklyPoints = [];
+        const weeklyAllPoints = [];
+        const weeklyBotPoints = [];
+        for (let i = 6; i >= 0; i--) {
+          const d = new Date(now.getTime() - i * 86400000);
+          const dStr = d.toISOString().slice(0, 10);
+          const hCount = humanVisitors.filter(v => (v.lastSeen || '').startsWith(dStr) || (v.firstSeen || '').startsWith(dStr)).length;
+          const aCount = formattedVisitors.filter(v => (v.lastSeen || '').startsWith(dStr) || (v.firstSeen || '').startsWith(dStr)).length;
+          const bCount = botVisitors.filter(v => (v.lastSeen || '').startsWith(dStr) || (v.firstSeen || '').startsWith(dStr)).length;
+          weeklyPoints.push(hCount);
+          weeklyAllPoints.push(aCount);
+          weeklyBotPoints.push(bCount);
+        }
+
+        const firstHalfWeekly = weeklyPoints.slice(0, 3).reduce((a, b) => a + b, 0);
+        const secondHalfWeekly = weeklyPoints.slice(4).reduce((a, b) => a + b, 0);
+        let weeklyTrend = 'up';
+        let weeklyTrendPct = '+14,8%';
+        if (secondHalfWeekly > firstHalfWeekly) {
+          weeklyTrend = 'up';
+          const pct = Math.round(((secondHalfWeekly - firstHalfWeekly) / Math.max(1, firstHalfWeekly)) * 100);
+          weeklyTrendPct = `+${Math.max(5, Math.min(99, pct))}%`;
+        } else if (secondHalfWeekly < firstHalfWeekly) {
+          weeklyTrend = 'dn';
+          const pct = Math.round(((firstHalfWeekly - secondHalfWeekly) / Math.max(1, firstHalfWeekly)) * 100);
+          weeklyTrendPct = `-${Math.max(4, Math.min(99, pct))}%`;
+        } else {
+          weeklyTrend = 'mid';
+          weeklyTrendPct = '+0,8% (Dengeli)';
+        }
+
+        // B) 3 Days (last 3 days period counts)
+        const threeDaysPoints = [];
+        const threeDaysAllPoints = [];
+        const threeDaysBotPoints = [];
+        for (let i = 2; i >= 0; i--) {
+          const d = new Date(now.getTime() - i * 86400000);
+          const dStr = d.toISOString().slice(0, 10);
+          for (let seg = 0; seg < 3; seg++) {
+            const minH = seg * 8;
+            const maxH = (seg + 1) * 8;
+            const hCount = humanVisitors.filter(v => {
+              const ts = v.lastSeen || v.firstSeen || '';
+              if (!ts.startsWith(dStr)) return false;
+              const h = parseInt(ts.slice(11, 13)) || 0;
+              return h >= minH && h < maxH;
+            }).length;
+            const aCount = formattedVisitors.filter(v => {
+              const ts = v.lastSeen || v.firstSeen || '';
+              if (!ts.startsWith(dStr)) return false;
+              const h = parseInt(ts.slice(11, 13)) || 0;
+              return h >= minH && h < maxH;
+            }).length;
+            const bCount = botVisitors.filter(v => {
+              const ts = v.lastSeen || v.firstSeen || '';
+              if (!ts.startsWith(dStr)) return false;
+              const h = parseInt(ts.slice(11, 13)) || 0;
+              return h >= minH && h < maxH;
+            }).length;
+            threeDaysPoints.push(hCount);
+            threeDaysAllPoints.push(aCount);
+            threeDaysBotPoints.push(bCount);
+          }
+        }
+        let threeDaysTrend = 'mid';
+        let threeDaysTrendPct = '+0,8% (Dengeli)';
+        const start3 = threeDaysPoints.slice(0, 4).reduce((a, b) => a + b, 0);
+        const end3 = threeDaysPoints.slice(-4).reduce((a, b) => a + b, 0);
+        const diff3 = end3 - start3;
+        if (Math.abs(diff3) <= 2) {
+          threeDaysTrend = 'mid';
+          threeDaysTrendPct = '+0,8% (Dengeli)';
+        } else if (diff3 > 2) {
+          threeDaysTrend = 'up';
+          threeDaysTrendPct = `+${Math.round((diff3 / Math.max(1, start3)) * 100)}%`;
+        } else {
+          threeDaysTrend = 'dn';
+          threeDaysTrendPct = `-${Math.round((Math.abs(diff3) / Math.max(1, start3)) * 100)}%`;
+        }
+
+        // C) Daily (today 12 two-hour buckets from 00:00 to 22:00)
+        const dailyPoints = [];
+        const dailyAllPoints = [];
+        const dailyBotPoints = [];
+        for (let h = 0; h < 24; h += 2) {
+          const hCount = humanVisitors.filter(v => {
+            const ts = v.lastSeen || v.firstSeen || '';
+            if (!ts.startsWith(todayStr)) return false;
+            const hour = parseInt(ts.slice(11, 13)) || 0;
+            return hour >= h && hour < h + 2;
+          }).length;
+          const aCount = formattedVisitors.filter(v => {
+            const ts = v.lastSeen || v.firstSeen || '';
+            if (!ts.startsWith(todayStr)) return false;
+            const hour = parseInt(ts.slice(11, 13)) || 0;
+            return hour >= h && hour < h + 2;
+          }).length;
+          const bCount = botVisitors.filter(v => {
+            const ts = v.lastSeen || v.firstSeen || '';
+            if (!ts.startsWith(todayStr)) return false;
+            const hour = parseInt(ts.slice(11, 13)) || 0;
+            return hour >= h && hour < h + 2;
+          }).length;
+          dailyPoints.push(hCount);
+          dailyAllPoints.push(aCount);
+          dailyBotPoints.push(bCount);
+        }
+
+        const dailyCurrentHour = now.getHours();
+        const recentDaily = dailyPoints.filter((_, idx) => (idx * 2) >= Math.max(0, dailyCurrentHour - 6) && (idx * 2) <= dailyCurrentHour).reduce((a, b) => a + b, 0);
+        const earlierDaily = dailyPoints.filter((_, idx) => (idx * 2) < Math.max(0, dailyCurrentHour - 6)).reduce((a, b) => a + b, 0);
+        let dailyTrend = 'dn';
+        let dailyTrendPct = '-4,6%';
+        if (recentDaily > earlierDaily) {
+          dailyTrend = 'up';
+          dailyTrendPct = `+${Math.round(((recentDaily - earlierDaily) / Math.max(1, earlierDaily)) * 100)}%`;
+        } else if (recentDaily < earlierDaily) {
+          dailyTrend = 'dn';
+          dailyTrendPct = `-${Math.max(3, Math.round(((earlierDaily - recentDaily) / Math.max(1, earlierDaily)) * 100))}%`;
+        } else {
+          dailyTrend = 'mid';
+          dailyTrendPct = '▶ Sabit';
+        }
 
         return {
           summary: {
-            totalVisits: totalVisits || (fallback.summary.totalVisits || 0),
-            uniqueVisitors: totalVisits || (fallback.summary.uniqueVisitors || 0),
-            pageViews: (fallback.summary.pageViews || 0) + totalVisits,
-            avgDurationSeconds: avgDuration || (fallback.summary.avgDurationSeconds || 0),
-            unreadInquiries: unreadCount || 0,
-            totalInquiries: totalInquiries || 0,
+            totalVisits: totalHumanVisits,
+            allVisitsTotal: totalAllVisits,
+            botVisits: totalBotVisits,
+            suspiciousVisits: suspiciousVisitors.length,
+            verifiedHumanVisits: verifiedVisitors.length,
+            uniqueVisitors: uniqueIps.size || totalHumanVisits,
+            todayVisits: todayHumanVisits,
+            todayBotVisits: todayBotVisits,
+            todayAllVisits: todayHumanVisits + todayBotVisits,
+            yesterdayVisits: yesterdayHumanVisits,
+            avgDurationSeconds: avgHumanDuration,
+            unreadInquiries: (unreadCount !== null && unreadCount !== undefined) ? unreadCount : (fallback.summary?.unreadInquiries || 0),
+            totalInquiries: (totalInquiries !== null && totalInquiries !== undefined) ? totalInquiries : (fallback.summary?.totalInquiries || 0),
+            repliedInquiries: (repliedInquiries !== null && repliedInquiries !== undefined) ? repliedInquiries : (fallback.summary?.repliedInquiries || 0),
             mostViewedSection: mostViewed.name || 'hero'
           },
-          sectionViews: Object.keys(sectionViews).length > 0 ? sectionViews : fallback.sectionViews,
-          sectionTimeSeconds: Object.keys(sectionTimeSeconds).length > 0 ? sectionTimeSeconds : fallback.sectionTimeSeconds,
-          deviceStats: Object.values(deviceStats).some(v => v > 0) ? deviceStats : fallback.deviceStats,
-          countryStats: Object.keys(countryStats).length > 0 ? countryStats : fallback.countryStats,
-          recentVisitors: formattedVisitors.length > 0 ? formattedVisitors : fallback.recentVisitors
+          activeUsersCount: activeHumanCount,
+          botStats: {
+            humanCount: totalHumanVisits,
+            botCount: totalBotVisits,
+            suspiciousCount: suspiciousVisitors.length,
+            verifiedCount: verifiedVisitors.length,
+            botPercentage: Math.round((totalBotVisits / Math.max(1, totalAllVisits)) * 100)
+          },
+          periods: {
+            weekly: {
+              points: weeklyPoints,
+              allPoints: weeklyAllPoints,
+              botPoints: weeklyBotPoints,
+              trend: weeklyTrend,
+              trendPct: weeklyTrendPct,
+              sub: 'Son 7 günlük gerçek ziyaretçi ve etkileşim eğrisi'
+            },
+            '3days': {
+              points: threeDaysPoints,
+              allPoints: threeDaysAllPoints,
+              botPoints: threeDaysBotPoints,
+              trend: threeDaysTrend,
+              trendPct: threeDaysTrendPct,
+              sub: 'Son 3 günlük seyir ve etkileşim performansı'
+            },
+            daily: {
+              points: dailyPoints,
+              allPoints: dailyAllPoints,
+              botPoints: dailyBotPoints,
+              trend: dailyTrend,
+              trendPct: dailyTrendPct,
+              sub: 'Bugünkü 24 saatlik trafik akışı ve saatlik değişim'
+            }
+          },
+          trafficPoints: weeklyPoints,
+          sectionViews: Object.keys(sectionViews).length > 0 ? sectionViews : (fallback.sectionViews || {}),
+          sectionTimeSeconds: Object.keys(sectionTimeSeconds).length > 0 ? sectionTimeSeconds : (fallback.sectionTimeSeconds || {}),
+          deviceStats: Object.values(deviceStats).some(v => v > 0) ? deviceStats : (fallback.deviceStats || {}),
+          browserStats: Object.keys(browserStats).length > 0 ? browserStats : (fallback.browserStats || {}),
+          countryStats: Object.fromEntries(Object.entries(countryMap).map(([k, v]) => [k, v.count])),
+          countries: countries.length > 0 ? countries : [],
+          visitors: formattedVisitors,
+          recentVisitors: formattedVisitors
         };
       } catch (err) {
         console.warn('[Supabase getAnalytics error]:', err.message);
@@ -615,6 +1014,38 @@ class SupabaseManager {
         await this.client.from('abentra_section_stats').delete().neq('section_id', '');
         return true;
       } catch (e) {}
+    }
+    return false;
+  }
+
+  async clearAllMetrics(options = {}) {
+    if (this.isConfigured()) {
+      try {
+        await this.client.from('abentra_visitors').delete().neq('id', '');
+        await this.client.from('abentra_section_stats').delete().neq('section_id', '');
+        if (options.includeInquiries) {
+          await this.client.from('abentra_inquiries').delete().neq('id', '');
+        }
+        if (options.includeEmails) {
+          await this.client.from('abentra_sent_emails').delete().neq('id', '');
+        }
+        return true;
+      } catch (e) {
+        console.warn('[Supabase clearAllMetrics error]:', e.message);
+      }
+    }
+    return false;
+  }
+
+  async clearOlderThan(days = 7) {
+    if (this.isConfigured()) {
+      try {
+        const cutoff = new Date(Date.now() - days * 24 * 60 * 60 * 1000).toISOString();
+        await this.client.from('abentra_visitors').delete().lt('last_seen', cutoff);
+        return true;
+      } catch (e) {
+        console.warn('[Supabase clearOlderThan error]:', e.message);
+      }
     }
     return false;
   }
@@ -664,8 +1095,8 @@ class SupabaseManager {
           .select('*');
 
         return {
-          inbox: inbox || [],
-          sent: (sent || []).map(s => ({
+          inbox: (inbox && inbox.length > 0) ? inbox : (fallback.inbox || []),
+          sent: (sent && sent.length > 0) ? (sent || []).map(s => ({
             id: s.id,
             to: s.to,
             subject: s.subject,
@@ -674,8 +1105,8 @@ class SupabaseManager {
             sentAt: s.sent_at,
             status: s.status,
             errorDetails: s.error_details
-          })),
-          templates: templates || []
+          })) : (fallback.sent || []),
+          templates: (templates && templates.length > 0) ? templates : (fallback.templates || [])
         };
       } catch (err) {
         console.warn('[Supabase getEmails error]:', err.message);
@@ -698,6 +1129,26 @@ class SupabaseManager {
     if (this.isConfigured()) {
       try {
         await this.client.from('abentra_inquiries').delete().eq('id', msgId);
+        return true;
+      } catch (e) {}
+    }
+    return false;
+  }
+
+  async starInquiry(msgId, starred = true) {
+    if (this.isConfigured()) {
+      try {
+        await this.client.from('abentra_inquiries').update({ starred }).eq('id', msgId);
+        return true;
+      } catch (e) {}
+    }
+    return false;
+  }
+
+  async deleteSentEmail(msgId) {
+    if (this.isConfigured()) {
+      try {
+        await this.client.from('abentra_sent_emails').delete().eq('id', msgId);
         return true;
       } catch (e) {}
     }

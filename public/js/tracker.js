@@ -151,6 +151,42 @@
   window.addEventListener('pagehide', flushActiveSections);
   window.addEventListener('beforeunload', flushActiveSections);
 
+  // Periodic heartbeat every 20 seconds to maintain real-time active visitor telemetry
+  setInterval(() => {
+    if (document.visibilityState === 'visible') {
+      fetch('/api/track/heartbeat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ visitorId, durationSeconds: 20 })
+      }).catch(() => {});
+    }
+  }, 20000);
+
+  // 5. JavaScript Human Verification Beacon
+  let beaconSent = false;
+  function sendHumanVerificationBeacon() {
+    if (beaconSent) return;
+    beaconSent = true;
+    const payload = JSON.stringify({ visitorId, t: Date.now() });
+    if (navigator.sendBeacon) {
+      const blob = new Blob([payload], { type: 'application/json' });
+      navigator.sendBeacon('/__beacon', blob);
+    } else {
+      fetch('/__beacon', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: payload,
+        keepalive: true
+      }).catch(() => {});
+    }
+  }
+
+  // Trigger beacon after 1s or immediately on first real human interaction
+  setTimeout(sendHumanVerificationBeacon, 1000);
+  ['mousemove', 'scroll', 'touchstart', 'keydown', 'click'].forEach(evt => {
+    window.addEventListener(evt, sendHumanVerificationBeacon, { once: true, passive: true });
+  });
+
   // Initialize once DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initSectionObserver);

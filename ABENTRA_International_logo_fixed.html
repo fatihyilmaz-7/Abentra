@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ABENTRA International | Bridging opportunities. Building tomorrow.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0a2038;--navy2:#0e2a47;--navy3:#061628;--gold:#c9a45c;--gold2:#e3c98f;--ink:#f3efe6;--mute:#b9c3d0;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark}
+:root[data-theme="light"]{color-scheme:dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--navy:#0a2038}}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:calc(76px + env(safe-area-inset-top,0px))}
+body{margin:0;background:var(--navy);color:var(--ink);font:400 17px/1.7 Inter,system-ui,sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--gold2);outline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;line-height:1.1;margin:0}
+h2{font-size:clamp(34px,5vw,56px);margin-bottom:20px}
+.gold{color:var(--gold)}
+/* nav */
+header{position:fixed;top:0;left:0;right:0;z-index:20;padding-top:env(safe-area-inset-top,0px);background:rgba(10,32,56,.82);backdrop-filter:blur(10px);border-bottom:1px solid rgba(201,164,92,.25)}
+nav{display:flex;align-items:center;justify-content:space-between;height:76px}
+nav .brand{font:600 18px Cinzel,serif;letter-spacing:.2em;color:var(--gold2);display:flex;align-items:center;gap:12px}
+nav ul{display:flex;gap:30px;list-style:none;margin:0;padding:0;font-size:15px}
+nav ul a{padding:6px 0;border-bottom:1px solid transparent;color:var(--mute);transition:.25s}
+nav ul a:hover,nav ul a.on{color:var(--gold2);border-color:var(--gold)}
+.btn{display:inline-block;padding:14px 28px;border:1px solid var(--gold);color:var(--gold2);font-weight:500;transition:.3s}
+.btn:hover{background:var(--gold);color:var(--navy)}
+.btn.solid{background:var(--gold);color:var(--navy)}
+.btn.solid:hover{background:var(--gold2)}
+#menu{display:none;background:none;border:1px solid var(--gold);color:var(--gold2);padding:8px 14px;font:inherit}
+/* hero */
+.hero{min-height:100vh;display:flex;align-items:center;padding:120px 0 80px;background:radial-gradient(900px 500px at 75% 40%,#16365a 0%,transparent 70%),var(--navy)}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(46px,7.4vw,96px);letter-spacing:-.01em}
+.hero p{max-width:30em;color:var(--mute);font-size:19px;margin:26px 0 36px}
+.hero .cta{display:flex;gap:14px;flex-wrap:wrap}
+.logo-art{width:100%;max-width:460px;justify-self:center}
+.logo-art .draw{fill:none;stroke:url(#g);stroke-width:1.4;stroke-dasharray:900;stroke-dashoffset:900;animation:draw 2.6s .2s ease forwards}
+.logo-art .fill{opacity:0;animation:fadein 1.2s 1.8s ease forwards}
+.logo-art .txt{opacity:0;animation:fadein 1s 2.8s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes fadein{to{opacity:1}}
+
+@keyframes spin{to{transform:rotate(360deg)}}
+/* sections */
+section{padding:110px 0}
+.alt{background:var(--navy3)}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .8s,transform .8s}
+.rv.in{opacity:1;transform:none}
+.who{display:grid;grid-template-columns:1.2fr 1fr;gap:64px}
+.who p.lead{font:400 24px/1.5 'Cormorant Garamond',serif;color:var(--ink)}
+.promise{border-left:2px solid var(--gold);padding:6px 0 6px 24px;margin-top:32px;color:var(--mute)}
+.promise b{display:block;color:var(--gold2);font-weight:600;margin-bottom:4px}
+.point{display:flex;gap:18px;padding:20px 0;border-bottom:1px solid rgba(201,164,92,.22);font-size:19px}
+.point span{font:500 22px 'Cormorant Garamond',serif;color:var(--gold);min-width:34px}
+.point:hover{padding-left:10px}
+.point{transition:padding .3s}
+.point:first-of-type{border-top:1px solid rgba(201,164,92,.22)}
+.who h3{font-size:28px;margin-bottom:18px;color:var(--gold2)}
+/* purpose */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.card{padding:40px;background:var(--navy2);border-top:2px solid var(--gold)}
+.card h3{font-size:34px;color:var(--gold2);margin-bottom:12px}
+.card p{margin:0;color:var(--mute)}
+.chars{margin-top:44px;display:flex;flex-wrap:wrap;gap:12px}
+.chars span{padding:9px 20px;border:1px solid rgba(201,164,92,.5);color:var(--gold2);border-radius:99px;transition:.3s}
+.chars span:hover{background:var(--gold);color:var(--navy)}
+/* services */
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:36px 0 0;border-bottom:1px solid rgba(201,164,92,.3)}
+.tabs button{background:none;border:0;border-bottom:2px solid transparent;color:var(--mute);font:500 16px Inter,sans-serif;padding:14px 22px;cursor:pointer;margin-bottom:-1px;transition:.25s}
+.tabs button:hover{color:var(--gold2)}
+.tabs button[aria-selected="true"]{color:var(--gold2);border-color:var(--gold)}
+.panel{display:none;padding:44px 0 0;animation:pin .5s ease}
+.panel.on{display:grid;grid-template-columns:1fr 1.2fr;gap:56px;align-items:start}
+@keyframes pin{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
+.panel h3{font-size:clamp(34px,4.4vw,52px);color:var(--gold2)}
+.panel .note{margin-top:22px;color:var(--mute);font-size:15px;border-left:2px solid var(--gold);padding-left:16px}
+.panel li{list-style:none;padding:20px 0;border-bottom:1px solid rgba(201,164,92,.22);font-size:20px;display:flex;gap:16px}
+.panel li::before{content:"";width:8px;height:8px;margin-top:12px;background:var(--gold);transform:rotate(45deg);flex:none}
+.panel ul{margin:0;padding:0}
+.foot-line{margin-top:50px;text-align:center;color:var(--gold2);font:400 24px 'Cormorant Garamond',serif}
+/* contact */
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.contact h2{font-size:clamp(46px,6vw,80px)}
+.name{font:600 22px Cinzel,serif;letter-spacing:.12em;color:var(--gold2)}
+.rows{margin-top:30px}
+.row{padding:18px 0;border-top:1px solid rgba(201,164,92,.3);display:grid;grid-template-columns:110px 1fr;gap:12px}
+.row small{color:var(--gold);font-weight:600;font-size:14px}
+.row a:hover{color:var(--gold2)}
+footer{padding:28px 0;border-top:1px solid rgba(201,164,92,.25);color:var(--mute);font-size:14px;background:var(--navy3)}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+@media (max-width:860px){
+ nav ul{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:var(--navy3);padding:20px 24px;gap:14px}
+ nav ul.open{display:flex}#menu{display:block}
+ .hero .wrap,.who,.two,.panel.on,.contact{grid-template-columns:1fr}
+ .logo-art{max-width:320px;order:-1}section{padding:80px 0}.row{grid-template-columns:90px 1fr}
+}
+.prog{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#8d6a2e,#e3c98f);z-index:30}
+.hero{position:relative;overflow:hidden}.hero .wrap{position:relative}
+.glow{position:absolute;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(201,164,92,.2),transparent 65%);left:var(--mx,70%);top:var(--my,40%);transform:translate(-50%,-50%);pointer-events:none;transition:left .5s,top .5s}
+.tag{display:flex;gap:14px;align-items:center;font:600 12px Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:22px}
+.tag::before{content:"";width:40px;height:1px;background:var(--gold)}.tag i{font-style:normal;color:var(--mute);font-weight:500}
+.loc{margin-top:44px;color:var(--gold2);font-size:13px;letter-spacing:.16em;text-transform:uppercase;display:flex;gap:14px;align-items:center}.loc::before{content:"";width:54px;height:3px;background:var(--gold)}
+.band{overflow:hidden;border-block:1px solid rgba(201,164,92,.3);background:var(--navy3);padding:20px 0}
+.band div{display:flex;gap:48px;width:max-content;animation:mq 36s linear infinite;font:400 28px 'Cormorant Garamond',serif;color:var(--gold2);white-space:nowrap}
+.band span::after{content:"\25C6";margin-left:48px;font-size:10px;color:var(--gold)}@keyframes mq{to{transform:translateX(-33.333%)}}
+.rail{position:fixed;right:20px;top:50%;transform:translateY(-50%);z-index:15;display:flex;flex-direction:column;gap:18px;align-items:flex-end}
+.rail a{font:500 13px Inter,sans-serif;color:var(--mute);display:flex;gap:10px;align-items:center}
+.rail a b{font-weight:500;opacity:0;transform:translateX(8px);transition:.3s}.rail a:hover b,.rail a.on b{opacity:1;transform:none;color:var(--gold2)}
+.rail a::after{content:"";width:9px;height:9px;border:1px solid var(--gold);transform:rotate(45deg);transition:.3s}.rail a.on::after{background:var(--gold)}
+.card{transition:transform .25s}
+.panel ul{counter-reset:n}.panel li{align-items:baseline}
+.panel li::before{content:counter(n,decimal-leading-zero);counter-increment:n;width:auto;height:auto;background:none;transform:none;margin:0;color:var(--gold);font:500 24px 'Cormorant Garamond',serif;min-width:36px}
+.panel li{transition:padding .3s}.panel li:hover{padding-left:12px}
+.cp{margin-left:12px;background:none;border:1px solid rgba(201,164,92,.5);color:var(--gold2);padding:2px 12px;font:500 13px Inter,sans-serif;cursor:pointer;transition:.25s}.cp:hover{background:var(--gold);color:var(--navy)}
+@media (max-width:1100px){.rail{display:none}}
+@media (prefers-reduced-motion:reduce){.band div{animation:none}*{animation:none!important;transition:none!important}.logo-art .draw{stroke-dashoffset:0}.logo-art .fill,.logo-art .txt,.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<!-- Logo symbol, reused -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f1dba6"/><stop offset=".5" stop-color="#c9a45c"/><stop offset="1" stop-color="#8d6a2e"/></linearGradient>
+<g id="mk-shapes">
+<path d="M169.6 9.5 174 9.5 241 124 212 124Z"/>
+<path d="M169.6 9.5 173 13 130 124 122 124Z"/>
+<path d="M111 124H137V126.6H111ZM203 124H247V126.6H203Z"/>
+<path d="M91 124C92 100 128 85 168 71 186 64 199 60 211 55 198 70 178 80 152 92 130 102 110 114 100 126.5 96 127.8 92 127 91 124Z"/>
+</g>
+<clipPath id="gc"><circle cx="234" cy="77" r="25"/></clipPath>
+<radialGradient id="gb" cx=".35" cy=".3" r=".9"><stop offset="0" stop-color="#e3c98f" stop-opacity=".55"/><stop offset="1" stop-color="#8d6a2e" stop-opacity=".25"/></radialGradient>
+<symbol id="mark" viewBox="90 8 170 120" overflow="visible">
+<circle cx="234" cy="77" r="25" fill="url(#gb)"/>
+<g clip-path="url(#gc)"><g fill="url(#g)" transform="translate(234 77)">
+<path d="M-4-12C-1-15 5-15 9-12 11-9 13-6 14-3 16 0 19 2 22 3 20 7 15 9 13 13 11 18 8 22 4 24 1 22 0 17 0 12-1 8-2 4-6 3-10 3-14 0-14-4-13-9-8-10-4-12Z"/>
+<path d="M-9-17C-5-20 4-21 9-19 6-17 2-16-2-15-5-14-8-14-9-17Z"/>
+<path d="M12-16C17-15 22-9 24-4 19-8 14-8 11-12Z"/>
+<path d="M16 10C18 10 19 14 18 17 16 18 15 14 16 10Z"/>
+<path d="M-22 6C-18 4-14 7-15 13-16 19-20 20-21 14Z"/>
+</g></g>
+<circle cx="234" cy="77" r="25" fill="none" stroke="url(#g)" stroke-width="1.3"/>
+<g fill="url(#g)" style="stroke:#0a2038;stroke-width:1.6;paint-order:stroke"><use href="#mk-shapes"/></g>
+</symbol></defs></svg>
+
+<div class="prog" id="prog"></div>
+<aside class="rail" aria-label="Sections"><a href="#who"><b>Who we are</b></a><a href="#purpose"><b>Our purpose</b></a><a href="#services"><b>Our services</b></a><a href="#contact"><b>Leadership &amp; contact</b></a></aside>
+<header><div class="wrap"><nav aria-label="Main">
+ <a class="brand" href="#top" aria-label="ABENTRA home"><svg width="34" height="26"><use href="#mark"/></svg>ABENTRA</a>
+ <button id="menu" aria-expanded="false" aria-controls="links">Menu</button>
+ <ul id="links">
+  <li><a href="#who">Who we are</a></li><li><a href="#purpose">Our purpose</a></li><li><a href="#services">Our services</a></li><li><a href="#contact">Contact</a></li>
+ </ul></nav></div></header>
+
+<main id="top">
+<section class="hero"><div class="glow" id="glow"></div><div class="wrap">
+ <div>
+  <div class="tag">Company profile</div>
+  <h1>Bridging opportunities.<br><span class="gold">Building tomorrow.</span></h1>
+  <p>Business establishment, licensing, compliance and liaison in Liberia.</p>
+  <div class="cta"><a class="btn solid" href="#services">Our services</a><a class="btn" href="#contact">Let’s connect</a></div><div class="loc">Monrovia, Liberia</div>
+ </div>
+ <svg class="logo-art" viewBox="0 0 300 200" role="img" aria-label="ABENTRA International logo">
+  <g class="draw"><use href="#mk-shapes"/></g>
+  <g class="fill"><use href="#mark" x="90" y="8" width="170" height="120"/></g>
+  <g class="txt">
+   <text x="150" y="162" text-anchor="middle" textLength="226" lengthAdjust="spacing" font-family="Cinzel,Georgia,serif" font-size="38" font-weight="600" fill="url(#g)">ABENTRA</text>
+   <path d="M40 176.5h58M202 176.5h58" stroke="#c9a45c" stroke-width="1"/>
+   <text x="150" y="180" text-anchor="middle" textLength="92" lengthAdjust="spacing" font-family="Cinzel,Georgia,serif" font-size="10.5" font-weight="500" fill="#d9bd82">INTERNATIONAL</text>
+   <text x="150" y="196" text-anchor="middle" textLength="214" lengthAdjust="spacing" font-family="Inter,sans-serif" font-size="5.4" fill="#c9b27d">BRIDGING OPPORTUNITIES. BUILDING TOMORROW.</text>
+  </g>
+ </svg>
+</div></section>
+
+<div class="band" aria-hidden="true"><div><span>Business establishment</span><span>Licensing &amp; compliance</span><span>Government &amp; corporate liaison</span><span>Market entry &amp; ongoing support</span><span>Business establishment</span><span>Licensing &amp; compliance</span><span>Government &amp; corporate liaison</span><span>Market entry &amp; ongoing support</span><span>Business establishment</span><span>Licensing &amp; compliance</span><span>Government &amp; corporate liaison</span><span>Market entry &amp; ongoing support</span></div></div>
+<section id="who" class="alt"><div class="wrap who">
+ <div class="rv">
+  <div class="tag">Who we are<i>Company profile 02</i></div>
+  <h2>Your connection to business in Liberia.</h2>
+  <p class="lead">ABENTRA is the trusted connection between businesses, government institutions, regulators and commercial opportunities in Liberia.</p>
+  <p style="color:var(--mute)">Helping local and international businesses establish, connect and remain compliant in Liberia.</p>
+  <div class="promise"><b>Our promise</b>We simplify the path between business ambition and compliant operation in Liberia.</div>
+ </div>
+ <div class="rv">
+  <h3>One coordinated point of contact</h3>
+  <div><a class="point" href="#s0" data-go="0"><span>01</span>Business establishment</a>
+  <a class="point" href="#s1" data-go="1"><span>02</span>Licensing &amp; compliance</a>
+  <a class="point" href="#s2" data-go="2"><span>03</span>Government &amp; corporate liaison</a>
+  <a class="point" href="#s3" data-go="3"><span>04</span>Market entry &amp; ongoing support</a></div>
+ </div>
+</div></section>
+
+<section id="purpose"><div class="wrap">
+ <div class="tag rv">Our purpose<i>Company profile 03</i></div>
+ <h2 class="rv">Purpose, direction and character.</h2>
+ <div class="two rv" style="margin-top:36px">
+  <div class="card"><h3>Mission</h3><p>Help businesses enter, establish and operate confidently through dependable liaison, licensing, compliance and market-entry support.</p></div>
+  <div class="card"><h3>Vision</h3><p>Become Liberia’s most trusted gateway for responsible local and international business establishment and regulatory compliance.</p></div>
+ </div>
+ <div class="rv" style="margin-top:56px"><h3 style="font-size:30px;color:var(--gold2)">Our character</h3>
+  <div class="chars"><span>Professional</span><span>Diplomatic</span><span>Knowledgeable</span><span>Efficient</span><span>Discreet</span><span>Responsive</span><span>Trustworthy</span></div></div>
+</div></section>
+
+<section id="services" class="alt"><div class="wrap">
+ <div class="tag rv">Our services<i>Company profile 04 – 07</i></div>
+ <h2 class="rv">Our services</h2>
+ <div class="tabs rv" role="tablist">
+  <button role="tab" aria-selected="true" id="t0" aria-controls="s0">Business establishment</button>
+  <button role="tab" aria-selected="false" id="t1" aria-controls="s1">Licensing &amp; compliance</button>
+  <button role="tab" aria-selected="false" id="t2" aria-controls="s2">Government &amp; corporate liaison</button>
+  <button role="tab" aria-selected="false" id="t3" aria-controls="s3">Market entry &amp; ongoing support</button>
+ </div>
+ <div class="panel on" id="s0" role="tabpanel" aria-labelledby="t0"><div><div class="tag">Service area 01<i>Company profile 04</i></div><h3>Business establishment</h3><p class="note">One coordinated point of contact for business support in Liberia.</p></div>
+  <ul><li>Business registration and renewal</li><li>Tax registration and clearance facilitation</li><li>Corporate administrative support</li></ul></div>
+ <div class="panel" id="s1" role="tabpanel" aria-labelledby="t1"><div><div class="tag">Service area 02<i>Company profile 05</i></div><h3>Licensing &amp; compliance</h3><p class="note">One coordinated point of contact for business support in Liberia.</p></div>
+  <ul><li>Operational permits and industry licenses</li><li>Certification, accreditation and renewals</li><li>Compliance monitoring and retainers</li></ul></div>
+ <div class="panel" id="s2" role="tabpanel" aria-labelledby="t2"><div><div class="tag">Service area 03<i>Company profile 06</i></div><h3>Government &amp; corporate liaison</h3>
+  <p class="note">ABENTRA coordinates processes but does not provide legal advice, guarantee government approval or control official processing times.</p></div>
+  <ul><li>Ministry and agency coordination</li><li>Application follow-up and reporting</li><li>Legal referrals to qualified lawyers</li></ul></div>
+ <div class="panel" id="s3" role="tabpanel" aria-labelledby="t3"><div><div class="tag">Service area 04<i>Company profile 07</i></div><h3>Market entry &amp; ongoing support</h3><p class="note">One coordinated point of contact for business support in Liberia.</p></div>
+  <ul><li>Market-entry guidance</li><li>Local introductions and partner connections</li><li>Investor and delegation support</li></ul></div>
+</div></section>
+
+<section id="contact"><div class="wrap contact">
+ <div class="rv"><div class="tag">Leadership &amp; contact<i>Company profile 08</i></div><h2>Let’s connect.</h2>
+  <svg viewBox="0 0 300 200" width="220" role="img" aria-label="ABENTRA logo" style="margin-top:10px;opacity:.9"><use href="#mark" x="90" y="8" width="170" height="120"/></svg></div>
+ <div class="rv">
+  <div class="name">ABENETTA KOLLIE</div><div style="color:var(--mute)">Founder &amp; Managing Director</div>
+  <div class="rows">
+   <div class="row"><small>Telephone</small><div><a href="tel:+231886246170">+231 886 246 170</a><br><a href="tel:+231775875843">+231 775 875 843</a></div></div>
+   <div class="row"><small>Email</small><div><a href="mailto:abentrainternational@gmail.com">abentrainternational@gmail.com</a><button class="cp" data-c="abentrainternational@gmail.com">Copy</button></div></div>
+   <div class="row" style="border-bottom:1px solid rgba(201,164,92,.3)"><small>Office</small><div><a href="https://www.google.com/maps/search/?api=1&query=Camp+Johnson+Road+and+Clay+Street+Monrovia+Liberia" target="_blank" rel="noopener">Camp Johnson Road &amp; Clay Street<br>Monrovia, Liberia</a></div></div>
+  </div>
+  <p style="margin-top:28px"><a class="btn solid" href="mailto:abentrainternational@gmail.com">Email ABENTRA</a></p>
+ </div>
+</div></section>
+</main>
+<footer><div class="wrap"><span>ABENTRA International · Monrovia, Liberia</span><span>Bridging opportunities. Building tomorrow.</span></div></footer>
+
+<script>
+const $=(s,r=document)=>[...r.querySelectorAll(s)];
+// scroll reveal
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.15});
+$('.rv').forEach(el=>io.observe(el));
+// scroll spy
+const links=$('#links a'),secs=links.map(a=>document.querySelector(a.getAttribute('href')));
+const spy=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){links.forEach(l=>l.classList.toggle('on',l.getAttribute('href')==='#'+x.target.id))}}),{rootMargin:'-45% 0px -50% 0px'});
+secs.forEach(s=>spy.observe(s));
+// progress bar + rail
+const pg=document.getElementById('prog');addEventListener('scroll',()=>{pg.style.width=(scrollY/(document.documentElement.scrollHeight-innerHeight)*100)+'%'},{passive:true});
+const rl=$('.rail a');new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)rl.forEach(l=>l.classList.toggle('on',l.getAttribute('href')==='#'+x.target.id))}),{rootMargin:'-45% 0px -50% 0px'}).observe&&secs.forEach(s=>new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)rl.forEach(l=>l.classList.toggle('on',l.getAttribute('href')==='#'+x.target.id))}),{rootMargin:'-45% 0px -50% 0px'}).observe(s));
+// hero glow + logo parallax
+const hero=document.querySelector('.hero'),art=document.querySelector('.logo-art');
+hero.addEventListener('pointermove',e=>{const r=hero.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;hero.style.setProperty('--mx',x+'px');hero.style.setProperty('--my',y+'px');art.style.transform='translate('+((x/r.width-.5)*-16)+'px,'+((y/r.height-.5)*-16)+'px)'});
+// card tilt
+$('.card').forEach(c=>{c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform='perspective(700px) rotateY('+x*8+'deg) rotateX('+-y*8+'deg) translateY(-4px)'});c.addEventListener('pointerleave',()=>c.style.transform='')});
+// copy buttons
+$('.cp').forEach(b=>b.onclick=()=>{try{navigator.clipboard.writeText(b.dataset.c)}catch(e){}b.textContent='Copied';setTimeout(()=>b.textContent='Copy',1600)});
+// mobile menu
+const m=document.getElementById('menu'),ul=document.getElementById('links');
+m.onclick=()=>{const o=ul.classList.toggle('open');m.setAttribute('aria-expanded',o)};
+links.forEach(l=>l.addEventListener('click',()=>{ul.classList.remove('open');m.setAttribute('aria-expanded',false)}));
+// service tabs
+const tabs=$('[role=tab]'),panels=$('.panel');
+function show(i){tabs.forEach((t,k)=>t.setAttribute('aria-selected',k==i));panels.forEach((p,k)=>p.classList.toggle('on',k==i))}
+tabs.forEach((t,i)=>{t.onclick=()=>show(i);t.onkeydown=e=>{if(e.key==='ArrowRight'){show((i+1)%4);tabs[(i+1)%4].focus()}if(e.key==='ArrowLeft'){show((i+3)%4);tabs[(i+3)%4].focus()}}});
+// "who we are" points route to the matching service tab
+$('[data-go]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();show(+a.dataset.go);document.getElementById('services').scrollIntoView({behavior:'smooth'})}));
+</script>
+</body>
+</html>

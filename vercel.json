@@ -7,6 +7,7 @@
       "config": {
         "includeFiles": [
           "public/**",
+          "moon/**",
           "data/**",
           "supabase_schema.sql"
         ]

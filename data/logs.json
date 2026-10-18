@@ -1,78 +1,59 @@
 {
   "summary": {
-    "totalVisits": 36,
-    "uniqueVisitors": 2,
-    "pageViews": 36,
+    "totalVisits": 16,
+    "uniqueVisitors": 1,
+    "pageViews": 16,
     "avgDurationSeconds": 0,
-    "lastUpdated": "2026-10-12T15:34:15.368Z"
+    "lastUpdated": "2026-10-17T15:24:00.479Z",
+    "allVisits": 16
   },
   "sectionViews": {
-    "purpose": 6,
-    "contact": 8,
-    "who": 16,
-    "services": 1
+    "who": 1
   },
   "sectionTimeSeconds": {
-    "purpose": 57,
-    "contact": 1153,
-    "who": 657,
-    "services": 931
+    "who": 76
+  },
+  "sectionCountryViews": {
+    "who": {
+      "🇹🇷 Türkiye": 1
+    }
   },
   "deviceStats": {
-    "Desktop": 11,
+    "Desktop": 16,
     "Mobile": 0,
     "Tablet": 0
   },
   "browserStats": {
-    "Safari": 11
+    "Safari": 16
   },
   "countryStats": {
-    "🇹🇷 Türkiye": 11
+    "🇹🇷 Türkiye": 16
   },
   "visitors": [
     {
-      "id": "vis_e09a5ff0",
-      "ip": "::1",
-      "country": "Turkey",
+      "id": "vis_p9p3maqmv5eu7b7",
+      "ip": "2a02:ff0:1e10:24c5:fcd4:effb:e736:e33f",
+      "country": "Türkiye",
       "countryCode": "TR",
       "flag": "🇹🇷",
-      "city": "Istanbul",
-      "region": "",
-      "isp": "Local Network",
-      "device": "Desktop",
-      "browser": "Unknown",
-      "os": "Unknown",
-      "screen": "1920x1080",
-      "referer": "Test Entry",
-      "firstSeen": "2026-10-12T16:42:59.600Z",
-      "lastSeen": "2026-10-12T16:42:59.601Z",
-      "durationSeconds": 0,
-      "sectionsViewed": []
-    },
-    {
-      "id": "vis_p9p3maqmv5eu7b7",
-      "ip": "176.30.100.141",
-      "country": "Türkiye",
       "city": "Meram",
+      "region": "Konya",
+      "isp": "TurkNet Iletisim Hizmetleri A.S.",
       "device": "Desktop",
       "browser": "Safari",
       "os": "macOS",
+      "screen": "1512x982",
       "referer": "Direct Entry",
-      "firstSeen": "2026-10-12T15:34:43.305Z",
-      "lastSeen": "2026-10-12T17:13:32.014Z",
+      "firstSeen": "2026-10-17T19:47:19.851Z",
+      "lastSeen": "2026-10-17T23:53:34.253Z",
       "durationSeconds": 0,
       "sectionsViewed": [],
-      "flag": "🇹🇷",
-      "countryCode": "TR"
+      "visitorType": "human",
+      "botScore": 0,
+      "botReasons": [],
+      "verified": true,
+      "isDns": false,
+      "dnsHost": "localhost"
     }
-  ],
-  "sectionCountryViews": {
-    "who": {
-      "🇹🇷 Turkey": 1,
-      "🇹🇷 Türkiye": 1
-    },
-    "contact": {
-      "🇹🇷 Türkiye": 4
-    }
-  }
+  ]
 }

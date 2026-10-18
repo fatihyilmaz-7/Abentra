@@ -11,3 +11,6 @@ logs/
 # OS metadata
 .DS_Store
 Thumbs.db
+
+# Runtime session storage
+data/sessions.json
