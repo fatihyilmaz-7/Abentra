@@ -1,5 +1,32 @@
 [
   {
+    "id": "audit_1792512778629",
+    "timestamp": "2026-10-20T16:12:58.629Z",
+    "action": "DATA_PURGE",
+    "user": "Otomatik Zamanlayıcı (daily)",
+    "target": "all",
+    "deletedVisitors": 1,
+    "details": "Veri ve metrik temizleme komutu çalıştırıldı (all)"
+  },
+  {
+    "id": "audit_1792424660393",
+    "timestamp": "2026-10-19T15:44:20.393Z",
+    "action": "DATA_PURGE",
+    "user": "Otomatik Zamanlayıcı (daily)",
+    "target": "all",
+    "deletedVisitors": 0,
+    "details": "Veri ve metrik temizleme komutu çalıştırıldı (all)"
+  },
+  {
+    "id": "audit_1792337741195",
+    "timestamp": "2026-10-18T15:35:41.195Z",
+    "action": "DATA_PURGE",
+    "user": "Otomatik Zamanlayıcı (daily)",
+    "target": "all",
+    "deletedVisitors": 1,
+    "details": "Veri ve metrik temizleme komutu çalıştırıldı (all)"
+  },
+  {
     "id": "audit_1792250643301",
     "timestamp": "2026-10-17T15:24:03.301Z",
     "action": "DATA_PURGE",

@@ -1,59 +1,20 @@
 {
   "summary": {
-    "totalVisits": 16,
-    "uniqueVisitors": 1,
-    "pageViews": 16,
+    "totalVisits": 0,
+    "uniqueVisitors": 0,
+    "pageViews": 0,
     "avgDurationSeconds": 0,
-    "lastUpdated": "2026-10-17T15:24:00.479Z",
-    "allVisits": 16
+    "lastUpdated": "2026-10-20T16:12:58.621Z"
   },
-  "sectionViews": {
-    "who": 1
-  },
-  "sectionTimeSeconds": {
-    "who": 76
-  },
-  "sectionCountryViews": {
-    "who": {
-      "🇹🇷 Türkiye": 1
-    }
-  },
+  "sectionViews": {},
+  "sectionTimeSeconds": {},
+  "sectionCountryViews": {},
   "deviceStats": {
-    "Desktop": 16,
+    "Desktop": 0,
     "Mobile": 0,
     "Tablet": 0
   },
-  "browserStats": {
-    "Safari": 16
-  },
-  "countryStats": {
-    "🇹🇷 Türkiye": 16
-  },
-  "visitors": [
-    {
-      "id": "vis_p9p3maqmv5eu7b7",
-      "ip": "2a02:ff0:1e10:24c5:fcd4:effb:e736:e33f",
-      "country": "Türkiye",
-      "countryCode": "TR",
-      "flag": "🇹🇷",
-      "city": "Meram",
-      "region": "Konya",
-      "isp": "TurkNet Iletisim Hizmetleri A.S.",
-      "device": "Desktop",
-      "browser": "Safari",
-      "os": "macOS",
-      "screen": "1512x982",
-      "referer": "Direct Entry",
-      "firstSeen": "2026-10-17T19:47:19.851Z",
-      "lastSeen": "2026-10-17T23:53:34.253Z",
-      "durationSeconds": 0,
-      "sectionsViewed": [],
-      "visitorType": "human",
-      "botScore": 0,
-      "botReasons": [],
-      "verified": true,
-      "isDns": false,
-      "dnsHost": "localhost"
-    }
-  ]
+  "browserStats": {},
+  "countryStats": {},
+  "visitors": []
 }

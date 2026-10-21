@@ -4,6 +4,7 @@
     "name": "Section",
     "title": "Excellence in Section",
     "tag": "Executive Advisory",
+    "tagSub": null,
     "subtitle": "Connecting multinational entities to verified commercial pathways in Liberia.",
     "type": "feature_grid",
     "enabled": true,
@@ -12,20 +13,21 @@
     "items": [
       {
         "title": "Institutional Advantage",
-        "description": "Verified regulatory compliance and ongoing advisory.",
-        "value": "100%"
+        "value": "100%",
+        "description": "Verified regulatory compliance and ongoing advisory."
       },
       {
         "title": "Operational Nexus",
-        "description": "Direct ministerial and administrative engagement.",
-        "value": "24/7"
+        "value": "24/7",
+        "description": "Direct ministerial and administrative engagement."
       },
       {
         "title": "Strategic Execution",
-        "description": "Seamless market entry and corporate establishment.",
-        "value": "15+"
+        "value": "15+",
+        "description": "Seamless market entry and corporate establishment."
       }
-    ]
+    ],
+    "customHtml": ""
   },
   {
     "id": "sec_stats",
@@ -233,6 +235,7 @@
     "name": "Eylem & Dönüşüm Bandı",
     "title": "Eylem & Dönüşüm Bandı Alanında Kurumsal Güven",
     "tag": "Stratejik Çözümler",
+    "tagSub": null,
     "subtitle": "Uluslararası yatırımcıları Liberya'da güvenilir ve şeffaf kanallarla buluşturuyoruz.",
     "type": "cta",
     "enabled": true,
@@ -241,17 +244,46 @@
     "items": [
       {
         "title": "Kurumsal Avantaj",
-        "description": "Mevzuat uyumu ve sürekli danışmanlık.",
-        "value": "100%"
+        "value": "100%",
+        "description": "Mevzuat uyumu ve sürekli danışmanlık."
       },
       {
         "title": "Operasyonel Merkez",
-        "description": "Doğrudan bakanlık ve idari süreç takibi.",
-        "value": "24/7"
+        "value": "24/7",
+        "description": "Doğrudan bakanlık ve idari süreç takibi."
       },
       {
         "title": "Stratejik Uygulama",
-        "description": "Pazara giriş ve şirket kurulumu.",
+        "value": "15+",
+        "description": "Pazara giriş ve şirket kurulumu."
+      }
+    ],
+    "customHtml": ""
+  },
+  {
+    "id": "sec_mvgqbl5a",
+    "name": "Feature & Card Grid",
+    "title": "Excellence in Feature & Card Grid",
+    "tag": "Executive Advisory",
+    "subtitle": "Connecting multinational entities to verified commercial pathways in Liberia.",
+    "type": "cards",
+    "enabled": true,
+    "order": 9,
+    "anchor": "cards-bl5a",
+    "items": [
+      {
+        "title": "Institutional Advantage",
+        "description": "Verified regulatory compliance and ongoing advisory.",
+        "value": "100%"
+      },
+      {
+        "title": "Operational Nexus",
+        "description": "Direct ministerial and administrative engagement.",
+        "value": "24/7"
+      },
+      {
+        "title": "Strategic Execution",
+        "description": "Seamless market entry and corporate establishment.",
         "value": "15+"
       }
     ]
